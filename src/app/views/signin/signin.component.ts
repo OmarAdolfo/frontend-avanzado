@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SignInService } from './signin-service.component';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  usersLogin: User[];
+
+  constructor(
+    private signInService: SignInService
+  ) { }
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.signInService.getUsers().subscribe(
+      users => {
+        this.usersLogin = users;
+      }
+    );
   }
 
 }

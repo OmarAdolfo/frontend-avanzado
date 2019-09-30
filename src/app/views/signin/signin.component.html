@@ -1,3 +1,13 @@
-<p>
-  signin works!
-</p>
+<table class="table">
+  <tr *ngFor="let u of usersLogin">
+    <td>
+      {{u.id}}
+    </td>
+    <td>
+      {{u.name}}
+    </td>
+    <td>
+      {{u.email}}
+    </td>
+  </tr>
+</table>
