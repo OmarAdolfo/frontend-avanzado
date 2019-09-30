@@ -29,10 +29,10 @@ export const rootRouterConfig: Routes = [
       import("./views/signup/signup.module").then(m => m.SignupModule),
     data: { title: "Signup" }
   },
-  {
+  /*{
     path: "admin",
-    /*  component: AdminLayoutComponent, */
-    /* canActivate: [AuthGuard], */
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: "dashboard",
@@ -65,7 +65,7 @@ export const rootRouterConfig: Routes = [
         data: { title: "Offers", breadcrumb: "Offers" }
       }
     ]
-  },
+  },*/
   {
     path: "**",
     redirectTo: "sessions/404"
