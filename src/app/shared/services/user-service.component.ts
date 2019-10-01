@@ -1,6 +1,5 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api'
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user.model';
@@ -8,7 +7,7 @@ import { User } from 'src/app/shared/models/user.model';
 @Injectable({
     providedIn: 'root'
 })
-export class SignInService {
+export class UserService {
 
     apiurl = 'api/users';
 

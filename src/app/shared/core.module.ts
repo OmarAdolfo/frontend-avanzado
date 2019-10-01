@@ -19,6 +19,7 @@ import { AppEffects } from './states/app/effects'; */
 /* import { UsersEffects } from './states/users/effects'; */
 /* import { UsersService } from '../views/users/shared/users.service'; */
 import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user-service.component';
 
 /* import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; */
@@ -33,6 +34,7 @@ import { FakeBackendService } from './inmemory-db/inmemory-db.service';
 
 export const CORE_SERVICES: Provider[] = [
   ProfileService,
+  UserService,
   NotificationsService
   /* {
     provide: HTTP_INTERCEPTORS,

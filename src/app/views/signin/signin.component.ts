@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SignInService } from './signin-service.component';
+import { UserService } from '../../shared/services/user-service.component';
 import { User } from 'src/app/shared/models/user.model';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +15,9 @@ export class SigninComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
-    private signInService: SignInService,
-    private formBuilder: FormBuilder
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class SigninComponent implements OnInit {
   }
 
   getUsers() {
-    this.signInService.getUsers().subscribe(
+    this.userService.getUsers().subscribe(
       users => {
         this.usersLogin = users;
       }
@@ -34,15 +36,15 @@ export class SigninComponent implements OnInit {
   /* Construye el formulario de login */
   buildForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
     });
-    console.log(this.loginForm);
   }
 
   login() {
-    if (this.usersLogin.filter(user => user.email === this.loginForm.get('email').value && user.password === this.loginForm.get('password').value).length > 0) {
-      console.log('Login');
+    const user = this.usersLogin.filter(user => user.email === this.loginForm.get('email').value && user.password === this.loginForm.get('password').value);
+    if (user.length > 0) {
+      this.router.navigate(['/profile/', user[0].id]);
     } else {
       console.log('No login');
     }

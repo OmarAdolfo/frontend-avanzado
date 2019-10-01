@@ -29,6 +29,12 @@ export const rootRouterConfig: Routes = [
       import("./views/signup/signup.module").then(m => m.SignupModule),
     data: { title: "Signup" }
   },
+  {
+    path: "profile",
+    loadChildren: () =>
+      import("./views/profile/profile.module").then(m => m.ProfileModule),
+    data: { title: "Material", breadcrumb: "MATERIAL" }
+  },
   /*{
     path: "admin",
     component: AdminLayoutComponent,
