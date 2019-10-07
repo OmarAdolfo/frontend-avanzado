@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'; */
 
 // COMPONENTS
-
+import { HeaderComponent } from './components/header/header.component';
 // DIRECTIVES
 
 // PIPES
@@ -15,13 +15,14 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'; */
 // SERVICES
 import { AppConfirmService } from './services/app-confirm/app-confirm.service';
 import { AppComfirmComponent } from './services/app-confirm/app-confirm.component';
+import { UserService } from './services/user.service';
 
-const classesToInclude = [AppComfirmComponent];
+const classesToInclude = [AppComfirmComponent, HeaderComponent];
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule],
 
-  providers: [AppConfirmService],
+  providers: [AppConfirmService, UserService],
   entryComponents: [AppComfirmComponent],
   declarations: classesToInclude,
   exports: [
@@ -30,4 +31,4 @@ const classesToInclude = [AppComfirmComponent];
   ]
 
 })
-export class SharedModule {}
+export class SharedModule { }

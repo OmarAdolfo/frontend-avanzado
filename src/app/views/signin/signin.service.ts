@@ -7,7 +7,7 @@ import { User } from 'src/app/shared/models/user.model';
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class SigninService {
 
     apiurl = 'api/users';
 

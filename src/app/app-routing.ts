@@ -30,48 +30,36 @@ export const rootRouterConfig: Routes = [
     data: { title: "Signup" }
   },
   {
+    path: "dashboard",
+    loadChildren: () =>
+      import("./views/dashboard/dashboard.module").then(
+        m => m.DashboardModule
+      ),
+
+    data: { title: "Dashboard", breadcrumb: "DASHBOARD" }
+  },
+  {
+    path: "favorites",
+    loadChildren: () =>
+      import("./views/favorites/favorites.module").then(
+        m => m.FavoritesModule
+      ),
+
+    data: { title: "Favorites", breadcrumb: "FAVORITES" }
+  },
+  {
     path: "profile",
     loadChildren: () =>
       import("./views/profile/profile.module").then(m => m.ProfileModule),
     data: { title: "Material", breadcrumb: "MATERIAL" }
   },
-  /*{
-    path: "admin",
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: "dashboard",
-        loadChildren: () =>
-          import("./views/dashboard/dashboard.module").then(
-            m => m.DashboardModule
-          ),
 
-        data: { title: "Dashboard", breadcrumb: "DASHBOARD" }
-      },
-      {
-        loadChildren: () =>
-          import("./views/favorites/favorites.module").then(
-            m => m.FavoritesModule
-          ),
-
-        data: { title: "Favorites", breadcrumb: "FAVORITES" }
-      },
-      {
-        path: "profile",
-        loadChildren: () =>
-          import("./views/profile/profile.module").then(m => m.ProfileModule),
-        data: { title: "Material", breadcrumb: "MATERIAL" }
-      },
-
-      {
-        path: "offers",
-        loadChildren: () =>
-          import("./views/offers/offers.module").then(m => m.OffersModule),
-        data: { title: "Offers", breadcrumb: "Offers" }
-      }
-    ]
-  },*/
+  {
+    path: "offers",
+    loadChildren: () =>
+      import("./views/offers/offers.module").then(m => m.OffersModule),
+    data: { title: "Offers", breadcrumb: "Offers" }
+  },
   {
     path: "**",
     redirectTo: "sessions/404"

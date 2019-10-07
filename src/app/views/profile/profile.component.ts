@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
-import { UserService } from 'src/app/shared/services/user-service.component';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,11 +18,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      users => {
-        this.user = users.filter(user => user.id === parseInt(this.route.snapshot.paramMap.get('id')))[0];
-      }
-    );
+    this.user = this.userService.getUserLoggedIn();
   }
 
 }

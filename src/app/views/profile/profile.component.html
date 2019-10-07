@@ -1,4 +1,5 @@
-<div class="container-fluid mt-5" *ngIf="user">
+<app-header></app-header>
+<div class="container mt-5" *ngIf="user">
   <div class="row">
     <div class="col-3">
       <img src="../../assets/user.png" alt="Imagen del usuario">
@@ -39,73 +40,95 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-12">
-        <h2>Formación académica</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Nivel</th>
-              <th>Título</th>
-              <th>Centro</th>
-              <th>Fecha</th>
-              <th>Certificado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let studie of user.studies">
-              <th scope="row">{{studie.level.name}}</th>
-              <td>{{studie.title.name}}</td>
-              <td>{{studie.institution.name}}</td>
-              <td>{{studie.date}}</td>
-              <td>{{studie.email}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="buttons text-right">
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Editar
+    </button>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h2>Formación académica</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>Título</th>
+            <th>Centro</th>
+            <th>Fecha</th>
+            <th>Certificado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let studie of user.studies">
+            <th scope="row">{{studie.level.name}}</th>
+            <td>{{studie.title.name}}</td>
+            <td>{{studie.institution.name}}</td>
+            <td>{{studie.date}}</td>
+            <td>{{studie.email}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row mt-3">
-      <div class="col-12">
-        <h2>Experiencia laboral</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Empresa</th>
-              <th>Puesto</th>
-              <th>Fechas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let experience of user.experiencies">
-              <th scope="row">{{studie.level.name}}</th>
-              <td>{{studie.title.name}}</td>
-              <td>{{studie.institution.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="buttons text-right">
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Editar
+    </button>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h2>Experiencia laboral</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Puesto</th>
+            <th>Fechas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let experience of user.experiencies">
+            <th scope="row">{{studie.level.name}}</th>
+            <td>{{studie.title.name}}</td>
+            <td>{{studie.institution.name}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row mt-3">
-      <div class="col-12">
-        <h2>Idiomas</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Nivel</th>
-              <th>Idioma</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let language of user.languages">
-              <th scope="row">{{language.level.name}}</th>
-              <td>{{language.name.name}}</td>
-              <td>{{language.date}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="buttons text-right">
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Editar
+    </button>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h2>Idiomas</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>Idioma</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let language of user.languages">
+            <th scope="row">{{language.level.name}}</th>
+            <td>{{language.name.name}}</td>
+            <td>{{language.date}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class="buttons text-right mb-5">
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Editar
+    </button>
   </div>
 </div>
