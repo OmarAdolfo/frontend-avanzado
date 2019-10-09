@@ -7,7 +7,7 @@ import { rootRouterConfig } from './app-routing';
 
 @NgModule({
   imports: [
-    SharedModule,
+    SharedModule.forRoot(),
     CoreModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],

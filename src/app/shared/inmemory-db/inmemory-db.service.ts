@@ -15,7 +15,7 @@ export class FakeBackendService implements InMemoryDbService {
         email: 'carlos.caballero@gmail.com',
         password: '1234',
         roles: ['student'],
-        documentType: { uid: 1, name: 'NIF' },
+        documentType: { uid: 1, name: 'NIF/NIE' },
         documentNumber: '26808956H',
         license: 'B1',
         aboutMe: 'LOREM IPSUM',
