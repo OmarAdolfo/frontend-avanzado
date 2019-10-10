@@ -1,55 +1,54 @@
 <app-header></app-header>
 <div class="container-fluid mt-5" *ngIf="model">
     <form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="login()">
-        <div class="row text-center">
+        <div class="row">
             <div class="col-2">
                 <img src="../../assets/user.png" alt="Logotipo de la Uoc">
             </div>
             <div class="col-10">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-2">
-                            <label class="control-label" for="nombre">Nombre</label>
+                        <div class="col-3">
+                            <label class="control-label" for="name">Nombre</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.nombre.invalid}"
-                                type="text" class="form-control" id="nombre" formControlName="nombre" name="nombre">
-                            <div *ngIf="personalInformationForm.controls.nombre.invalid && (personalInformationForm.controls.nombre.dirty || personalInformationForm.controls.nombre.touched)"
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.name.invalid}" type="text"
+                                class="form-control" id="name" formControlName="name" name="name">
+                            <div *ngIf="personalInformationForm.controls.name.invalid && (personalInformationForm.controls.name.dirty || personalInformationForm.controls.name.touched)"
                                 class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.nombre.errors.required">
+                                <div *ngIf="personalInformationForm.controls.name.errors.required">
                                     El nombre es obligatorio
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.nombre.errors.minlength">
+                                <div *ngIf="personalInformationForm.controls.name.errors.minlength">
                                     El nombre debe ser mínimo 3 carácteres
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.nombre.errors.maxlength">
+                                <div *ngIf="personalInformationForm.controls.name.errors.maxlength">
                                     El nombre debe ser máximo 55 carácteres
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.nombre.errors.pattern">
+                                <div *ngIf="personalInformationForm.controls.name.errors.pattern">
                                     El nombre no puede contener espacios ni al final ni al principio ni tampoco
                                     carácteres especiales
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <label class="control-label" for="apellido">Apellidos</label>
+                        <div class="col-3">
+                            <label class="control-label" for="surname">Apellidos</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.apellido.invalid}"
-                                type="text" class="form-control" id="apellido" formControlName="apellido"
-                                name="apellido">
-                            <div *ngIf="personalInformationForm.controls.apellido.invalid && (personalInformationForm.controls.apellido.dirty || personalInformationForm.controls.apellido.touched)"
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.surname.invalid}"
+                                type="text" class="form-control" id="surname" formControlName="surname" name="surname">
+                            <div *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)"
                                 class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.apellido.errors.required">
+                                <div *ngIf="personalInformationForm.controls.surname.errors.required">
                                     El apellido es obligatorio
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.apellido.errors.minlength">
+                                <div *ngIf="personalInformationForm.controls.surname.errors.minlength">
                                     El apellido debe ser mínimo 3 carácteres
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.apellido.errors.maxlength">
+                                <div *ngIf="personalInformationForm.controls.surname.errors.maxlength">
                                     El apellido debe ser máximo 55 carácteres
                                 </div>
-                                <div *ngIf="personalInformationForm.controls.apellido.errors.pattern">
+                                <div *ngIf="personalInformationForm.controls.surname.errors.pattern">
                                     El apellido no puede contener espacios ni al final ni al principio ni tampoco
                                     carácteres
                                     especiales
@@ -58,56 +57,142 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-2">
-                            <label class="control-label" for="fechaNacimiento">Fecha de nacimiento</label>
+                        <div class="col-3">
+                            <label class="control-label" for="birthdate">Fecha de nacimiento</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.fechaNacimiento.invalid}"
-                                type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento"
-                                name="fechaNacimiento">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.birthdate.invalid}"
+                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="birthdate"
+                                formControlName="birthdate" name="birthdate">
+                            <div *ngIf="personalInformationForm.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
+                                class="cross-validation-error-message alert alert-danger">
+                                Debe introducir un número de documento válido respecto al tipo de documento
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-2">
-                            <label class="control-label" for="telefono">Teléfono</label>
+                        <div class="col-3">
+                            <label class="control-label" for="phone">Teléfono</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.telefono.invalid}"
-                                type="text" class="form-control" id="telefono" formControlName="telefono"
-                                name="telefono">
-                        </div>
-                        <div class="col-2">
-                            <label class="control-label" for="telefonoAlternativo">Teléfono 2</label>
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.phone.invalid}"
+                                type="text" class="form-control" id="phone" formControlName="phone" name="phone">
                         </div>
                         <div class="col-3">
-                            <input
-                                [ngClass]="{'is-invalid': personalInformationForm.controls.telefonoAlternativo.invalid}"
-                                type="text" class="form-control" id="telefonoAlternativo"
-                                formControlName="telefonoAlternativo" name="telefonoAlternativo">
+                            <label class="control-label" for="phone2">Teléfono 2</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.phone2.invalid}"
+                                type="text" class="form-control" id="phone2" formControlName="phone2" name="phone2">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-2">
-                            <label class="control-label" for="tipoDocumento">Tipo de documento</label>
+                        <div class="col-3">
+                            <label class="control-label" for="documentType">Tipo de documento</label>
                         </div>
                         <div class="col-3">
-                            <select class="custom-select" formControlName="tipoDocumento" [compareWith]="compare"
-                                id="tipoDocumento">
+                            <select class="custom-select" formControlName="documentType" [compareWith]="compare"
+                                id="documentType">
+                                <option></option>
                                 <option *ngFor="let documentType of documentTypes" [ngValue]="documentType">
                                     {{documentType.name}}
                                 </option>
                             </select>
                         </div>
-                        <div class="col-2">
-                            <label class="control-label" for="numeroDocumento">Número documento</label>
+                        <div class="col-3">
+                            <label class="control-label" for="documentNumber">Número documento</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.numeroDocumento.invalid}"
-                                type="text" class="form-control" id="numeroDocumento" formControlName="numeroDocumento"
-                                name="numeroDocumento">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.documentNumber.invalid}"
+                                type="text" class="form-control" id="documentNumber" formControlName="documentNumber"
+                                name="documentNumber">
                             <div *ngIf="personalInformationForm.errors?.numeroDocumentoNoValido && (personalInformationForm.touched || personalInformationForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir un número de documento válido respecto al tipo de documento
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="direccion">Dirección</label>
+                        </div>
+                        <div class="col-9">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.direccion.invalid}"
+                                type="text" class="form-control" id="direccion" formControlName="direccion"
+                                name="direccion">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="province">Provincias</label>
+                        </div>
+                        <div class="col-3">
+                            <select class="custom-select" formControlName="province" [compareWith]="compare"
+                                id="province">
+                                <option></option>
+                                <option *ngFor="let province of provinces" [ngValue]="province">
+                                    {{province.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label" for="municipie">Municipio</label>
+                        </div>
+                        <div class="col-3">
+                            <select class="custom-select" formControlName="municipie" [compareWith]="compare"
+                                id="municipie">
+                                <option></option>
+                                <option *ngFor="let municipie of municipies" [ngValue]="municipie">
+                                    {{municipie.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="license">Permiso de conducir</label>
+                        </div>
+                        <div class="col-9">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.license.invalid}"
+                                type="text" class="form-control" id="license" formControlName="license" name="license">
+                            <div *ngIf="personalInformationForm.controls.license.invalid && (personalInformationForm.controls.license.dirty || personalInformationForm.controls.license.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.license.errors.maxlength">
+                                    El permiso de conducción debe ser máximo 5 carácteres
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="aboutMe">Sobre mí</label>
+                        </div>
+                        <div class="col-9">
+                            <textarea [ngClass]="{'is-invalid': personalInformationForm.controls.aboutMe.invalid}"
+                                class="form-control rounded-0" rows="5" id="aboutMe" formControlName="aboutMe"
+                                name="aboutMe"></textarea>
+                            <div *ngIf="personalInformationForm.controls.aboutMe.invalid && (personalInformationForm.controls.aboutMe.dirty || personalInformationForm.controls.aboutMe.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.aboutMe.errors.minlength">
+                                    El texto sobre mí debe ser mínimo 10 carácteres
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="otherCompetences">Otras competencias</label>
+                        </div>
+                        <div class="col-9">
+                            <textarea
+                                [ngClass]="{'is-invalid': personalInformationForm.controls.otherCompetences.invalid}"
+                                class="form-control rounded-0" rows="5" id="otherCompetences"
+                                formControlName="otherCompetences" name="otherCompetences"></textarea>
+                            <div *ngIf="personalInformationForm.controls.otherCompetences.invalid && (personalInformationForm.controls.otherCompetences.dirty || personalInformationForm.controls.otherCompetences.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.otherCompetences.errors.minlength">
+                                    El texto de otras competencias debe ser mínimo 10 carácteres
+                                </div>
                             </div>
                         </div>
                     </div>

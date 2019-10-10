@@ -90,9 +90,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let experience of user.experiencies">
-            <th scope="row">{{studie.level.name}}</th>
-            <td>{{studie.title.name}}</td>
-            <td>{{studie.institution.name}}</td>
+            <th scope="row">{{experience.company}}</th>
+            <td>{{experience.position}}</td>
+            <td>{{experience.date}}</td>
           </tr>
         </tbody>
       </table>

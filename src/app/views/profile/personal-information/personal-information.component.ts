@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { User } from 'src/app/shared/models/user.model';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+import { User, createNewUser, Province, Municipe } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
+
+import * as moment from 'moment';
+import { ProvinceService } from 'src/app/shared/services/province.service';
+import { MunicipeService } from 'src/app/shared/services/municipe.service';
 
 export const documentNumberType = {
     nifNie: 'NIF/NIE',
@@ -54,7 +58,7 @@ function validateCif(cif: string): boolean {
 
 function validatePasaporte(value) {
     var pasaporteRexp = /^[a-z]{3}[0-9]{6}[a-z]?$/i;
-    return pasaporteRexp.test(value);
+    return value && pasaporteRexp.test(value);
 }
 
 function validate(value) {
@@ -89,14 +93,27 @@ function validateDocumentNumber(document: string, documentType: string): boolean
         return validatePasaporte(document);
     } else if (documentType === documentNumberType.otro) {
         return validateCif(document);
+    } else {
+        return false;
     }
 }
 
 function documentNumberValidator(control: FormGroup) {
-    const document = control.get('numeroDocumento').value;
-    const documentType = control.get('tipoDocumento').value;
-    const valid = validateDocumentNumber(document, documentType.name);
+    const document = control.get('documentNumber').value;
+    const documentType = control.get('documentType').value;
+    let valid = true;
+    if (documentType && documentType.uid !== -1) {
+        valid = validateDocumentNumber(document, documentType.name);
+    }
     return valid ? null : { 'numeroDocumentoNoValido': { document } };
+}
+
+function dateValidator(control: AbstractControl) {
+    let valid = true;
+    if (control.value) {
+        valid = moment(control.value, 'DD/MM/YYYY', true).isValid();
+    }
+    return valid ? null : { 'dataNotValid': { document } };
 }
 
 @Component({
@@ -112,55 +129,93 @@ export class PersonalInformationComponent implements OnInit {
         { uid: 2, name: 'Pasaporte' },
         { uid: 3, name: 'Otro' }
     ];
+    provinces: Province[];
+    municipies: Municipe[];
 
     constructor(
         private fb: FormBuilder,
-        private userService: UserService
+        private userService: UserService,
+        private provinceService: ProvinceService,
+        private municipeService: MunicipeService
     ) { }
 
     ngOnInit() {
         this.model = this.userService.getUserLoggedIn();
-        if (this.model) {
-            this.buildForm();
+        if (!this.model) {
+            this.model = createNewUser();
         }
+        this.getProvinces();
+        this.getMunicipies();
+        this.buildForm();
+    }
+
+    getProvinces() {
+        this.provinceService.getProvinces().subscribe(
+            provinces => {
+                this.provinces = provinces;
+            }
+        )
+    }
+
+    getMunicipies() {
+        this.municipeService.getMunicipes().subscribe(
+            municipes => {
+                this.municipies = municipes;
+            }
+        )
     }
 
     private buildForm() {
         this.personalInformationForm = this.fb.group({
-            nombre: new FormControl(this.model.name, [
+            name: new FormControl(this.model.name, [
                 Validators.required,
                 Validators.minLength(3),
                 Validators.maxLength(55),
                 Validators.pattern(this.nameAndSurnameRegExp)
             ]),
-            apellido: new FormControl(this.model.surname, [
+            surname: new FormControl(this.model.surname, [
                 Validators.required,
                 Validators.minLength(3),
                 Validators.maxLength(55),
                 Validators.pattern(this.nameAndSurnameRegExp)
             ]),
-            fechaNacimiento: new FormControl(this.model.birthdate, []),
-            telefono: new FormControl(this.model.phone, []),
-            telefonoAlternativo: new FormControl(this.model.phone2, []),
-            tipoDocumento: new FormControl(this.model.documentType, []),
-            numeroDocumento: new FormControl(this.model.documentNumber, [])
+            birthdate: new FormControl(this.model.birthdate, dateValidator),
+            phone: new FormControl(this.model.phone, []),
+            phone2: new FormControl(this.model.phone2, []),
+            documentType: new FormControl(this.model.documentType, []),
+            documentNumber: new FormControl(this.model.documentNumber, []),
+            direccion: new FormControl(this.model.address.street, []),
+            province: new FormControl(this.model.address.province, []),
+            municipie: new FormControl(this.model.address.municipe, []),
+            license: new FormControl(this.model.license, Validators.maxLength(5)),
+            aboutMe: new FormControl(this.model.aboutMe, Validators.minLength(10)),
+            otherCompetences: new FormControl(this.model.otherCompetences, Validators.minLength(10))
         }, { validators: documentNumberValidator });
 
-        this.personalInformationForm.get('fechaNacimiento').valueChanges.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
-
-        this.personalInformationForm.get('tipoDocumento').valueChanges.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
     }
 
     compare(val1: any, val2: any) {
-        return val1.id === val2.id;
+        return val1.uid === val2.uid;
     }
 
+    login() {
+        this.model.name = this.personalInformationForm.get('name').value;
+        this.model.surname = this.personalInformationForm.get('surname').value;
+        this.model.birthdate = this.personalInformationForm.get('birthdate').value;
+        this.model.phone = this.personalInformationForm.get('phone').value;
+        this.model.phone2 = this.personalInformationForm.get('phone2').value;
+        this.model.documentType = this.personalInformationForm.get('documentType').value;
+        this.model.documentNumber = this.personalInformationForm.get('documentNumber').value;
+        this.model.address.street = this.personalInformationForm.get('direccion').value;
+        this.model.address.province = this.personalInformationForm.get('province').value;
+        this.model.address.municipe = this.personalInformationForm.get('municipie').value;
+        this.model.license = this.personalInformationForm.get('license').value;
+        this.model.aboutMe = this.personalInformationForm.get('aboutMe').value;
+        this.model.otherCompetences = this.personalInformationForm.get('otherCompetences').value;
+        this.userService.saveUser(this.model).subscribe(
+            data => {
+                console.log('Subscribe ', data);
+            }
+        )
+    }
 }

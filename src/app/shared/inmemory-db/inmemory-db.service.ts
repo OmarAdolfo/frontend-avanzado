@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { User } from '../models/user.model';
+import { User, Province, Municipe } from '../models/user.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -67,7 +67,6 @@ export class FakeBackendService implements InMemoryDbService {
             certificate: false
           }
         ],
-        experiencies: [],
         languages: [
           {
             uid: 1,
@@ -82,38 +81,21 @@ export class FakeBackendService implements InMemoryDbService {
             date: '30/06/1998'
           }
         ],
-        offers: []
-        /*         experiences: [
+        offers: [],
+        experiencies: [
           {
-            id: 0,
-            eid: 0,
-            empresa: 'Suma',
-            date_incio: '1548320228',
-            date_fin: '1548320228',
-            puesto: 'Junior',
-            tareas: 'Desarrollador front-end'
+            uid: 0,
+            company: 'Suma',
+            date: '1548320228',
+            position: 'Junior'
           },
           {
-            id: 0,
-            eid: 1,
-            empresa: 'Indra',
-            date_incio: '1548320228',
-            date_fin: '1548320228',
-            puesto: 'Ingeniero',
-            tareas: 'Desarrollador back-end'
+            uid: 0,
+            company: 'Indra',
+            date: '1548320228',
+            position: 'Ingeniero',
           }
         ],
-        languages: [
-          { id: 0, lid: 0, idioma: 'Inglés', nivel: 'B2', date: '30/06/2008' },
-          {
-            id: 0,
-            lid: 1,
-            idioma: 'Portugués',
-            nivel: 'A2',
-            date: '30/06/2013'
-          }
-        ]
-     */
       }
     ];
 
@@ -188,6 +170,22 @@ export class FakeBackendService implements InMemoryDbService {
         title: [{ uid: 6, name: 'Empresariales' }]
       }
     ];
-    return { users, offers };
+
+    const provinces: Province[] = [
+      { uid: 1, name: 'Málaga' },
+      { uid: 2, name: 'Sevilla' },
+      { uid: 4, name: 'Cádiz' },
+      { uid: 5, name: 'Granada' }
+    ]
+
+    const municipes: Municipe[] = [
+      { uid: 6, name: 'Chiclana de la Frontera' },
+      { uid: 7, name: 'Estepona' },
+      { uid: 8, name: 'Campanillas (PTA)' },
+      { uid: 9, name: 'Motril' },
+      { uid: 10, name: 'Osuna' }
+    ]
+
+    return { users, offers, provinces, municipes };
   }
 }
