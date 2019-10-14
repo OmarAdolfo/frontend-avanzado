@@ -1,6 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User, Province, Municipe } from '../models/user.model';
-import { Study, CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
+import { CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
+import { LanguageLevel, LanguageName } from '../models/language.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -72,13 +73,13 @@ export class FakeBackendService implements InMemoryDbService {
           {
             uid: 1,
             level: { uid: 5, name: 'C1' },
-            name: { uid: 1, name: 'Inglés' },
+            name: { id: 1, name: 'Inglés' },
             date: '30/06/2005'
           },
           {
             uid: 2,
             level: { uid: 4, name: 'B2' },
-            name: { uid: 2, name: 'Francés' },
+            name: { id: 2, name: 'Francés' },
             date: '30/06/1998'
           }
         ],
@@ -260,6 +261,21 @@ export class FakeBackendService implements InMemoryDbService {
       { uid: 6, name: 'Empresariales' }
     ];
 
-    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles };
+    const languageLevels: LanguageLevel[] = [
+      { uid: 1, name: 'A1' },
+      { uid: 2, name: 'A2' },
+      { uid: 3, name: 'B1' },
+      { uid: 4, name: 'B2' },
+      { uid: 5, name: 'C1' },
+      { uid: 6, name: 'C2' }
+    ];
+
+    const languages: LanguageName[] = [
+      { id: 1, name: 'Inglés' },
+      { id: 2, name: 'Francés' },
+      { id: 3, name: 'Español' }
+    ];
+
+    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles, languageLevels, languages };
   }
 }

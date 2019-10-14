@@ -40,4 +40,17 @@ export class DataProfileComponent implements OnInit {
     this.route.navigate(['./profile-study', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
+  removeLanguage(uid: number) {
+    this.user.languages = this.user.languages.filter(language => language.uid !== uid);
+    this.userService.updateUser(this.user).subscribe(
+      user => {
+        this.user = user;
+      }
+    )
+  }
+
+  goToProfileLanguage(uid: number) {
+    this.route.navigate(['./profile-language', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
+  }
+
 }

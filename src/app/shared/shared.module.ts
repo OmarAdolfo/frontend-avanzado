@@ -22,6 +22,8 @@ import { StudyService } from './services/study.service';
 import { InstitutionService } from './services/institution.service';
 import { GradeService } from './services/grade.service';
 import { TitleService } from './services/title.service';
+import { LanguageLevelService } from './services/language-level.service';
+import { LanguageService } from './services/language.service';
 
 const classesToInclude = [AppComfirmComponent, HeaderComponent];
 
@@ -41,7 +43,17 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [UserService, MunicipeService, ProvinceService, StudyService, InstitutionService, GradeService, TitleService]
+      providers: [
+        UserService, 
+        MunicipeService, 
+        ProvinceService, 
+        StudyService, 
+        InstitutionService, 
+        GradeService, 
+        TitleService, 
+        LanguageLevelService, 
+        LanguageService
+      ]
     };
   }
 }

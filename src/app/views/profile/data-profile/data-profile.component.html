@@ -122,6 +122,7 @@
             <th>Nivel</th>
             <th>Idioma</th>
             <th>Fecha</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -129,15 +130,22 @@
             <th scope="row">{{language.level.name}}</th>
             <td>{{language.name.name}}</td>
             <td>{{language.date}}</td>
+            <td>
+              <button type="button" class="btn btn-success" (click)="goToProfileLanguage(language.uid)">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-danger" (click)="removeLanguage(language.uid)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="buttons text-right mb-5">
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success" (click)="goToProfileLanguage()">
       <i class="fa fa-pencil" aria-hidden="true"></i>
-      Editar
+      Añadir
     </button>
   </div>
 </div>

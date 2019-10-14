@@ -9,6 +9,7 @@ import { DataProfileComponent } from './data-profile/data-profile.component';
 import { ProfileStudyComponent } from './profile-study/profile-study.component';
 import { ProfileStudyCollegeComponent } from './profile-study/profile-study-college/profile-study-college.component';
 import { ProfileStudyVocationalComponent } from './profile-study/profile-study-vocational/profile-study-vocational.component';
+import { ProfileLanguageComponent } from './profile-language/profile-language.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProfileStudyVocationalComponent } from './profile-study/profile-study-v
     ProfileComponent,
     ProfileStudyComponent,
     ProfileStudyCollegeComponent,
-    ProfileStudyVocationalComponent
+    ProfileStudyVocationalComponent,
+    ProfileLanguageComponent
   ],
   imports: [
     CommonModule,

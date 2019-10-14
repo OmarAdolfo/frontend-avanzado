@@ -1,0 +1,81 @@
+<app-header></app-header>
+<div class="container-fluid mt-5" *ngIf="model">
+    <form class="form-horizontal mt-5" [formGroup]="languageForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    <label class="control-label" for="languageName">Idioma</label>
+                </div>
+                <div class="col-3">
+                    <select class="custom-select" formControlName="languageName" [compareWith]="compare"
+                        id="languageName">
+                        <option></option>
+                        <option *ngFor="let languageName of languages" [ngValue]="languageName">
+                            {{languageName.name}}
+                        </option>
+                    </select>
+                </div>
+                <ng-container *ngIf="languageForm.controls.languageName.value?.name === 'Otro'">
+                    <div class="col-3">
+                        <label class="control-label" for="otherLanguage">Otro</label>
+                    </div>
+                    <div class="col-3">
+                        <input [ngClass]="{'is-invalid': languageForm.controls.otherLanguage.invalid}" type="text"
+                            class="form-control" id="otherLanguage" formControlName="otherLanguage"
+                            name="otherLanguage">
+                        <div *ngIf="languageForm.controls.otherLanguage.invalid && (languageForm.controls.otherLanguage.dirty || languageForm.controls.otherLanguage.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="languageForm.controls.otherLanguage.errors.required">
+                                El idioma es obligatorio
+                            </div>
+                            <div *ngIf="languageForm.controls.otherLanguage.errors.minlength">
+                                El idioma debe ser mínimo 3 carácteres
+                            </div>
+                            <div *ngIf="languageForm.controls.otherLanguage.errors.maxlength">
+                                El idioma debe ser máximo 255 carácteres
+                            </div>
+                            <div *ngIf="languageForm.controls.otherLanguage.errors.whitespace">
+                                El idioma no puede estar en blanco
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label class="control-label" for="level">Nivel</label>
+                </div>
+                <div class="col-3">
+                    <select class="custom-select" formControlName="level" [compareWith]="compareUid" id="level">
+                        <option *ngFor="let level of languageLevels" [ngValue]="level">
+                            {{level.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label class="control-label" for="date">Fecha de obtención del título</label>
+                </div>
+                <div class="col-3">
+                    <input [ngClass]="{'is-invalid': languageForm.controls.date.invalid}" type="text"
+                        placeholder="DD/MM/YYYY" class="form-control" id="date" formControlName="date" name="date">
+                    <div *ngIf="languageForm.controls.date.errors?.dataNotValid && (languageForm.touched || languageForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir una fecha con el formato correcto y válida
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="buttons text-right">
+                        <button type="submit" class="btn btn-success"
+                            [disabled]="languageForm.pristine || languageForm.invalid">
+                            <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

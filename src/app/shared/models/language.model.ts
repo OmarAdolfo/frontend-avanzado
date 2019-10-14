@@ -5,7 +5,7 @@ export interface Language {
   date: string;
 }
 export interface LanguageName {
-  uid: number;
+  id: number;
   name: string;
 }
 export interface LanguageLevel {
