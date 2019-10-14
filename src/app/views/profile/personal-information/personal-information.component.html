@@ -64,9 +64,9 @@
                             <input [ngClass]="{'is-invalid': personalInformationForm.controls.birthdate.invalid}"
                                 type="text" placeholder="DD/MM/YYYY" class="form-control" id="birthdate"
                                 formControlName="birthdate" name="birthdate">
-                            <div *ngIf="personalInformationForm.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
+                            <div *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
-                                Debe introducir un número de documento válido respecto al tipo de documento
+                                Debe introducir una fecha con el formato correcto y válida
                             </div>
                         </div>
                     </div>

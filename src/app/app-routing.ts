@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AuthGuard } from './shared/guards/auth.guard';
 /* import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './shared/services/auth/auth.guard'; */
@@ -31,6 +32,7 @@ export const rootRouterConfig: Routes = [
   },
   {
     path: "dashboard",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/dashboard/dashboard.module").then(
         m => m.DashboardModule
@@ -40,6 +42,7 @@ export const rootRouterConfig: Routes = [
   },
   {
     path: "favorites",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/favorites/favorites.module").then(
         m => m.FavoritesModule
@@ -49,6 +52,7 @@ export const rootRouterConfig: Routes = [
   },
   {
     path: "profile",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/profile/profile.module").then(m => m.ProfileModule),
     data: { title: "Material", breadcrumb: "MATERIAL" }
@@ -56,6 +60,7 @@ export const rootRouterConfig: Routes = [
 
   {
     path: "offers",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/offers/offers.module").then(m => m.OffersModule),
     data: { title: "Offers", breadcrumb: "Offers" }

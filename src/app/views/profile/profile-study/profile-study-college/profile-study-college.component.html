@@ -1,0 +1,65 @@
+<div class="container-fluid mt-5" *ngIf="model">
+    <form class="form-horizontal mt-5" [formGroup]="profileStudyCollegeForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Opción Título Universitario</h3>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="institution">Nombre de centro</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.institution.invalid}" type="text"
+                                class="form-control" id="institution" formControlName="institution" name="institution">
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label" for="titleName">Título</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleName.invalid}" type="text"
+                                class="form-control" id="titleName" formControlName="titleName" name="titleName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="titleDate">Fecha de nacimiento</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleDate.invalid}" type="text"
+                                placeholder="DD/MM/YYYY" class="form-control" id="titleDate" formControlName="titleDate"
+                                name="titleDate">
+                            <div *ngIf="profileStudyCollegeForm.controls.titleDate.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
+                                class="cross-validation-error-message alert alert-danger">
+                                Debe introducir una fecha con el formato correcto y válida
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="bilingue"
+                                    formControlName="bilingue" name="bilingue">
+                                <label class="form-check-label" for="bilingue">
+                                    Formación bilingue
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="certificate">Seleccione un fichero</label>
+                            <input type="file" class="form-control-file" id="certificate"
+                                (change)="handleFileInput($event.target.files)" name="certificate">
+                        </div>
+                        <div class="col-6">
+                            <div class="buttons text-right">
+                                <button type="submit" class="btn btn-success"
+                                    [disabled]="profileStudyCollegeForm.pristine || profileStudyCollegeForm.invalid">
+                                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

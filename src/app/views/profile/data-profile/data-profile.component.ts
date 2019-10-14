@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
+import { StudyService } from 'src/app/shared/services/study.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,8 @@ export class DataProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private studyService: StudyService
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,19 @@ export class DataProfileComponent implements OnInit {
 
   goToPersonalInformationForm() {
     this.route.navigate(['./personal-information'], { relativeTo: this.activatedRoute });
+  }
+
+  removeStudie(uid: number) {
+    this.user.studies = this.user.studies.filter(studie => studie.id !== uid);
+    this.userService.updateUser(this.user).subscribe(
+      user => {
+        this.user = user;
+      }
+    )
+  }
+
+  goToProfileStudy(uid: number) {
+    this.route.navigate(['./profile-study', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
 }

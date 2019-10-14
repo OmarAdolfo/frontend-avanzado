@@ -18,6 +18,10 @@ import { AppComfirmComponent } from './services/app-confirm/app-confirm.componen
 import { UserService } from './services/user.service';
 import { MunicipeService } from './services/municipe.service'
 import { ProvinceService } from './services/province.service';
+import { StudyService } from './services/study.service';
+import { InstitutionService } from './services/institution.service';
+import { GradeService } from './services/grade.service';
+import { TitleService } from './services/title.service';
 
 const classesToInclude = [AppComfirmComponent, HeaderComponent];
 
@@ -37,7 +41,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [UserService, MunicipeService, ProvinceService]
+      providers: [UserService, MunicipeService, ProvinceService, StudyService, InstitutionService, GradeService, TitleService]
     };
   }
 }

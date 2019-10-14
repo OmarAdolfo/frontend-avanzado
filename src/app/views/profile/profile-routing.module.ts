@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { DataProfileComponent } from './data-profile/data-profile.component';
+import { ProfileStudyComponent } from './profile-study/profile-study.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       { path: '', component: DataProfileComponent },
-      { path: 'personal-information', component: PersonalInformationComponent }
+      { path: 'personal-information', component: PersonalInformationComponent },
+      { path: 'profile-study/:id', component: ProfileStudyComponent }
     ]
   }
 ];

@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="container-fluid mt-5">
+    <form class="form-horizontal mt-5" [formGroup]="profileStudyForm" (ngSubmit)="add()">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    <label class="control-label" for="level">Tipo de título</label>
+                </div>
+                <div class="col-3">
+                    <select class="custom-select" formControlName="level" [compareWith]="compare" id="level">
+                        <option></option>
+                        <option *ngFor="let levelType of levelTypes" [ngValue]="levelType">
+                            {{levelType.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" *ngIf="profileStudyForm.controls.level.value.name === 'Título universitario'">
+                <div class="col-12">
+                    <app-profile-study-college [model]="model" (saveProfileStudy)="save($event)">
+                    </app-profile-study-college>
+                </div>
+            </div>
+            <div class="row" *ngIf="profileStudyForm.controls.level.value.name === 'Ciclo Formativo'">
+                <div class="col-12">
+                    <app-profile-study-vocational [model]="model" (saveProfileStudy)="save($event)">
+                    </app-profile-study-vocational>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,5 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User, Province, Municipe } from '../models/user.model';
+import { Study, CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -28,7 +29,7 @@ export class FakeBackendService implements InMemoryDbService {
         avatar_hash: 'assets/img/perfil.png',
         studies: [
           {
-            uid: 1,
+            id: 1,
             level: { uid: 1, name: 'Ciclo Formativo' },
             category: { uid: 2, name: 'Informática y comunicaciones' },
             institution: {
@@ -49,7 +50,7 @@ export class FakeBackendService implements InMemoryDbService {
             certificate: true
           },
           {
-            uid: 2,
+            id: 2,
             institution: {
               uid: 2,
               name: 'IES Politécnico Jesús Marin'
@@ -186,6 +187,79 @@ export class FakeBackendService implements InMemoryDbService {
       { uid: 10, name: 'Osuna' }
     ]
 
-    return { users, offers, provinces, municipes };
+    const studies: (VocationalStudy | CollegeStudy)[] = [
+      {
+        id: 1,
+        level: { uid: 1, name: 'Ciclo Formativo' },
+        category: { uid: 2, name: 'Informática y comunicaciones' },
+        institution: {
+          uid: 2,
+          name: 'IES Politécnico Jesús Marin'
+        },
+        title: {
+          uid: 2,
+          name: 'Administracion de sistemas informaticos y redes'
+        },
+        grade: {
+          uid: 3,
+          name: 'Ciclo Formativo de Grado Superior'
+        },
+        date: '30/06/2005',
+        dual: false,
+        bilingue: true,
+        certificate: true
+      },
+      {
+        id: 2,
+        institution: {
+          uid: 2,
+          name: 'IES Politécnico Jesús Marin'
+        },
+        category: { uid: 2, name: 'Informática y comunicaciones' },
+        level: { uid: 1, name: 'Ciclo Formativo' },
+        title: {
+          uid: 1,
+          name: 'Técnico Superior en Desarrollo de Aplicaciones Web'
+        },
+        grade: { uid: 3, name: 'Ciclo Formativo de Grado Superior' },
+        date: '30/06/2007',
+        dual: true,
+        bilingue: false,
+        certificate: false
+      }
+    ];
+
+    const institutions: Institution[] = [
+      {
+        uid: 1,
+        name: 'IES César Manrique'
+      },
+      {
+        uid: 2,
+        name: 'IES Politécnico Jesús Marin'
+      }
+    ];
+
+    const categories: Category[] = [
+      { uid: 2, name: 'Informática y comunicaciones' },
+      { uid: 4, name: 'Comercio y Marketing' },
+      { uid: 5, name: 'Administración y Gestión' }
+    ];
+
+    const grades: Grade[] = [
+      { uid: 1, name: 'Ciclo Formativo de FP Básica' },
+      { uid: 2, name: 'Ciclo Formativo de Grado Medio' },
+      { uid: 3, name: 'Ciclo Formativo de Grado Superior' }
+    ];
+
+    const titles: TitleStudy[] = [
+      { uid: 1, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
+      { uid: 2, name: 'Administracion de sistemas informaticos y redes' },
+      { uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' },
+      { uid: 5, name: 'Gestión Comercial y Empresarial' },
+      { uid: 6, name: 'Empresariales' }
+    ];
+
+    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles };
   }
 }

@@ -20,6 +20,10 @@ export class UserService {
         return this.userLogged;
     }
 
+    isLogged() {
+        return this.userLogged ? true : false;
+    }
+
     private handleError(error: any) {
         console.log(error);
         return throwError(error);
