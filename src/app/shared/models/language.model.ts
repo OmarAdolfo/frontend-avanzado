@@ -1,5 +1,5 @@
 export interface Language {
-  uid: number;
+  id: number;
   level: LanguageLevel;
   name: LanguageName;
   date: string;

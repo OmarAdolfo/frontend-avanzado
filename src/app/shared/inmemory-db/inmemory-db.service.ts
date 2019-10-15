@@ -1,7 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User, Province, Municipe } from '../models/user.model';
 import { CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
-import { LanguageLevel, LanguageName } from '../models/language.model';
+import { LanguageLevel, LanguageName, Language } from '../models/language.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -58,10 +58,7 @@ export class FakeBackendService implements InMemoryDbService {
             },
             category: { uid: 2, name: 'Informática y comunicaciones' },
             level: { uid: 1, name: 'Ciclo Formativo' },
-            title: {
-              uid: 1,
-              name: 'Técnico Superior en Desarrollo de Aplicaciones Web'
-            },
+            title: { uid: 1, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
             grade: { uid: 3, name: 'Ciclo Formativo de Grado Superior' },
             date: '30/06/2007',
             dual: true,
@@ -71,13 +68,13 @@ export class FakeBackendService implements InMemoryDbService {
         ],
         languages: [
           {
-            uid: 1,
+            id: 1,
             level: { uid: 5, name: 'C1' },
             name: { id: 1, name: 'Inglés' },
             date: '30/06/2005'
           },
           {
-            uid: 2,
+            id: 2,
             level: { uid: 4, name: 'B2' },
             name: { id: 2, name: 'Francés' },
             date: '30/06/1998'
@@ -117,7 +114,7 @@ export class FakeBackendService implements InMemoryDbService {
         date: '21/09/2006',
         category: { uid: 2, name: 'Informática y Comunicaciones' },
         title: [
-          { uid: 1, name: 'Desarrollo Aplicaciones Web' },
+          { uid: 1, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
           { uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }
         ]
       },
@@ -270,12 +267,27 @@ export class FakeBackendService implements InMemoryDbService {
       { uid: 6, name: 'C2' }
     ];
 
-    const languages: LanguageName[] = [
+    const languageNames: LanguageName[] = [
       { id: 1, name: 'Inglés' },
       { id: 2, name: 'Francés' },
       { id: 3, name: 'Español' }
     ];
 
-    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles, languageLevels, languages };
+    const languages: Language[] = [
+      {
+        id: 1,
+        level: { uid: 5, name: 'C1' },
+        name: { id: 1, name: 'Inglés' },
+        date: '30/06/2005'
+      },
+      {
+        id: 2,
+        level: { uid: 4, name: 'B2' },
+        name: { id: 2, name: 'Francés' },
+        date: '30/06/1998'
+      }
+    ];
+
+    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles, languageLevels, languageNames, languages };
   }
 }

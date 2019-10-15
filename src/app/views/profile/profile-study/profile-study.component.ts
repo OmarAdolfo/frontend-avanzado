@@ -48,7 +48,6 @@ export class ProfileStudyComponent implements OnInit {
   }
 
   save(eve: any) {
-    console.log(eve);
     this.model = eve;
     this.model.level = this.profileStudyForm.get('level').value;
     this.studyService.saveStudy(this.model).subscribe(
