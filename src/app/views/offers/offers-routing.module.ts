@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OffersComponent } from './offers.component';
+import { OffersDetailComponent } from './offers-detail/offers-detail.component';
 
 const routes: Routes = [
   {
     path: '',
     component: OffersComponent
   },
-  /*{
-    path: 'profile-student/account',
-    component: ProfileAccountComponent
-  },*/
+  {
+    path: 'offers/detail/:id',
+    component: OffersDetailComponent
+  },
 ];
 
 @NgModule({
