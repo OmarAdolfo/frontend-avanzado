@@ -19,8 +19,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileLanguageComponent implements OnInit {
 
-  selectUndefinedOptionValue: any;
-
   model: Language;
 
   languageForm: FormGroup;

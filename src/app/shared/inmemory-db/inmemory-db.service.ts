@@ -89,7 +89,7 @@ export class FakeBackendService implements InMemoryDbService {
             position: 'Junior'
           },
           {
-            uid: 0,
+            uid: 1,
             company: 'Indra',
             date: '1548320228',
             position: 'Ingeniero',
