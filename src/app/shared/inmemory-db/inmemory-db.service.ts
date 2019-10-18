@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User, Province, Municipe } from '../models/user.model';
 import { CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
 import { LanguageLevel, LanguageName, Language } from '../models/language.model';
+import { Experience } from '../models/experience.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -83,16 +84,20 @@ export class FakeBackendService implements InMemoryDbService {
         offers: [],
         experiencies: [
           {
-            uid: 0,
+            id: 0,
             company: 'Suma',
-            date: '1548320228',
-            position: 'Junior'
+            dateInitial: '1548320228',
+            dateEnd: '1548320228',
+            position: 'Junior',
+            tasks: 'Lore ipsum'
           },
           {
-            uid: 1,
+            id: 1,
             company: 'Indra',
-            date: '1548320228',
+            dateInitial: '1548320228',
+            dateEnd: '1548320228',  
             position: 'Ingeniero',
+            tasks: 'Lore ipsum'
           }
         ],
       }
@@ -288,6 +293,40 @@ export class FakeBackendService implements InMemoryDbService {
       }
     ];
 
-    return { users, offers, provinces, municipes, studies, institutions, categories, grades, titles, languageLevels, languageNames, languages };
+    const experiencies: Experience[] = [
+      {
+        id: 1,
+        company: 'Suma',
+        dateInitial: '1548320228',
+        dateEnd: '1548320228',
+        position: 'Junior',
+        tasks: 'Lore ipsum'
+      },
+      {
+        id: 2,
+        company: 'Indra',
+        dateInitial: '1548320228',
+        dateEnd: '1548320228',
+        position: 'Ingeniero',
+        tasks: 'Lore ipsum'
+      }
+    ];
+
+    return {
+      users,
+      offers,
+      provinces,
+      municipes,
+      studies,
+      institutions,
+      categories,
+      grades,
+      titles,
+      languageLevels,
+      languageNames,
+      languages,
+      experiencies
+    };
+
   }
 }

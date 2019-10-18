@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   removeExperience(id: number) {
-    this.user.experiencies = this.user.experiencies.filter(experience => experience.uid !== id);
+    this.user.experiencies = this.user.experiencies.filter(experience => experience.id !== id);
     this.userService.updateUser(this.user).subscribe(
       user => {
         this.user = user;

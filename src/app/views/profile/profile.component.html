@@ -102,12 +102,12 @@
                     <tr *ngFor="let experience of user.experiencies">
                         <th scope="row">{{experience.company}}</th>
                         <td>{{experience.position}}</td>
-                        <td>{{experience.date}}</td>
+                        <td>{{experience.dateInitial + ' - ' + experience.dateEnd}}</td>
                         <td>
-                            <button type="button" class="btn btn-success" (click)="goToExperience(experience.uid)">
+                            <button type="button" class="btn btn-success" (click)="goToExperience(experience.id)">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" (click)="removeExperience(experience.uid)">
+                            <button type="button" class="btn btn-danger" (click)="removeExperience(experience.id)">
                                 <i class="fa fa-remove" aria-hidden="true"></i>
                             </button>
                         </td>

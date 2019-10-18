@@ -26,6 +26,7 @@ import { LanguageLevelService } from './services/language-level.service';
 import { LanguageNameService } from './services/language-name.service';
 import { LanguageService } from './services/language.service';
 import { OfferService } from './services/offer.service';
+import { ExperienceService } from './services/experience.service';
 
 const classesToInclude = [AppComfirmComponent, HeaderComponent];
 
@@ -56,7 +57,8 @@ export class SharedModule {
         LanguageLevelService,
         LanguageNameService,
         LanguageService,
-        OfferService
+        OfferService,
+        ExperienceService
       ]
     };
   }

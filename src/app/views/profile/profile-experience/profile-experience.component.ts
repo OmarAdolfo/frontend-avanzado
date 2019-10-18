@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Experience } from 'src/app/shared/models/experience.model';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ExperienceService } from 'src/app/shared/services/experience.service';
+import { ActivatedRoute } from '@angular/router';
+import { DateValidator } from 'src/app/shared/validators/date.validator';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/user.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-experience',
@@ -10,14 +16,81 @@ import { FormGroup } from '@angular/forms';
 export class ProfileExperienceComponent implements OnInit {
 
   model: Experience;
-
   experienceForm: FormGroup;
+  withOutBlankSpacesInitiallyRegExp = /^\S.*/;
 
-  /* ^\S.* */
-
-  constructor() { }
+  constructor(
+    private experienceService: ExperienceService,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private userService: UserService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    const id = this.activatedRoute.snapshot.params.id;
+    if (id !== 'new') {
+      this.experienceService.getExperience(id).subscribe(
+        experience => {
+          this.model = experience;
+          this.buildForm();
+        }
+      )
+    } else {
+      this.model = {
+        id: -1,
+        company: '',
+        position: '',
+        dateInitial: '',
+        dateEnd: '',
+        tasks: ''
+      };
+    }
+    this.buildForm();
+  }
+
+  buildForm() {
+    this.experienceForm = this.fb.group({
+      company: new FormControl(this.model.company, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+        Validators.pattern(this.withOutBlankSpacesInitiallyRegExp)
+      ]),
+      dateInitial: new FormControl(this.model.dateInitial, DateValidator),
+      dateEnd: new FormControl(this.model.dateEnd, DateValidator),
+      position: new FormControl(this.model.position, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+        Validators.pattern(this.withOutBlankSpacesInitiallyRegExp)
+      ]),
+      tasks: new FormControl(this.model.tasks, Validators.minLength(10)),
+    });
+  }
+
+  save() {
+    this.model = Object.assign(this.model, this.experienceForm.value);
+    this.experienceService.saveExperience(this.model).subscribe(
+      experience => {
+        const user = this.userService.getUserLoggedIn();
+        let index = user.experiencies.findIndex(({ id }) => id === experience.id);
+        if (index === -1) {
+          user.experiencies.push(experience);
+        } else {
+          user.experiencies[index] = experience;
+        }
+        this.updateUser(user);
+      }
+    )
+  }
+
+  updateUser(user: User) {
+    this.userService.saveUser(user).subscribe(
+      () => {
+        this.location.back();
+      }
+    )
   }
 
 }
