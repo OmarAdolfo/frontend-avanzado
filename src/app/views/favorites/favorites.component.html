@@ -1,3 +1,51 @@
-<p>
-  favorites works!
-</p>
+<app-header></app-header>
+<div class="container-fluid mt-5" *ngIf="model">
+  <form class="form-horizontal mt-5" [formGroup]="configurationForm" (ngSubmit)="save()">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-3">
+          <label class="control-label" for="languageName">Idioma</label>
+        </div>
+        <div class="col-3">
+          <select class="custom-select" formControlName="languageName" [compareWith]="compare" id="languageName">
+            <option></option>
+            <option *ngFor="let languageName of languageNames" [ngValue]="languageName">
+              {{languageName.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" (change)="handleSelected($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1">Todos</label>
+          </div>
+          <div formArrayName="notifications"
+            *ngFor="let configuration of configurationForm.controls.notifications?.value; let i = index;">
+            <div [formGroupName]="i" class="form-check">
+              <input type="checkbox" class="form-check-input" formControlName="notified">
+              <label class="form-check-label" for="exampleCheck1">{{getNameProvince(i)}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="buttons text-right">
+            <button type="submit" class="btn btn-success" [disabled]="configurationForm.invalid">
+              <i class="fa fa-save" aria-hidden="true"></i> Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="isUserUpdate">
+        <div class="col-4 offset-4">
+          <div class="alert alert-success" role="alert">
+            Se ha guardado correctamente la configuración
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

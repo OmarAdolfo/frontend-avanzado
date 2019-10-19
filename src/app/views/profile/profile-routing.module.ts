@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
-import { PersonalInformationComponent } from './personal-information/personal-information.component';
-import { ProfileStudyComponent } from './profile-study/profile-study.component';
-import { ProfileLanguageComponent } from './profile-language/profile-language.component';
-import { ProfileExperienceComponent } from './profile-experience/profile-experience.component';
+import { ProfileLanguageComponent } from './profile-student/profile-language/profile-language.component';
+import { ProfileExperienceComponent } from './profile-student/profile-experience/profile-experience.component';
+import { ProfileStudentPersonalInformationDetailComponent } from './profile-student/profile-student-personal-information/profile-student-personal-information-detail.component';
+import { ProfileStudyComponent } from './profile-student/profile-study/profile-study.component';
+import { ProfileCompanyPersonalInformationComponent } from './profile-company/profile-company-personal-information/profile-company-personal-information.component';
 
 const routes: Routes = [
   {
@@ -12,8 +13,12 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'personal-information',
-    component: PersonalInformationComponent
+    path: 'personal-information-student',
+    component: ProfileStudentPersonalInformationDetailComponent
+  },
+  {
+    path: 'personal-information-company',
+    component: ProfileCompanyPersonalInformationComponent
   },
   {
     path: 'profile-study/:id',

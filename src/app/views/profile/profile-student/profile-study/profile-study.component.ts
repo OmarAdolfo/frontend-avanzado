@@ -5,6 +5,8 @@ import { CollegeStudy, VocationalStudy } from 'src/app/shared/models/study.model
 import { UserService } from 'src/app/shared/services/user.service';
 import { Location } from '@angular/common';
 import { StudyService } from 'src/app/shared/services/study.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { Student } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-profile-study',
@@ -26,13 +28,14 @@ export class ProfileStudyComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private location: Location,
-    private studyService: StudyService
+    private studyService: StudyService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
     if (id !== 'new') {
-      this.model = this.userService.getUserLoggedIn().studies.find(studie => studie.id == id);
+      this.model = (this.authService.getUserLoggedIn() as Student).studies.find(studie => studie.id == id);
     }
     this.buildForm();
   }
@@ -52,7 +55,7 @@ export class ProfileStudyComponent implements OnInit {
     this.model.level = this.profileStudyForm.get('level').value;
     this.studyService.saveStudy(this.model).subscribe(
       study => {
-        const user = this.userService.getUserLoggedIn();
+        const user = (this.authService.getUserLoggedIn() as Student);
         let index = user.studies.findIndex(({ id }) => id === study.id);
         if (index === -1) {
           user.studies.push(study);

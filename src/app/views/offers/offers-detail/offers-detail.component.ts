@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from 'src/app/shared/services/offer.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Offer } from 'src/app/shared/models/offer.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-offers-detail',
@@ -21,7 +22,9 @@ export class OffersDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -45,15 +48,26 @@ export class OffersDetailComponent implements OnInit {
     this.offerForm.disable();
   }
 
+  isMyJobOffer() {
+    return this.router.url.indexOf('/my-offers') !== -1 ? true : false;
+  }
+
   register() {
-    const user = this.userService.getUserLoggedIn();
-    user.offers.push(this.model);
+    const user = this.authService.getUserLoggedIn();
+    if (this.isMyJobOffer()) {
+      user.offers = user.offers.filter(offer => offer.id !== this.model.id);
+    } else {
+      user.offers.push(this.model);
+    }
     this.userService.saveUser(user).subscribe(
-      user => {
-        console.log(user);
-        this.location.back();
+      () => {
+        this.back();
       }
     )
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

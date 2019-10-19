@@ -4,13 +4,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { LanguageLevelService } from 'src/app/shared/services/language-level.service';
 import { LanguageNameService } from 'src/app/shared/services/language-name.service';
-import { NoWhitespaceValidator } from 'src/app/shared/validators/noWhitespace.validator';
+import { NoWhitespaceStartAndEndValidator } from 'src/app/shared/validators/noWhitespace.validator';
 import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChanged';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/shared/models/user.model';
+import { User, Student } from 'src/app/shared/models/user.model';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-profile-language',
@@ -34,13 +35,14 @@ export class ProfileLanguageComponent implements OnInit {
     private languageService: LanguageService,
     private userService: UserService,
     private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
     if (id !== 'new') {
-      this.model = this.userService.getUserLoggedIn().languages.find(studie => studie.id == id);
+      this.model = (this.authService.getUserLoggedIn() as Student).languages.find(studie => studie.id == id);
     } else {
       this.model = {
         id: -1,
@@ -84,7 +86,11 @@ export class ProfileLanguageComponent implements OnInit {
       .subscribe(
         data => {
           if (data.name === 'Otro') {
-            this.languageForm.get('otherLanguage').setValidators([Validators.minLength(3), Validators.maxLength(255), NoWhitespaceValidator]);
+            this.languageForm.get('otherLanguage').setValidators([
+              Validators.minLength(3), 
+              Validators.maxLength(255), 
+              NoWhitespaceStartAndEndValidator
+            ]);
           } else {
             this.languageForm.get('otherLanguage').clearValidators();
           }
@@ -113,7 +119,7 @@ export class ProfileLanguageComponent implements OnInit {
   saveLanguage() {
     this.languageService.saveLanguage(this.model).subscribe(
       language => {
-        const user = this.userService.getUserLoggedIn();
+        const user = (this.authService.getUserLoggedIn() as Student);
         let index = user.languages.findIndex(({ id }) => id === language.id);
         if (index === -1) {
           user.languages.push(language);
@@ -128,7 +134,7 @@ export class ProfileLanguageComponent implements OnInit {
   updateUser(user: User) {
     this.userService.saveUser(user).subscribe(
       () => {
-        this.location.back();
+        this.back();
       }
     )
   }
@@ -142,6 +148,10 @@ export class ProfileLanguageComponent implements OnInit {
       this.model.name = this.languageForm.get('languageName').value;
       this.saveLanguage();
     }
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

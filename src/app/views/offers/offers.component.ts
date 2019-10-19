@@ -6,7 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { ProvinceService } from 'src/app/shared/services/province.service';
-import { Province } from 'src/app/shared/models/user.model';
+import { Province, Student } from 'src/app/shared/models/user.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-offers',
@@ -25,18 +26,27 @@ export class OffersComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private provinceService: ProvinceService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.offerService.getOffers(this.userService.getUserLoggedIn().studies.map(study => study.title))
-      .subscribe(
-        offers => {
-          this.offers = offers;
-        }
-      );
+    if (this.isMyJobOffer()) {
+      this.offers = (this.authService.getUserLoggedIn() as Student).offers;
+    } else {
+      this.offerService.getOffers((this.authService.getUserLoggedIn() as Student).studies.map(study => study.title))
+        .subscribe(
+          offers => {
+            this.offers = offers;
+          }
+        );
+    }
     this.getProvinces();
     this.buildForm();
+  }
+
+  isMyJobOffer() {
+    return this.router.url === '/my-offers';
   }
 
   getProvinces() {

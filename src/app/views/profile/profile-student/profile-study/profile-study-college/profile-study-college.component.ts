@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { CollegeStudy } from 'src/app/shared/models/study.model';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-study-college',
@@ -25,7 +26,8 @@ export class ProfileStudyCollegeComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -59,7 +61,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
   }
 
   handleFileInput(eve: any) {
-    if (eve) { 
+    if (eve) {
       this.profileStudyCollegeForm.get('certificate').setValue(true);
     } else {
       this.profileStudyCollegeForm.get('certificate').setValue(false);
@@ -73,6 +75,10 @@ export class ProfileStudyCollegeComponent implements OnInit {
     this.model.institution = this.profileStudyCollegeForm.get('institution').value;
     this.model.title.name = this.profileStudyCollegeForm.get('titleName').value;
     this.saveProfileStudy.emit(this.model);
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

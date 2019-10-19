@@ -69,6 +69,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="buttons text-right">
+                        <button type="submit" class="btn btn-primary" (click)="back()">
+                            <i class="fa fa-back" aria-hidden="true"></i> Volver
+                        </button>
                         <button type="submit" class="btn btn-success"
                             [disabled]="languageForm.pristine || languageForm.invalid">
                             <i class="fa fa-save" aria-hidden="true"></i> Guardar

@@ -49,11 +49,14 @@
               aria-hidden="true"></i> Login
           </button>
           <button type="submit" class="btn btn-success">
-            <i class="fa" [ngClass]="{'fa-key': !preloader, 'fa-spinner fa-spin': preloader}"
-              aria-hidden="true"></i> Remember password
+            <i class="fa" [ngClass]="{'fa-key': !preloader, 'fa-spinner fa-spin': preloader}" aria-hidden="true"></i>
+            Remember password
           </button>
         </div>
       </form>
+      <div class="alert alert-danger" role="alert" *ngIf="errorLogin">
+        El login no es correcto
+      </div>
     </div>
   </div>
 </div>

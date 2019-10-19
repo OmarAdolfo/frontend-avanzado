@@ -1,0 +1,165 @@
+<div class="container mt-5" *ngIf="user">
+    <div class="row">
+        <div class="col-12">
+            <h2>Estudiante</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <img src="../../assets/user.png" alt="Imagen del usuario">
+            <div class="mt-2 text-center">{{user.name}}</div>
+            <div class="mt-2 text-center">{{user.surname}}</div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <span><b>Email:</b> {{user.email}}</span>
+            </div>
+            <div class="row">
+                <span><b>Fecha de nacimiento:</b> {{user.birthdate}}</span>
+            </div>
+            <div class="row">
+                <span><b>Teléfono:</b> {{user.phone}}</span>
+            </div>
+            <div class="row">
+                <span><b>NIF/NIE:</b> {{user.documentNumber}}</span>
+            </div>
+            <div class="row">
+                <span><b>Permisos de conducir:</b> {{user.license}}</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <span><b>Acerca de mí:</b></span>
+            </div>
+            <div class="row">
+                {{user.aboutMe}}
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <span><b>Otras competencias:</b></span>
+            </div>
+            <div class="row">
+                {{user.otherCompetences}}
+            </div>
+        </div>
+    </div>
+    <div class="buttons text-right">
+        <button type="submit" class="btn btn-success" (click)="goToPersonalInformationForm()">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            Editar
+        </button>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Formación académica</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Título</th>
+                        <th>Centro</th>
+                        <th>Fecha</th>
+                        <th>Certificado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let studie of user.studies">
+                        <th scope="row">{{studie.level.name}}</th>
+                        <td>{{studie.title.name}}</td>
+                        <td>{{studie.institution.name}}</td>
+                        <td>{{studie.date}}</td>
+                        <td>{{studie.email}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" (click)="goToProfileStudy(studie.id)">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="removeStudie(studie.id)">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="buttons text-right">
+        <button type="submit" class="btn btn-success" (click)="goToProfileStudy()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Nueva
+        </button>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Experiencia laboral</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Puesto</th>
+                        <th>Fechas</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let experience of user.experiencies">
+                        <th scope="row">{{experience.company}}</th>
+                        <td>{{experience.position}}</td>
+                        <td>{{experience.dateInitial + ' - ' + experience.dateEnd}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" (click)="goToExperience(experience.id)">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="removeExperience(experience.id)">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="buttons text-right">
+        <button type="submit" class="btn btn-success" (click)="goToExperience()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Nueva
+        </button>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Idiomas</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Idioma</th>
+                        <th>Fecha</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let language of user.languages">
+                        <th scope="row">{{language.level.name}}</th>
+                        <td>{{language.name.name}}</td>
+                        <td>{{language.date}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" (click)="goToProfileLanguage(language.id)">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="removeLanguage(language.id)">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="buttons text-right mb-5">
+        <button type="submit" class="btn btn-success" (click)="goToProfileLanguage()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Nueva
+        </button>
+    </div>
+</div>

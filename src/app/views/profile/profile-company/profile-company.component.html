@@ -1,0 +1,80 @@
+<div class="container mt-5" *ngIf="user">
+    <div class="row">
+        <div class="col-3">
+            <b>Nombre Comercial</b>
+        </div>
+        <div class="col-3">
+            {{user.comercialName}}
+        </div>
+        <div class="col-3">
+            <b>Razón social</b>
+        </div>
+        <div class="col-3">
+            {{user.businessName}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <b>CIF</b>
+        </div>
+        <div class="col-3">
+            {{user.documentNumber}}
+        </div>
+        <div class="col-3">
+            <b>Dirección</b>
+        </div>
+        <div class="col-3">
+            {{user.address.street}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <b>Provincia</b>
+        </div>
+        <div class="col-3">
+            {{user.address.province.name}}
+        </div>
+        <div class="col-3">
+            <b>Municipio</b>
+        </div>
+        <div class="col-3">
+            {{user.address.municipe.name}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <b>Url</b>
+        </div>
+        <div class="col-3">
+            <a href="{{user.url}}">{{user.url}}</a>
+        </div>
+        <div class="col-3">
+            <b>Nombre y apellidos persona contacto</b>
+        </div>
+        <div class="col-3">
+            {{user.name + ' ' + user.surname}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <b>Teléfono persona contacto</b>
+        </div>
+        <div class="col-3">
+            {{user.phone}}
+        </div>
+        <div class="col-3">
+            <b>Correo electrónico persona contacto</b>
+        </div>
+        <div class="col-3">
+            {{user.email}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="buttons text-right mb-5">
+            <button type="submit" class="btn btn-success" (click)="goToPersonalInformation()">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                Editar
+            </button>
+        </div>
+    </div>
+</div>

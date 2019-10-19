@@ -9,15 +9,17 @@
                             <label class="control-label" for="institution">Nombre de centro</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.institution.invalid}" type="text"
-                                class="form-control" id="institution" formControlName="institution" name="institution">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.institution.invalid}"
+                                type="text" class="form-control" id="institution" formControlName="institution"
+                                name="institution">
                         </div>
                         <div class="col-3">
                             <label class="control-label" for="titleName">Título</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleName.invalid}" type="text"
-                                class="form-control" id="titleName" formControlName="titleName" name="titleName">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleName.invalid}"
+                                type="text" class="form-control" id="titleName" formControlName="titleName"
+                                name="titleName">
                         </div>
                     </div>
                     <div class="row">
@@ -25,9 +27,9 @@
                             <label class="control-label" for="titleDate">Fecha del título</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleDate.invalid}" type="text"
-                                placeholder="DD/MM/YYYY" class="form-control" id="titleDate" formControlName="titleDate"
-                                name="titleDate">
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleDate.invalid}"
+                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="titleDate"
+                                formControlName="titleDate" name="titleDate">
                             <div *ngIf="profileStudyCollegeForm.controls.titleDate.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir una fecha con el formato correcto y válida
@@ -51,6 +53,9 @@
                         </div>
                         <div class="col-6">
                             <div class="buttons text-right">
+                                <button type="submit" class="btn btn-primary" (click)="back()">
+                                    <i class="fa fa-back" aria-hidden="true"></i> Volver
+                                </button>
                                 <button type="submit" class="btn btn-success"
                                     [disabled]="profileStudyCollegeForm.pristine || profileStudyCollegeForm.invalid">
                                     <i class="fa fa-save" aria-hidden="true"></i> Guardar

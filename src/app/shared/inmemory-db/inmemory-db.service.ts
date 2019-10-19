@@ -1,12 +1,14 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { User, Province, Municipe } from '../models/user.model';
+import { Province, Municipe, Student, Enterprise } from '../models/user.model';
 import { CollegeStudy, VocationalStudy, Institution, Category, Grade, TitleStudy } from '../models/study.model';
 import { LanguageLevel, LanguageName, Language } from '../models/language.model';
 import { Experience } from '../models/experience.model';
+import { Offer } from '../models/offer.model';
 
 export class FakeBackendService implements InMemoryDbService {
+
   createDb() {
-    const users: User[] = [
+    const users: (Student | Enterprise)[] = [
       {
         id: 1,
         username: 'carloscg',
@@ -81,7 +83,28 @@ export class FakeBackendService implements InMemoryDbService {
             date: '30/06/1998'
           }
         ],
-        offers: [],
+        offers: [
+          {
+            id: 1,
+            company: {
+              uid: 33,
+              name: 'Coritel'
+            },
+            job: {
+              uid: 1,
+              name: 'Programador Jr Java',
+              description: 'Programación y prueba unitaria en Java'
+            },
+            province: { uid: 1, name: 'Málaga' },
+            municipe: { uid: 7, name: 'Estepona' },
+            date: '21/09/2006',
+            category: { uid: 2, name: 'Informática y Comunicaciones' },
+            title: [
+              { uid: 1, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
+              { uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }
+            ]
+          }
+        ],
         experiencies: [
           {
             id: 0,
@@ -95,15 +118,64 @@ export class FakeBackendService implements InMemoryDbService {
             id: 1,
             company: 'Indra',
             dateInitial: '1548320228',
-            dateEnd: '1548320228',  
+            dateEnd: '1548320228',
             position: 'Ingeniero',
             tasks: 'Lore ipsum'
           }
         ],
+        configuration: {
+          languageName: { id: -1, name: '' },
+          notifications: []
+        }
+      },
+      {
+        id: 2,
+        username: 'arte',
+        password: 'arte',
+        name: 'Paco',
+        surname: 'Álvarez',
+        phone: '123456789',
+        email: 'arte@gmail.com',
+        documentNumber: 'W1876112B0',
+        address: {
+          street: 'Urbanización las Areanas - 45',
+          province: { uid: 4, name: 'Cádiz' },
+          municipe: { uid: 6, name: 'Chiclana de la Frontera' }
+        },
+        offers: [
+          {
+            id: 1,
+            company: {
+              uid: 33,
+              name: 'Coritel'
+            },
+            job: {
+              uid: 1,
+              name: 'Programador Jr Java',
+              description: 'Programación y prueba unitaria en Java'
+            },
+            province: { uid: 1, name: 'Málaga' },
+            municipe: { uid: 7, name: 'Estepona' },
+            date: '21/09/2006',
+            category: { uid: 2, name: 'Informática y Comunicaciones' },
+            title: [
+              { uid: 1, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
+              { uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }
+            ]
+          }
+        ],
+        roles: ['company'],
+        comercialName: 'Arte Consultores',
+        businessName: 'Arte Consultores Tecnológicos S.L.',
+        url: 'www.arte-consultores.com',
+        configuration: {
+          languageName: { id: -1, name: '' },
+          notifications: []
+        }
       }
     ];
 
-    const offers: any[] = [
+    const offers: Offer[] = [
       {
         id: 1,
         company: {
@@ -111,6 +183,7 @@ export class FakeBackendService implements InMemoryDbService {
           name: 'Coritel'
         },
         job: {
+          uid: 1,
           name: 'Programador Jr Java',
           description: 'Programación y prueba unitaria en Java'
         },
@@ -130,6 +203,7 @@ export class FakeBackendService implements InMemoryDbService {
           name: 'Coritel'
         },
         job: {
+          uid: 2,
           name: 'Comercial',
           description:
             'Relaciones con los clientes y atención a las redes sociales.'
@@ -147,6 +221,7 @@ export class FakeBackendService implements InMemoryDbService {
           name: 'Coritel'
         },
         job: {
+          uid: 3,
           name: 'Analista Programador Java',
           description:
             'Análisis funcional y diseño técnico/detallado de componentes'
@@ -164,6 +239,7 @@ export class FakeBackendService implements InMemoryDbService {
           name: 'Indra'
         },
         job: {
+          uid: 4,
           name: 'Administrativo',
           description: 'Gestión de cartera de clientes.'
         },

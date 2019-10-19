@@ -5,8 +5,9 @@ import { ExperienceService } from 'src/app/shared/services/experience.service';
 import { ActivatedRoute } from '@angular/router';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { UserService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/shared/models/user.model';
+import { User, Student } from 'src/app/shared/models/user.model';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-profile-experience',
@@ -24,7 +25,8 @@ export class ProfileExperienceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -73,7 +75,7 @@ export class ProfileExperienceComponent implements OnInit {
     this.model = Object.assign(this.model, this.experienceForm.value);
     this.experienceService.saveExperience(this.model).subscribe(
       experience => {
-        const user = this.userService.getUserLoggedIn();
+        const user = (this.authService.getUserLoggedIn() as Student);
         let index = user.experiencies.findIndex(({ id }) => id === experience.id);
         if (index === -1) {
           user.experiencies.push(experience);
@@ -88,9 +90,13 @@ export class ProfileExperienceComponent implements OnInit {
   updateUser(user: User) {
     this.userService.saveUser(user).subscribe(
       () => {
-        this.location.back();
+        this.back();
       }
     )
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

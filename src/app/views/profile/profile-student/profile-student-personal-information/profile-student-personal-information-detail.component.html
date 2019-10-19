@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="container-fluid mt-5" *ngIf="model">
-    <form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="login()">
+    <form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="save()">
         <div class="row">
             <div class="col-2">
                 <img src="../../assets/user.png" alt="Logotipo de la Uoc">
@@ -199,6 +199,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="buttons text-right">
+                                <button type="submit" class="btn btn-primary" (click)="back()">
+                                    <i class="fa fa-back" aria-hidden="true"></i> Volver
+                                </button>
                                 <button type="submit" class="btn btn-success"
                                     [disabled]="personalInformationForm.pristine || personalInformationForm.invalid">
                                     <i class="fa fa-save" aria-hidden="true"></i> Guardar

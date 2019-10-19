@@ -57,9 +57,15 @@ export const rootRouterConfig: Routes = [
       import("./views/profile/profile.module").then(m => m.ProfileModule),
     data: { title: "Material", breadcrumb: "MATERIAL" }
   },
-
   {
     path: "offers",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./views/offers/offers.module").then(m => m.OffersModule),
+    data: { title: "Offers", breadcrumb: "Offers" }
+  },
+  {
+    path: "my-offers",
     canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/offers/offers.module").then(m => m.OffersModule),

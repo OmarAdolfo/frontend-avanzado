@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SigninService } from './signin.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,12 +12,13 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
+  errorLogin = false;
 
   constructor(
-    private signinService: SigninService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -33,14 +34,14 @@ export class SigninComponent implements OnInit {
   }
 
   login() {
-    this.signinService.getUsers().subscribe(
+    this.userService.getUsers().subscribe(
       users => {
         const user = users.find(user => user.email === this.loginForm.get('email').value && user.password === this.loginForm.get('password').value);
         if (user) {
-          this.userService.setUserLoggedIn(user);
+          this.authService.setUserLoggedIn(user);
           this.router.navigate(['dashboard']);
         } else {
-          console.log('No loggin');
+          this.errorLogin = true;
         }
       }
     );

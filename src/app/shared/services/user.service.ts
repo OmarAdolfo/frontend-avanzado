@@ -8,25 +8,26 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
     apiurl = 'api/users';
-    userLogged: User;
 
     constructor(private http: HttpClient) { }
-
-    setUserLoggedIn(user: User) {
-        this.userLogged = user;
-    }
-
-    getUserLoggedIn(): User {
-        return this.userLogged;
-    }
-
-    isLogged() {
-        return this.userLogged ? true : false;
-    }
 
     private handleError(error: any) {
         console.log(error);
         return throwError(error);
+    }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.apiurl).pipe(
+            tap(data => console.log(data)),
+            catchError(this.handleError)
+        );
+    }
+
+    getUser(id: number): Observable<User> {
+        return this.http.get<User>(this.apiurl + '/' + id).pipe(
+            tap(data => console.log(data)),
+            catchError(this.handleError)
+        );
     }
 
     saveUser(user: User): Observable<User> {

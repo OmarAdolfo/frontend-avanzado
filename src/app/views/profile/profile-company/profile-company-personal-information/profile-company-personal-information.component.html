@@ -1,0 +1,204 @@
+<app-header></app-header>
+<div class="container-fluid mt-5" *ngIf="model">
+    <form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="comercialName">Nombre Comercial</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.comercialName.invalid}"
+                                type="text" class="form-control" id="comercialName" formControlName="comercialName"
+                                name="comercialName">
+                            <div *ngIf="personalInformationForm.controls.comercialName.invalid && (personalInformationForm.controls.comercialName.dirty || personalInformationForm.controls.comercialName.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.comercialName.errors.required">
+                                    El nombre comercial es obligatorio
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.comercialName.errors.minlength">
+                                    El nombre comercial debe ser mínimo 3 carácteres
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.comercialName.errors.maxlength">
+                                    El nombre comercial debe ser máximo 255 carácteres
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.comercialName.errors.whitespace">
+                                    El nombre comercial no puede contener espacios en blanco
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label" for="businessName">Razón social</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.businessName.invalid}"
+                                type="text" class="form-control" id="businessName" formControlName="businessName"
+                                name="businessName">
+                            <div *ngIf="personalInformationForm.controls.businessName.invalid && (personalInformationForm.controls.businessName.dirty || personalInformationForm.controls.businessName.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.businessName.errors.required">
+                                    La razón social es obligatorio
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.businessName.errors.minlength">
+                                    La razón social debe ser mínimo 3 carácteres
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.businessName.errors.maxlength">
+                                    La razón social debe ser máximo 255 carácteres
+                                </div>
+                                <div *ngIf="personalInformationForm.controls.businessName.errors.whitespace">
+                                    La razón social no puede contener espacios en blanco
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="cif">CIF</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.cif.invalid}" type="text"
+                                class="form-control" id="cif" formControlName="cif" name="cif">
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label" for="street">Dirección</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.street.invalid}"
+                                type="text" class="form-control" id="street" formControlName="street" name="street">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="province">Provincias</label>
+                        </div>
+                        <div class="col-3">
+                            <select class="custom-select" formControlName="province" [compareWith]="compare"
+                                id="province">
+                                <option></option>
+                                <option *ngFor="let province of provinces" [ngValue]="province">
+                                    {{province.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label" for="municipie">Municipio</label>
+                        </div>
+                        <div class="col-3">
+                            <select class="custom-select" formControlName="municipie" [compareWith]="compare"
+                                id="municipie">
+                                <option></option>
+                                <option *ngFor="let municipie of municipies" [ngValue]="municipie">
+                                    {{municipie.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label" for="url">Url</label>
+                        </div>
+                        <div class="col-3">
+                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.url.invalid}" type="text"
+                                class="form-control" id="url" formControlName="url" name="url">
+                            <div *ngIf="personalInformationForm.controls.url.invalid && (personalInformationForm.controls.url.dirty || personalInformationForm.controls.businessName.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="personalInformationForm.controls.url.errors.pattern">
+                                    La url no es válida
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset>
+                        <legend>Datos de contacto</legend>
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="control-label" for="name">Nombre</label>
+                            </div>
+                            <div class="col-3">
+                                <input [ngClass]="{'is-invalid': personalInformationForm.controls.name.invalid}"
+                                    type="text" class="form-control" id="name" formControlName="name" name="name">
+                                <div *ngIf="personalInformationForm.controls.name.invalid && (personalInformationForm.controls.name.dirty || personalInformationForm.controls.name.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="personalInformationForm.controls.name.errors.required">
+                                        El nombre es obligatorio
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.name.errors.minlength">
+                                        El nombre debe ser mínimo 3 carácteres
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.name.errors.maxlength">
+                                        El nombre debe ser máximo 55 carácteres
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.name.errors.pattern">
+                                        El nombre no puede contener espacios ni al final ni al principio ni tampoco
+                                        carácteres especiales
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label class="control-label" for="surname">Apellidos</label>
+                            </div>
+                            <div class="col-3">
+                                <input [ngClass]="{'is-invalid': personalInformationForm.controls.surname.invalid}"
+                                    type="text" class="form-control" id="surname" formControlName="surname"
+                                    name="surname">
+                                <div *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="personalInformationForm.controls.surname.errors.required">
+                                        El apellido es obligatorio
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.surname.errors.minlength">
+                                        El apellido debe ser mínimo 3 carácteres
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.surname.errors.maxlength">
+                                        El apellido debe ser máximo 55 carácteres
+                                    </div>
+                                    <div *ngIf="personalInformationForm.controls.surname.errors.pattern">
+                                        El apellido no puede contener espacios ni al final ni al principio ni tampoco
+                                        carácteres
+                                        especiales
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="control-label" for="phone">Teléfono</label>
+                            </div>
+                            <div class="col-3">
+                                <input [ngClass]="{'is-invalid': personalInformationForm.controls.phone.invalid}"
+                                    type="text" class="form-control" id="phone" formControlName="phone" name="phone">
+                            </div>
+                            <div class="col-3">
+                                <label class="control-label" for="email">Correo electrónico</label>
+                            </div>
+                            <div class="col-3">
+                                <input [ngClass]="{'is-invalid': personalInformationForm.controls.email.invalid}"
+                                    type="text" class="form-control" id="email" formControlName="email" name="email">
+                                <div *ngIf="personalInformationForm.controls.email.invalid && (personalInformationForm.controls.email.dirty || personalInformationForm.controls.email.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="personalInformationForm.controls.email.errors.email">
+                                        El correo electrónico no tiene un formato correcto
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="buttons text-right">
+                                <button type="submit" class="btn btn-primary" (click)="back()">
+                                    <i class="fa fa-back" aria-hidden="true"></i> Volver
+                                </button>
+                                <button type="submit" class="btn btn-success"
+                                    [disabled]="personalInformationForm.pristine || personalInformationForm.invalid">
+                                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

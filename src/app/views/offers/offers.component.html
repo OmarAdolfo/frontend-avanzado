@@ -49,6 +49,7 @@
                         <th>Familia profesional</th>
                         <th>Fecha</th>
                         <th>Provincia</th>
+                        <th *ngIf="isMyJobOffer()">Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -59,6 +60,7 @@
                         <td>{{offer.category.name}}</td>
                         <td>{{offer.date}}</td>
                         <td>{{offer.province.name}}</td>
+                        <td *ngIf="isMyJobOffer()"></td>
                         <td>
                             <button type="button" class="btn btn-success" (click)="goToDetail(offer.id)">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
