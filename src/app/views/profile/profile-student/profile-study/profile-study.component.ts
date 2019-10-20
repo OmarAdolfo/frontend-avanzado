@@ -40,6 +40,7 @@ export class ProfileStudyComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Construye el formulario */
   buildForm() {
     this.profileStudyForm = this.fb.group({
       level: new FormControl(this.model && this.model.level ? this.model.level : { uid: -1, name: '' })
@@ -50,6 +51,7 @@ export class ProfileStudyComponent implements OnInit {
     return val1.uid === val2.uid;
   }
 
+  /* Guarda los estudios de un estudiante */
   save(eve: any) {
     this.model = eve;
     this.model.level = this.profileStudyForm.get('level').value;

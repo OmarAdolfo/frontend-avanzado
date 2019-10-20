@@ -36,6 +36,7 @@ export class OffersDetailComponent implements OnInit {
     )
   }
 
+  /* Construye el formulario de las ofertas */
   buildForm() {
     this.offerForm = this.fb.group({
       company: new FormControl(this.model.company.name),
@@ -52,6 +53,7 @@ export class OffersDetailComponent implements OnInit {
     return this.router.url.indexOf('/my-offers') !== -1 ? true : false;
   }
 
+  /* Registra si se ha borrado o se ha inscrito un usuario a una oferta */
   register() {
     const user = this.authService.getUserLoggedIn();
     if (this.isMyJobOffer()) {

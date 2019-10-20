@@ -51,6 +51,7 @@ export class ProfileExperienceComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Construye el formulario de experiencia académica */
   buildForm() {
     this.experienceForm = this.fb.group({
       company: new FormControl(this.model.company, [
@@ -71,6 +72,7 @@ export class ProfileExperienceComponent implements OnInit {
     });
   }
 
+  /* Guarda la información del formulario */
   save() {
     this.model = Object.assign(this.model, this.experienceForm.value);
     this.experienceService.saveExperience(this.model).subscribe(
@@ -87,6 +89,7 @@ export class ProfileExperienceComponent implements OnInit {
     )
   }
 
+  /* Actualiza el usuario */
   updateUser(user: User) {
     this.userService.saveUser(user).subscribe(
       () => {
@@ -95,6 +98,7 @@ export class ProfileExperienceComponent implements OnInit {
     )
   }
 
+  /* Navega a la pantalla anterior */
   back() {
     this.location.back();
   }

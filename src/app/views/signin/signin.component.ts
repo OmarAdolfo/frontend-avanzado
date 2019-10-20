@@ -33,10 +33,10 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  /* Realiza el proceso de login mediante email y contraseña */
   login() {
-    this.userService.getUsers().subscribe(
-      users => {
-        const user = users.find(user => user.email === this.loginForm.get('email').value && user.password === this.loginForm.get('password').value);
+    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe(
+      user => {
         if (user) {
           this.authService.setUserLoggedIn(user);
           this.router.navigate(['dashboard']);
@@ -44,7 +44,7 @@ export class SigninComponent implements OnInit {
           this.errorLogin = true;
         }
       }
-    );
+    )
   }
 
 }

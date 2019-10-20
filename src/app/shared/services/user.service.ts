@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { throwError, Observable } from 'rxjs';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, catchError, map, find } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
@@ -20,6 +20,12 @@ export class UserService {
         return this.http.get<User[]>(this.apiurl).pipe(
             tap(data => console.log(data)),
             catchError(this.handleError)
+        );
+    }
+
+    login(email: string, password: string) {
+        return this.getUsers().pipe(
+            map(users => users.find(user => user.email === email && user.password === password))
         );
     }
 

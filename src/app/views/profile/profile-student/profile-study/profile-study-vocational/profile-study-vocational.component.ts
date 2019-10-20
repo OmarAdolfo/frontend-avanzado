@@ -60,6 +60,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Obtienes los centros educativos */
   getInstitutions() {
     this.institutionService.getInstitutions().subscribe(
       institutions => {
@@ -68,6 +69,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     )
   }
 
+  /* Obtiene las familias profesionales */
   getCategories() {
     this.categoryService.getCategories().subscribe(
       categories => {
@@ -76,6 +78,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     )
   }
 
+  /* Obtiene los grados */
   getGrades() {
     this.gradeService.getGrades().subscribe(
       grades => {
@@ -84,6 +87,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     )
   }
 
+  /* Obtiene los títulos */
   getTitles() {
     this.titleService.getTitleStudies().subscribe(
       titles => {
@@ -92,6 +96,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     )
   }
 
+  /* Construye el formulario de estudios del estudiante */
   buildForm() {
     this.profileStudyVocationalForm = this.fb.group({
       institution: new FormControl(this.model.institution),
@@ -109,6 +114,16 @@ export class ProfileStudyVocationalComponent implements OnInit {
     return val1.uid === val2.uid;
   }
 
+  /* Checkea si se sube un fichero */
+  handleFileInput(eve: any) {
+    if (eve) {
+      this.profileStudyVocationalForm.get('certificate').setValue(true);
+    } else {
+      this.profileStudyVocationalForm.get('certificate').setValue(false);
+    }
+  }
+
+  /* Guarda la información relativa a un ciclo formativo */
   save() {
     this.model.bilingue = this.profileStudyVocationalForm.get('bilingue').value;
     this.model.certificate = this.profileStudyVocationalForm.get('certificate').value;

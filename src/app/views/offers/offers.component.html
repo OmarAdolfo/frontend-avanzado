@@ -62,8 +62,11 @@
                         <td>{{offer.province.name}}</td>
                         <td *ngIf="isMyJobOffer()"></td>
                         <td>
-                            <button type="button" class="btn btn-success" (click)="goToDetail(offer.id)">
+                            <button *ngIf="authService.hasStudentRol()" type="button" class="btn btn-success" (click)="goToDetail(offer.id)">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <button *ngIf="authService.hasCompanyRol()" type="button" class="btn btn-success">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>

@@ -212,7 +212,10 @@ export class FakeBackendService implements InMemoryDbService {
         municipe: { uid: 8, name: 'Campanillas (PTA)' },
         date: '21/09/2016',
         category: { uid: 4, name: 'Comercio y Marketing' },
-        title: [{ uid: 5, name: 'Gestión Comercial y Empresarial' }]
+        title: [{ uid: 5, name: 'Gestión Comercial y Empresarial' }, {
+          uid: 2,
+          name: 'Administracion de sistemas informaticos y redes'
+        }]
       },
       {
         id: 3,

@@ -96,7 +96,7 @@ export class ProfileCompanyPersonalInformationComponent implements OnInit {
     this.model.comercialName = this.personalInformationForm.get('comercialName').value;
     this.model.businessName = this.personalInformationForm.get('businessName').value;
     this.model.documentNumber = this.personalInformationForm.get('cif').value;
-    this.model.address.street = this.personalInformationForm.get('direccion').value;
+    this.model.address.street = this.personalInformationForm.get('street').value;
     this.model.address.province = this.personalInformationForm.get('province').value;
     this.model.address.municipe = this.personalInformationForm.get('municipie').value;
     this.model.url = this.personalInformationForm.get('url').value;

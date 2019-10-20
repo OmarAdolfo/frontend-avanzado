@@ -37,12 +37,13 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
   ) { }
 
   ngOnInit() {
-    this.model = (this.authService.getUserLoggedIn() as Student);
+    this.model = Object.assign({}, (this.authService.getUserLoggedIn() as Student));
     this.getProvinces();
     this.getMunicipies();
     this.buildForm();
   }
 
+  /* Obtiene las provincias */
   getProvinces() {
     this.provinceService.getProvinces().subscribe(
       provinces => {
@@ -51,6 +52,7 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
     )
   }
 
+  /* Obtiene los municipios */
   getMunicipies() {
     this.municipeService.getMunicipes().subscribe(
       municipes => {
@@ -59,6 +61,7 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
     )
   }
 
+  /* Construye el formulario de datos personales */
   private buildForm() {
     this.personalInformationForm = this.fb.group({
       name: new FormControl(this.model.name, [
@@ -92,6 +95,7 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
     return val1.uid === val2.uid;
   }
 
+  /* Guarda los datos personales */
   save() {
     this.model.name = this.personalInformationForm.get('name').value;
     this.model.surname = this.personalInformationForm.get('surname').value;
@@ -107,7 +111,8 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
     this.model.aboutMe = this.personalInformationForm.get('aboutMe').value;
     this.model.otherCompetences = this.personalInformationForm.get('otherCompetences').value;
     this.userService.saveUser(this.model).subscribe(
-      () => {
+      user => {
+        this.authService.setUserLoggedIn(user);
         this.back();
       }
     )

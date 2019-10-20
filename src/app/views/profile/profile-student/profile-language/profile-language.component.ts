@@ -56,6 +56,7 @@ export class ProfileLanguageComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Obtienes los niveles de idiomas */
   getLanguageLevels() {
     this.languageLevelService.getLanguageLevels().subscribe(
       languageLevels => {
@@ -64,6 +65,7 @@ export class ProfileLanguageComponent implements OnInit {
     )
   }
 
+  /* Obtiene los nombre de los idiomas */
   getLanguageNames() {
     this.languageNameService.getLanguageNames().subscribe(
       languages => {
@@ -73,6 +75,7 @@ export class ProfileLanguageComponent implements OnInit {
     )
   }
 
+  /* Construye el formulario de idioma */
   buildForm() {
     this.languageForm = this.fb.group({
       date: new FormControl(this.model.date, DateValidator),
@@ -107,6 +110,7 @@ export class ProfileLanguageComponent implements OnInit {
     return val1 && val2 ? val1.uid === val2.uid : val1 === val2;
   }
 
+  /* Guardar un idioma escrito en el input de Otros */
   saveOtherLanguage() {
     this.languageNameService.addLanguageName({ id: -1, name: this.languageForm.get('otherLanguage').value }).subscribe(
       language => {
@@ -116,6 +120,7 @@ export class ProfileLanguageComponent implements OnInit {
     )
   }
 
+  /* Guardar idioma del estudiante */
   saveLanguage() {
     this.languageService.saveLanguage(this.model).subscribe(
       language => {
@@ -131,6 +136,7 @@ export class ProfileLanguageComponent implements OnInit {
     )
   }
 
+  /* Actualiza el usuario */
   updateUser(user: User) {
     this.userService.saveUser(user).subscribe(
       () => {
@@ -139,6 +145,7 @@ export class ProfileLanguageComponent implements OnInit {
     )
   }
 
+  /* Comienza el proceso de guardar cuando el usuario pulsa sobre el botón Guardar */
   save() {
     this.model.date = this.languageForm.get('date').value;
     this.model.level = this.languageForm.get('level').value;

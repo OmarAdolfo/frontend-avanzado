@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -8,20 +7,19 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class ProfileComponent implements OnInit {
 
-  user: User;
-
   constructor(
     private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.user = this.authService.getUserLoggedIn();
   }
 
+  /* Comprueba si el usuario tiene el rol de estudiante */
   hasStudentRol() {
     return this.authService.hasStudentRol();
   }
 
+  /* Comprueba si el usuario tiene el rol de empresa */
   hasCompanyRol() {
     return this.authService.hasCompanyRol();
   }

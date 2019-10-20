@@ -39,6 +39,7 @@ export class FavoritesComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Obtiene los idiomas */
   getLanguageNames() {
     this.languageNameService.getLanguageNames().subscribe(
       languageNames => {
@@ -47,6 +48,7 @@ export class FavoritesComponent implements OnInit {
     )
   }
 
+  /* Construye el formulario de configuración */
   buildForm() {
     this.configurationForm = this.fb.group({
       languageName: new FormControl(this.model.languageName),
@@ -55,6 +57,7 @@ export class FavoritesComponent implements OnInit {
     this.getProvinces();
   }
 
+  /* Obtiene las provincias */
   getProvinces() {
     const notifications = this.configurationForm.get('notifications') as FormArray;
     this.provinceService.getProvinces().subscribe(
@@ -71,12 +74,14 @@ export class FavoritesComponent implements OnInit {
     )
   }
 
+  /* Obtiene el nombre de la provincia */
   getNameProvince(index) {
     const notifications = this.configurationForm.get('notifications') as FormArray;
     const formGroup = notifications.controls[index] as FormGroup;
     return formGroup.value.province ? formGroup.value.province.name : 'Todos';
   }
 
+  /* Se marca o desmarca todos los checkbox */
   handleSelected(eve: any) {
     const notifications = this.configurationForm.get('notifications') as FormArray;
     for (let index in notifications.value) {
@@ -89,6 +94,7 @@ export class FavoritesComponent implements OnInit {
     return val1 && val2 ? val1.id === val2.id : val1 === val2;
   }
 
+  /* Guarda la información de configuración */
   save() {
     this.model = Object.assign(this.model, this.configurationForm.value);
     this.user.configuration = this.model;

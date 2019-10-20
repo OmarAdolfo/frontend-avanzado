@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ProfileStudentComponent implements OnInit {
 
-  @Input() user: Student;
+  user: Student;
 
   constructor(
     private userService: UserService,
@@ -20,43 +20,53 @@ export class ProfileStudentComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = Object.assign({}, (this.authService.getUserLoggedIn() as Student));
+  }
 
+  /* Navega a la pantalla de datos personales del estudiante */
   goToPersonalInformationForm() {
     this.route.navigate(['./personal-information-student'], { relativeTo: this.activatedRoute });
   }
 
+  /* Elimina un estudio del estudiante */
   removeStudie(uid: number) {
     this.user.studies = this.user.studies.filter(studie => studie.id !== uid);
     this.updateUser();
   }
 
+  /* Navega a la pantalla de estudios del estudiante */
   goToProfileStudy(uid: number) {
     this.route.navigate(['./profile-study', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
+  /* Elimina un idioma del estudiante */
   removeLanguage(id: number) {
     this.user.languages = this.user.languages.filter(language => language.id !== id);
     this.updateUser();
   }
 
+  /* Navega a la pantalla de idiomas del estudiante */
   goToProfileLanguage(uid: number) {
     this.route.navigate(['./profile-language', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
+  /* Elimina una experiencia del estudiante */
   removeExperience(id: number) {
     this.user.experiencies = this.user.experiencies.filter(experience => experience.id !== id);
     this.updateUser();
   }
 
+  /* Navega a la pantalla de experiencia del estudiante */
   goToExperience(uid: number) {
     this.route.navigate(['./profile-experience', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
+  /* Actualiza el usuario */
   updateUser() {
     this.userService.updateUser(this.user).subscribe(
       user => {
-        this.authService.setUserLoggedIn(this.user);
+        this.authService.setUserLoggedIn(user);
         this.user = user as Student;
       }
     )

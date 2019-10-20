@@ -46,6 +46,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
     this.buildForm();
   }
 
+  /* Construye el formulario de estudios del estudiante relativos a un título universitario */
   buildForm() {
     this.profileStudyCollegeForm = this.fb.group({
       institution: new FormControl(this.model.institution),
@@ -60,6 +61,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
     return val1.uid === val2.uid;
   }
 
+  /* Checkea si se ha subido un fichero */
   handleFileInput(eve: any) {
     if (eve) {
       this.profileStudyCollegeForm.get('certificate').setValue(true);
@@ -68,6 +70,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
     }
   }
 
+  /* Guarda la información relativa a un título universitario */
   save() {
     this.model.bilingue = this.profileStudyCollegeForm.get('bilingue').value;
     this.model.certificate = this.profileStudyCollegeForm.get('certificate').value;
