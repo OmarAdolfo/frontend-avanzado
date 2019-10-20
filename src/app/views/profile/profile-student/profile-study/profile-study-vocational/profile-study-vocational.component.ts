@@ -6,7 +6,6 @@ import { InstitutionService } from 'src/app/shared/services/institution.service'
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { GradeService } from 'src/app/shared/services/grade.service';
 import { TitleService } from 'src/app/shared/services/title.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-study-vocational',
@@ -36,8 +35,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
     private institutionService: InstitutionService,
     private categoryService: CategoryService,
     private gradeService: GradeService,
-    private titleService: TitleService,
-    private location: Location
+    private titleService: TitleService
   ) { }
 
   ngOnInit() {
@@ -121,10 +119,6 @@ export class ProfileStudyVocationalComponent implements OnInit {
     this.model.title = this.profileStudyVocationalForm.get('title').value;
     this.model.dual = this.profileStudyVocationalForm.get('dual').value;
     this.saveProfileStudy.emit(this.model);
-  }
-
-  back() {
-    this.location.back();
   }
 
 }

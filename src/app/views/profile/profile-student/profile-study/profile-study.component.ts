@@ -64,11 +64,15 @@ export class ProfileStudyComponent implements OnInit {
         }
         this.userService.saveUser(user).subscribe(
           () => {
-            this.location.back();
+            this.back();
           }
         )
       }
     )
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

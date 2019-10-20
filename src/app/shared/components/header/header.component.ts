@@ -29,6 +29,10 @@ export class HeaderComponent {
     this.router.navigate(['/favorites']);
   }
 
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
   logout() {
     this.authService.setUserLoggedIn(null);
     this.router.navigate(['/signin']);

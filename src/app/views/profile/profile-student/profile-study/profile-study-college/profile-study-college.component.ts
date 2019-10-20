@@ -77,8 +77,4 @@ export class ProfileStudyCollegeComponent implements OnInit {
     this.saveProfileStudy.emit(this.model);
   }
 
-  back() {
-    this.location.back();
-  }
-
 }

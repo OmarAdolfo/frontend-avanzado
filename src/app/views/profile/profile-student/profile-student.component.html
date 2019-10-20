@@ -70,7 +70,7 @@
                         <td>{{studie.title.name}}</td>
                         <td>{{studie.institution.name}}</td>
                         <td>{{studie.date}}</td>
-                        <td>{{studie.email}}</td>
+                        <td>{{studie.certificate ? 'Sí' : 'No'}}</td>
                         <td>
                             <button type="button" class="btn btn-success" (click)="goToProfileStudy(studie.id)">
                                 <i class="fa fa-edit" aria-hidden="true"></i>

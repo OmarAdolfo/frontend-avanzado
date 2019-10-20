@@ -56,8 +56,8 @@ export class ProfileStudentComponent implements OnInit {
   updateUser() {
     this.userService.updateUser(this.user).subscribe(
       user => {
-        this.user = user as Student;
         this.authService.setUserLoggedIn(this.user);
+        this.user = user as Student;
       }
     )
   }
