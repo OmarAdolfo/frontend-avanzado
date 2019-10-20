@@ -74,7 +74,7 @@ export class OffersComponent implements OnInit {
 
   /* Navega a la pantalla de detalle de la oferta */
   goToDetail(id: number) {
-    this.router.navigate(['./offers/detail/', id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['./offer-detail/', id], { relativeTo: this.activatedRoute });
   }
 
 }
