@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "UOCJob"
+    }
+  },
+  "defaultProject": "UOCJob",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

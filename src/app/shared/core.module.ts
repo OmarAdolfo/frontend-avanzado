@@ -4,15 +4,14 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 /* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
 /* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
 
-/* import { StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'; */
-
-/* import { metaReducers, reducers } from './states/root.reducer';
-import { AuthEffects } from './states/auth/effects/auth.effects';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../../environments/environment';
+import { reducers, metaReducers } from './state/root.reducer';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterEffects } from './states/router/effects/router.effects';
+
+/*import { RouterEffects } from './states/router/effects/router.effects';
 
 import { UserEffects } from './states/user/effects/user.effects';
 import { AppEffects } from './states/app/effects'; */
@@ -26,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from './services/notifications.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeBackendService } from './inmemory-db/inmemory-db.service';
+import { AuthEffects } from './state/auth/effects/auth.effects';
 
 /* export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -59,15 +59,16 @@ export const CORE_SERVICES: Provider[] = [
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    /*     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    StoreDevtoolsModule.instrument({ maxAge: 50 }),
-    EffectsModule.forRoot([
-      AppEffects,
-      AuthEffects,
-      UserEffects,
-      RouterEffects
-    ]),*/
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+    EffectsModule.forRoot([AuthEffects]),
     /*  TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Store } from '@ngrx/store';
+import { LogIn } from 'src/app/shared/state/auth/actions/auth.actions';
+import { AuthState } from 'src/app/shared/state/auth/reducers/auth.reducers';
 
 @Component({
   selector: 'app-signin',
@@ -16,9 +16,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private userService: UserService,
-    private authService: AuthService
+    private store: Store<AuthState>
   ) { }
 
   ngOnInit() {
@@ -35,16 +33,10 @@ export class SigninComponent implements OnInit {
 
   /* Realiza el proceso de login mediante email y contraseña */
   login() {
-    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe(
-      user => {
-        if (user) {
-          this.authService.setUserLoggedIn(user);
-          this.router.navigate(['dashboard']);
-        } else {
-          this.errorLogin = true;
-        }
-      }
-    )
+    this.store.dispatch(new LogIn({
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    }));
   }
 
 }

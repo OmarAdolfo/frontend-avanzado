@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { throwError, Observable } from 'rxjs';
-import { tap, catchError, map, find } from 'rxjs/operators';
+import { throwError, Observable, of } from 'rxjs';
+import { tap, catchError, map, find, mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
@@ -23,9 +23,12 @@ export class UserService {
         );
     }
 
-    login(email: string, password: string) {
+    login(email: string, password: string): Observable<User> {
         return this.getUsers().pipe(
-            map(users => users.find(user => user.email === email && user.password === password))
+            mergeMap(users => {
+                const user = users.find(user => user.email === email && user.password === password);
+                return user ? of(user) : throwError('El usuario no existe'); 
+            })
         );
     }
 
