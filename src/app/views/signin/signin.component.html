@@ -54,7 +54,7 @@
           </button>
         </div>
       </form>
-      <div class="alert alert-danger" role="alert" *ngIf="errorLogin">
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async">
         El login no es correcto
       </div>
     </div>

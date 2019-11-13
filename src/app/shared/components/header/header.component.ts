@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Logout } from '../../state/auth/actions/auth.actions';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../../state/store.interface';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +12,7 @@ export class HeaderComponent {
 
   constructor(
     private router: Router,
-    public authService: AuthService
+    private store: Store<AppStore>
   ) { }
 
   goToProfile() {
@@ -34,8 +36,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.authService.setUserLoggedIn(null);
-    this.router.navigate(['/signin']);
+    this.store.dispatch(new Logout());
   }
 
 }

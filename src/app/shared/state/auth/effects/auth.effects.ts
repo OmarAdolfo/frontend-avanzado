@@ -40,4 +40,13 @@ export class AuthEffects {
     LogInFailure: Observable<any> = this.actions$.pipe(
         ofType(AuthActionTypes.LOGIN_FAILURE)
     );
+
+    @Effect({ dispatch: false })
+    logout$ = this.actions$.pipe(
+        ofType(AuthActionTypes.LOGOUT),
+        tap(() => {
+            this.authService.setUserLoggedIn(null);
+            this.router.navigate(['/signin']);
+        })
+    );
 }

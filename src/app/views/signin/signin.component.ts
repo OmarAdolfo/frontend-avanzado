@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LogIn } from 'src/app/shared/state/auth/actions/auth.actions';
-import { AuthState } from 'src/app/shared/state/auth/reducers/auth.reducers';
+import { AppStore } from 'src/app/shared/state/store.interface';
+import { Observable } from 'rxjs';
+import { userErrorMessage } from 'src/app/shared/state/auth/selectors/auth.selector';
 
 @Component({
   selector: 'app-signin',
@@ -12,12 +14,14 @@ import { AuthState } from 'src/app/shared/state/auth/reducers/auth.reducers';
 export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
-  errorLogin = false;
+  errorMessage$: Observable<any>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AuthState>
-  ) { }
+    private store: Store<AppStore>
+  ) {
+    this.errorMessage$ = this.store.select(userErrorMessage);
+  }
 
   ngOnInit() {
     this.buildForm();

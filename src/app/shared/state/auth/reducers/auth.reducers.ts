@@ -1,6 +1,5 @@
 import { User } from '../../../models/user.model';
 import { All, AuthActionTypes } from '../actions/auth.actions';
-import { createReducer, on } from '@ngrx/store';
 
 export interface AuthState {
     isAuthenticated: boolean;
@@ -29,6 +28,14 @@ export function authReducer(state = initialState, action: All): AuthState {
             return {
                 ...state,
                 errorMessage: 'El login no es correcto'
+            };
+        }
+        case AuthActionTypes.LOGOUT: {
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: undefined,
+                errorMessage: null
             };
         }
         default: {
