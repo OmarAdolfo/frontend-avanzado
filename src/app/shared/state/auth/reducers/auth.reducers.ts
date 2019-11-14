@@ -14,7 +14,6 @@ export const initialState: AuthState = {
 };
 
 export function authReducer(state = initialState, action: All): AuthState {
-    console.log(action);
     switch (action.type) {
         case AuthActionTypes.LOGIN_SUCCESS: {
             return {
@@ -27,6 +26,7 @@ export function authReducer(state = initialState, action: All): AuthState {
         case AuthActionTypes.LOGIN_FAILURE: {
             return {
                 ...state,
+                isAuthenticated: false,
                 errorMessage: 'El login no es correcto'
             };
         }
