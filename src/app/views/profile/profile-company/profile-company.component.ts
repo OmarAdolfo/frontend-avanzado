@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Enterprise } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ProfileCompanyComponent implements OnInit {
 
-  user: Enterprise;
+  @Input() user: Enterprise;
 
   constructor(
     private route: Router,
@@ -19,7 +19,7 @@ export class ProfileCompanyComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.user = Object.assign({}, (this.authService.getUserLoggedIn() as Enterprise));
+    console.log(this.user);
   }
 
   goToPersonalInformation() {

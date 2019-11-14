@@ -1,3 +1,5 @@
 <app-header></app-header>
-<app-profile-student *ngIf="hasStudentRol()"></app-profile-student>
-<app-profile-company *ngIf="hasCompanyRol()"></app-profile-company>
+<ng-container *ngIf="user$ | async as user">
+    <app-profile-student [user]="user" *ngIf="hasStudentRol(user)"></app-profile-student>
+    <app-profile-company [user]="user" *ngIf="hasCompanyRol(user)"></app-profile-company>
+</ng-container>

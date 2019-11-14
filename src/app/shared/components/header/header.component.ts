@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Logout } from '../../state/auth/actions/auth.actions';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../state/store.interface';
+import { Logout } from '../../state/user/actions/user.action';
+import { Observable } from 'rxjs';
+import { user } from '../../state/user/selectors/user.selectors';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +13,14 @@ import { AppStore } from '../../state/store.interface';
 })
 export class HeaderComponent {
 
+  user$: Observable<any>;
+
   constructor(
     private router: Router,
     private store: Store<AppStore>
-  ) { }
+  ) {
+    this.user$ = this.store.select(user);
+  }
 
   goToProfile() {
     this.router.navigate(['/profile']);
@@ -37,6 +44,10 @@ export class HeaderComponent {
 
   logout() {
     this.store.dispatch(new Logout());
+  }
+
+  hasStudentRol(user: User) {
+    return user.roles.find(rol => rol === 'student');
   }
 
 }

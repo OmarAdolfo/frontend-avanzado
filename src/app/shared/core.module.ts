@@ -13,9 +13,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 /*import { RouterEffects } from './states/router/effects/router.effects';
 
-import { UserEffects } from './states/user/effects/user.effects';
+;
 import { AppEffects } from './states/app/effects'; */
-/* import { UsersEffects } from './states/users/effects'; */
+
 /* import { UsersService } from '../views/users/shared/users.service'; */
 import { ProfileService } from './services/profile.service';
 
@@ -26,6 +26,7 @@ import { NotificationsService } from './services/notifications.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeBackendService } from './inmemory-db/inmemory-db.service';
 import { AuthEffects } from './state/auth/effects/auth.effects';
+import { UserEffects } from './state/user/effects/user.effects';
 
 /* export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -68,7 +69,7 @@ export const CORE_SERVICES: Provider[] = [
     }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects]),
     /*  TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

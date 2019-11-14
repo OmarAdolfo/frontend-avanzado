@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Province, Municipe, Student } from 'src/app/shared/models/user.model';
-import { UserService } from 'src/app/shared/services/user.service';
-
 import { ProvinceService } from 'src/app/shared/services/province.service';
 import { MunicipeService } from 'src/app/shared/services/municipe.service';
-import { Location } from '@angular/common';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { DocumentNumberValidator } from 'src/app/shared/validators/document-number.validator';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppStore } from 'src/app/shared/state/store.interface';
+import { Observable } from 'rxjs';
+import { user } from 'src/app/shared/state/user/selectors/user.selectors';
+import { UpdateUser } from 'src/app/shared/state/user/actions/user.action';
 
 @Component({
   selector: 'app-profile-student-personal-information-detail',
@@ -18,6 +19,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class ProfileStudentPersonalInformationDetailComponent implements OnInit {
 
   model: Student;
+  user$: Observable<any>;
   personalInformationForm: FormGroup;
   documentTypes = [
     { uid: 1, name: 'NIF/NIE' },
@@ -29,18 +31,26 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
     private provinceService: ProvinceService,
     private municipeService: MunicipeService,
-    private location: Location,
-    private authService: AuthService
+    private store: Store<AppStore>
   ) { }
 
   ngOnInit() {
-    this.model = Object.assign({}, (this.authService.getUserLoggedIn() as Student));
+    this.getUser();
     this.getProvinces();
     this.getMunicipies();
     this.buildForm();
+  }
+
+  /* Obtener usuario */
+  getUser() {
+    this.user$ = this.store.select(user);
+    this.user$.subscribe(
+      user => {
+        this.model = { ...user, address: { ...user.address } };
+      }
+    )
   }
 
   /* Obtiene las provincias */
@@ -104,22 +114,13 @@ export class ProfileStudentPersonalInformationDetailComponent implements OnInit 
     this.model.phone2 = this.personalInformationForm.get('phone2').value;
     this.model.documentType = this.personalInformationForm.get('documentType').value;
     this.model.documentNumber = this.personalInformationForm.get('documentNumber').value;
-    this.model.address.street = this.personalInformationForm.get('direccion').value;
-    this.model.address.province = this.personalInformationForm.get('province').value;
-    this.model.address.municipe = this.personalInformationForm.get('municipie').value;
     this.model.license = this.personalInformationForm.get('license').value;
     this.model.aboutMe = this.personalInformationForm.get('aboutMe').value;
     this.model.otherCompetences = this.personalInformationForm.get('otherCompetences').value;
-    this.userService.saveUser(this.model).subscribe(
-      user => {
-        this.authService.setUserLoggedIn(user);
-        this.back();
-      }
-    )
-  }
-
-  back() {
-    this.location.back();
+    this.model.address.street = this.personalInformationForm.get('direccion').value;
+    this.model.address.province = this.personalInformationForm.get('province').value;
+    this.model.address.municipe = this.personalInformationForm.get('municipie').value;
+    this.store.dispatch(new UpdateUser(this.model));
   }
 
 }

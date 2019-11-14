@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ProfileStudentComponent implements OnInit {
 
-  user: Student;
+  @Input() user: Student;
 
   constructor(
     private userService: UserService,
@@ -20,9 +20,7 @@ export class ProfileStudentComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit() {
-    this.user = Object.assign({}, (this.authService.getUserLoggedIn() as Student));
-  }
+  ngOnInit() {}
 
   /* Navega a la pantalla de datos personales del estudiante */
   goToPersonalInformationForm() {
