@@ -35,11 +35,6 @@ export class AuthEffects {
     );
 
     @Effect({ dispatch: false })
-    LogInFailure: Observable<any> = this.actions$.pipe(
-        ofType(AuthActionTypes.LOGIN_FAILURE)
-    );
-
-    @Effect({ dispatch: false })
     logout$ = this.actions$.pipe(
         ofType(AuthActionTypes.LOGOUT),
         tap(() => {

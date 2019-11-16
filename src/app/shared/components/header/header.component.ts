@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '../../state/store.interface';
 import { Logout } from '../../state/user/actions/user.action';
 import { Observable } from 'rxjs';
-import { user } from '../../state/user/selectors/user.selectors';
+import { selectorUser } from '../../state/user/selectors/user.selectors';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class HeaderComponent {
     private router: Router,
     private store: Store<AppStore>
   ) {
-    this.user$ = this.store.select(user);
+    this.user$ = this.store.select(selectorUser);
   }
 
   goToProfile() {

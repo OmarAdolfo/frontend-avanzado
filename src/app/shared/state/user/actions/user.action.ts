@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 export enum UserActionTypes {
     LOAD_USER = '[User] Load user',
     LOGOUT = '[User] Logout',
-    UPDATE_USER = '[User] Update User Personal Information',
+    UPDATE_USER = '[User] Update User',
     UPDATE_USER_SUCCESS = '[User] Update User Success',
     UPDATE_USER_FAILED = '[User] Update User Failed'
 }

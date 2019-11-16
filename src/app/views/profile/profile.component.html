@@ -1,5 +1,5 @@
 <app-header></app-header>
 <ng-container *ngIf="user$ | async as user">
-    <app-profile-student [user]="user" *ngIf="hasStudentRol(user)"></app-profile-student>
+    <app-profile-student [user]="user" (updateUser)="updateUser($event)" *ngIf="hasStudentRol(user)"></app-profile-student>
     <app-profile-company [user]="user" *ngIf="hasCompanyRol(user)"></app-profile-company>
 </ng-container>

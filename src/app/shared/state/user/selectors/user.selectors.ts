@@ -5,7 +5,7 @@ export const selectUserState = createFeatureSelector<UserState>(
     'user'
 );
 
-export const user = createSelector(
+export const selectorUser = createSelector(
     selectUserState,
     (state: UserState) => state.user
 );

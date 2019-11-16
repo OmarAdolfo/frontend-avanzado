@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { CollegeStudy } from 'src/app/shared/models/study.model';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
@@ -7,7 +7,8 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-profile-study-college',
   templateUrl: './profile-study-college.component.html',
-  styleUrls: ['./profile-study-college.component.scss']
+  styleUrls: ['./profile-study-college.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileStudyCollegeComponent implements OnInit {
 

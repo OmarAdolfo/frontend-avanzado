@@ -27,7 +27,7 @@ export function userReducer(state = initialState, action: All): UserState {
                 errorMessage: null
             };
         }
-        case UserActionTypes.UPDATE_USER: {
+        case UserActionTypes.UPDATE_USER_SUCCESS: {
             return {
                 ...state,
                 user: action.payload,

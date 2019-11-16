@@ -6,14 +6,18 @@ import { UserActionTypes, UpdateUser, UpdateUserSuccess, UpdateUserFailed } from
 import { of } from 'rxjs';
 import { Logout } from '../../auth/actions/auth.actions';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class UserEffects {
 
+    routesNoNavigate = ['/profile'];
+
     constructor(
         private actions$: Actions,
         private router: Router,
-        private userService: UserService
+        private userService: UserService,
+        private location: Location
     ) { }
 
     @Effect({ dispatch: false })
@@ -46,6 +50,8 @@ export class UserEffects {
         ofType(UserActionTypes.UPDATE_USER_SUCCESS),
         map((action: UpdateUserSuccess) => action.payload),
         tap(() => {
-            this.router.navigate(['/profile']);
+            if (this.routesNoNavigate.indexOf(this.router.url) === -1) {
+                this.location.back();
+            }
         }));
 }

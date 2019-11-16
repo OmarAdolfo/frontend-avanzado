@@ -1,36 +1,27 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppStore } from 'src/app/shared/state/store.interface';
 import { selectorUser } from 'src/app/shared/state/user/selectors/user.selectors';
-import { User } from 'src/app/shared/models/user.model';
 import { UpdateUser } from 'src/app/shared/state/user/actions/user.action';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  selector: 'app-profile-experience-smart',
+  templateUrl: './profile-experience-smart.component.html',
+  styleUrls: ['./profile-experience-smart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit {
+export class ProfileExperienceSmartComponent implements OnInit {
 
   user$: Observable<any>;
 
   constructor(
     private store: Store<AppStore>
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.user$ = this.store.select(selectorUser);
   }
 
-  /* Comprueba si el usuario tiene el rol de estudiante */
-  hasStudentRol(user: User) {
-    return user.roles.find(rol => rol === 'student');
-  }
-
-  /* Comprueba si el usuario tiene el rol de empresa */
-  hasCompanyRol(user: User) {
-    return user.roles.find(rol => rol === 'company');
+  ngOnInit() {
   }
 
   updateUser(user: any) {

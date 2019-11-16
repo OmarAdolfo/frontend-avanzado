@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Configuration, NotificationProvince, User } from 'src/app/shared/models/user.model';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { LanguageNameService } from 'src/app/shared/services/language-name.service';
 import { LanguageName } from 'src/app/shared/models/language.model';
 import { ProvinceService } from 'src/app/shared/services/province.service';
@@ -10,7 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+  styleUrls: ['./favorites.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoritesComponent implements OnInit {
 
@@ -22,7 +22,6 @@ export class FavoritesComponent implements OnInit {
   public checks: Array<NotificationProvince> = [];
 
   constructor(
-    private authService: AuthService,
     private fb: FormBuilder,
     private languageNameService: LanguageNameService,
     private provinceService: ProvinceService,
@@ -30,8 +29,8 @@ export class FavoritesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.model = this.authService.getUserLoggedIn().configuration;
-    this.user = this.authService.getUserLoggedIn();
+    //this.model = this.authService.getUserLoggedIn().configuration;
+    //this.user = this.authService.getUserLoggedIn();
     if (this.user.configuration) {
       this.model = this.user.configuration;
     }

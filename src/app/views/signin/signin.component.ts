@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LogIn } from 'src/app/shared/state/auth/actions/auth.actions';
@@ -9,7 +9,8 @@ import { userErrorMessage } from 'src/app/shared/state/auth/selectors/auth.selec
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  styleUrls: ['./signin.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SigninComponent implements OnInit {
 

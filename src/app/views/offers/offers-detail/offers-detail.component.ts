@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OfferService } from 'src/app/shared/services/offer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Offer } from 'src/app/shared/models/offer.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Location } from '@angular/common';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-offers-detail',
   templateUrl: './offers-detail.component.html',
-  styleUrls: ['./offers-detail.component.scss']
+  styleUrls: ['./offers-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OffersDetailComponent implements OnInit {
 
@@ -23,7 +23,6 @@ export class OffersDetailComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private location: Location,
-    private authService: AuthService,
     public router: Router
   ) { }
 
@@ -55,8 +54,8 @@ export class OffersDetailComponent implements OnInit {
 
   /* Registra si se ha borrado o se ha inscrito un usuario a una oferta */
   register() {
-    const user = this.authService.getUserLoggedIn();
-    if (this.isMyJobOffer()) {
+    // const user = this.authService.getUserLoggedIn();
+    /*if (this.isMyJobOffer()) {
       user.offers = user.offers.filter(offer => offer.id !== this.model.id);
     } else {
       user.offers.push(this.model);
@@ -65,7 +64,7 @@ export class OffersDetailComponent implements OnInit {
       () => {
         this.back();
       }
-    )
+    )*/
   }
 
   back() {

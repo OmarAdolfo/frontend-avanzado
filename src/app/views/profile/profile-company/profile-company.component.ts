@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Enterprise } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-profile-company',
   templateUrl: './profile-company.component.html',
-  styleUrls: ['./profile-company.component.scss']
+  styleUrls: ['./profile-company.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileCompanyComponent implements OnInit {
 
@@ -14,13 +14,10 @@ export class ProfileCompanyComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private activatedRoute: ActivatedRoute
     ) { }
 
-  ngOnInit() {
-    console.log(this.user);
-  }
+  ngOnInit() {}
 
   goToPersonalInformation() {
     this.route.navigate(['./personal-information-company'], { relativeTo: this.activatedRoute });

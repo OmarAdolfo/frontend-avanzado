@@ -1,36 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Enterprise, Province, Municipe } from 'src/app/shared/models/user.model';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Enterprise, Province, Municipe, UserAddress } from 'src/app/shared/models/user.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { NoWhitespaceValidator } from 'src/app/shared/validators/noWhitespace.validator';
 import { ProvinceService } from 'src/app/shared/services/province.service';
 import { MunicipeService } from 'src/app/shared/services/municipe.service';
-import { Location } from '@angular/common';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-profile-company-personal-information',
   templateUrl: './profile-company-personal-information.component.html',
-  styleUrls: ['./profile-company-personal-information.component.scss']
+  styleUrls: ['./profile-company-personal-information.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileCompanyPersonalInformationComponent implements OnInit {
 
-  model: Enterprise;
+  @Input() model: Enterprise;
+
+  @Output() updateUser = new EventEmitter();
+
   personalInformationForm: FormGroup;
   provinces: Province[];
   municipies: Municipe[];
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private provinceService: ProvinceService,
-    private municipeService: MunicipeService,
-    private location: Location,
-    private userService: UserService
+    private municipeService: MunicipeService
   ) { }
 
   ngOnInit() {
-    this.model = (this.authService.getUserLoggedIn() as Enterprise);
     this.getProvinces();
     this.getMunicipies();
     this.buildForm();
@@ -70,7 +67,7 @@ export class ProfileCompanyPersonalInformationComponent implements OnInit {
         Validators.maxLength(255),
         NoWhitespaceValidator
       ]),
-      cif: new FormControl(this.model.documentNumber),
+      documentNumber: new FormControl(this.model.documentNumber),
       street: new FormControl(this.model.address.street),
       province: new FormControl(this.model.address.province),
       municipie: new FormControl(this.model.address.municipe),
@@ -93,25 +90,14 @@ export class ProfileCompanyPersonalInformationComponent implements OnInit {
   }
 
   save() {
-    this.model.comercialName = this.personalInformationForm.get('comercialName').value;
-    this.model.businessName = this.personalInformationForm.get('businessName').value;
-    this.model.documentNumber = this.personalInformationForm.get('cif').value;
-    this.model.address.street = this.personalInformationForm.get('street').value;
-    this.model.address.province = this.personalInformationForm.get('province').value;
-    this.model.address.municipe = this.personalInformationForm.get('municipie').value;
-    this.model.url = this.personalInformationForm.get('url').value;
-    this.model.name = this.personalInformationForm.get('name').value;
-    this.model.surname = this.personalInformationForm.get('surname').value;
-    this.model.phone = this.personalInformationForm.get('phone').value;
-    this.model.email = this.personalInformationForm.get('email').value;
-    this.userService.saveUser(this.model).subscribe(
-      () => {
-        this.back();
-      }
-    )
+    const address: UserAddress = {
+      ...this.model.address,
+      municipe: this.personalInformationForm.get('municipie').value,
+      province: this.personalInformationForm.get('province').value,
+      street: this.personalInformationForm.get('street').value
+    };
+    const user = { ...this.model, ...this.personalInformationForm.value, address };
+    this.updateUser.emit(user);
   }
 
-  back() {
-    this.location.back();
-  }
 }

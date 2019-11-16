@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Language, LanguageLevel, LanguageName } from 'src/app/shared/models/language.model';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
@@ -11,12 +11,12 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { User, Student } from 'src/app/shared/models/user.model';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-profile-language',
   templateUrl: './profile-language.component.html',
-  styleUrls: ['./profile-language.component.scss']
+  styleUrls: ['./profile-language.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileLanguageComponent implements OnInit {
 
@@ -35,14 +35,13 @@ export class ProfileLanguageComponent implements OnInit {
     private languageService: LanguageService,
     private userService: UserService,
     private location: Location,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
     if (id !== 'new') {
-      this.model = (this.authService.getUserLoggedIn() as Student).languages.find(studie => studie.id == id);
+      //this.model = (this.authService.getUserLoggedIn() as Student).languages.find(studie => studie.id == id);
     } else {
       this.model = {
         id: -1,
@@ -124,14 +123,14 @@ export class ProfileLanguageComponent implements OnInit {
   saveLanguage() {
     this.languageService.saveLanguage(this.model).subscribe(
       language => {
-        const user = (this.authService.getUserLoggedIn() as Student);
+        /*const user = (this.authService.getUserLoggedIn() as Student);
         let index = user.languages.findIndex(({ id }) => id === language.id);
         if (index === -1) {
           user.languages.push(language);
         } else {
           user.languages[index] = language;
         }
-        this.updateUser(user);
+        this.updateUser(user);*/
       }
     )
   }

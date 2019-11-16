@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OfferService } from 'src/app/shared/services/offer.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Offer } from 'src/app/shared/models/offer.model';
@@ -7,12 +7,12 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { ProvinceService } from 'src/app/shared/services/province.service';
 import { Province, Student, Enterprise } from 'src/app/shared/models/user.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-offers',
   templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss']
+  styleUrls: ['./offers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OffersComponent implements OnInit {
 
@@ -25,16 +25,15 @@ export class OffersComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private provinceService: ProvinceService,
-    private activatedRoute: ActivatedRoute,
-    public authService: AuthService
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    /* Opción para la opción de mis ofertas */
+    /* Opción para la opción de mis ofertas 
     if (this.isMyJobOffer()) {
       this.offers = (this.authService.getUserLoggedIn() as Student).offers;
     } else {
-      /* Se diferencia si el usuario es estudiante o una empresa */
+      Se diferencia si el usuario es estudiante o una empresa
       if (this.authService.hasCompanyRol()) {
         this.offers = (this.authService.getUserLoggedIn() as Enterprise).offers;
       } else {
@@ -45,7 +44,8 @@ export class OffersComponent implements OnInit {
             }
           );
       }
-    }
+      
+    }*/
     this.getProvinces();
     this.buildForm();
   }

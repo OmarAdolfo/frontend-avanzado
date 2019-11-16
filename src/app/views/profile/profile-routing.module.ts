@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { ProfileLanguageComponent } from './profile-student/profile-language/profile-language.component';
-import { ProfileExperienceComponent } from './profile-student/profile-experience/profile-experience.component';
-import { ProfileStudentPersonalInformationDetailComponent } from './profile-student/profile-student-personal-information/profile-student-personal-information-detail.component';
-import { ProfileStudyComponent } from './profile-student/profile-study/profile-study.component';
-import { ProfileCompanyPersonalInformationComponent } from './profile-company/profile-company-personal-information/profile-company-personal-information.component';
+import { ProfileStudentPersonalInformationSmartComponent } from './profile-student/profile-student-personal-information/smart/profile-student-personal-information-smart.component';
+import { ProfileCompanyPersonalInformationSmartComponent } from './profile-company/profile-company-personal-information/smart/profile-company-personal-information-smart.component';
+import { ProfileExperienceSmartComponent } from './profile-student/profile-experience/smart/profile-experience-smart.component';
+import { ProfileStudySmartComponent } from './profile-student/profile-study/smart/profile-study-smart.component';
 
 const routes: Routes = [
   {
@@ -14,15 +14,15 @@ const routes: Routes = [
   },
   {
     path: 'personal-information-student',
-    component: ProfileStudentPersonalInformationDetailComponent
+    component: ProfileStudentPersonalInformationSmartComponent
   },
   {
     path: 'personal-information-company',
-    component: ProfileCompanyPersonalInformationComponent
+    component: ProfileCompanyPersonalInformationSmartComponent
   },
   {
     path: 'profile-study/:id',
-    component: ProfileStudyComponent
+    component: ProfileStudySmartComponent
   },
   {
     path: 'profile-language/:id',
@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'profile-experience/:id',
-    component: ProfileExperienceComponent
+    component: ProfileExperienceSmartComponent
   }
 ];
 
