@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Enterprise } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 

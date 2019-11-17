@@ -31,7 +31,6 @@ export class ProfileStudyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.study);
     this.buildForm();
   }
 

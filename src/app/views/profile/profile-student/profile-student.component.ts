@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Student, createNewUser } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 

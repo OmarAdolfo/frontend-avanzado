@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { VocationalStudy, Institution, Category, Grade, TitleStudy } from 'src/app/shared/models/study.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { DateValidator } from 'src/app/shared/validators/date.validator';

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Configuration, NotificationProvince, User } from 'src/app/shared/models/user.model';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { LanguageNameService } from 'src/app/shared/services/language-name.service';
@@ -14,7 +14,6 @@ export class FavoritesComponent implements OnInit {
 
   @Input() user: User;
   @Input() configuration: Configuration;
-  @Input() successMessage: string;
 
   @Output() updateUser = new EventEmitter();
 
@@ -48,7 +47,7 @@ export class FavoritesComponent implements OnInit {
       languageName: new FormControl(this.configuration.languageName),
       notifications: this.fb.array([])
     });
-    this.getProvinces();
+    //this.getProvinces();
   }
 
   /* Obtiene las provincias */

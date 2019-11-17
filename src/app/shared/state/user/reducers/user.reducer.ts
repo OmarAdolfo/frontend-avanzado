@@ -4,7 +4,6 @@ import { UserState } from '../state/user.state';
 
 export const initialState: UserState = {
     user: null,
-    successMessage: null,
     errorMessage: null
 };
 
@@ -28,14 +27,12 @@ export function userReducer(state = initialState, action: All): UserState {
             return {
                 ...state,
                 user: action.payload,
-                successMessage: 'Se ha actualizado de forma correcta el usuario',
                 errorMessage: null
             };
         }
         case UserActionTypes.UPDATE_USER_FAILED: {
             return {
                 ...state,
-                successMessage: null,
                 errorMessage: 'No se ha podido actualizar la información del usuario'
             };
         }

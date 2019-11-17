@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserState } from '../state/user.state';
 import * as userForm from '../reducers/user.reducer';
+import { Student } from 'src/app/shared/models/user.model';
 
 export const selectUserState = createFeatureSelector<UserState>('user');
 
@@ -14,14 +15,14 @@ export const getConfiguration = createSelector(
     state => state.user.configuration
 );
 
-export const userSuccessMessage = createSelector(
-    selectUserState,
-    state => state.successMessage
-);
-
 export const userOffers = createSelector(
     selectUserState,
     state => state.user.offers
+);
+
+export const userStudies = createSelector(
+    selectUserState,
+    state => (state.user as Student).studies
 );
 
 export const userHasRol = (rolName: string) => createSelector(

@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppStore } from 'src/app/shared/state/store.interface';
 import { Store } from '@ngrx/store';
 import { UpdateUser } from 'src/app/shared/state/user/actions/user.action';
-import { selectorUser, getStudyById } from 'src/app/shared/state/user/selectors/user.selectors';
+import { selectorUser, getStudyById, userStudies } from 'src/app/shared/state/user/selectors/user.selectors';
 import { ActivatedRoute } from '@angular/router';
+import { LoadJobOffers } from 'src/app/shared/state/job-offers/actions/job-offers.action';
 
 @Component({
   selector: 'app-profile-study-smart',
@@ -25,6 +26,11 @@ export class ProfileStudySmartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.select(userStudies).subscribe(
+      studies => {
+        this.store.dispatch(new LoadJobOffers(studies.map(study => study.title)));
+      }
+    );
   }
 
   updateUser(user: any) {

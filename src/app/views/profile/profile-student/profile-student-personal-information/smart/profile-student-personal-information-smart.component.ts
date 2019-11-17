@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from 'src/app/shared/state/store.interface';
 import { Observable } from 'rxjs';
