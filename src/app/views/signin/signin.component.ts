@@ -9,8 +9,7 @@ import { userErrorMessage } from 'src/app/shared/state/auth/selectors/auth.selec
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
 

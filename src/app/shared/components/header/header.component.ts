@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../state/store.interface';
-import { Logout } from '../../state/user/actions/user.action';
 import { Observable } from 'rxjs';
 import { selectorUser } from '../../state/user/selectors/user.selectors';
 import { User } from '../../models/user.model';
+import { LogoutAuth } from '../../state/auth/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -43,7 +43,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.store.dispatch(new Logout());
+    this.store.dispatch(new LogoutAuth());
   }
 
   hasStudentRol(user: User) {

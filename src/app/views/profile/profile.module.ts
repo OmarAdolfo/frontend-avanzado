@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProfileLanguageComponent } from './profile-student/profile-language/profile-language.component';
+import { ProfileLanguageComponent } from './profile-student/profile-language/presentation/profile-language.component';
 import { ProfileExperienceComponent } from './profile-student/profile-experience/presentation/profile-experience.component';
 import { ProfileStudentPersonalInformationComponent } from './profile-student/profile-student-personal-information/presentation/profile-student-personal-information.component';
 import { ProfileStudyComponent } from './profile-student/profile-study/presentation/profile-study.component';
@@ -17,6 +17,7 @@ import { ProfileExperienceSmartComponent } from './profile-student/profile-exper
 import { ProfileStudyCollegeComponent } from './profile-student/profile-study/presentation/profile-study-college/profile-study-college.component';
 import { ProfileStudyVocationalComponent } from './profile-student/profile-study/presentation/profile-study-vocational/profile-study-vocational.component';
 import { ProfileStudySmartComponent } from './profile-student/profile-study/smart/profile-study-smart.component';
+import { ProfileLanguageSmartComponent } from './profile-student/profile-language/smart/profile-language-smart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProfileStudySmartComponent } from './profile-student/profile-study/smar
     ProfileCompanyPersonalInformationComponent,
     ProfileCompanyPersonalInformationSmartComponent,
     ProfileExperienceSmartComponent,
-    ProfileStudySmartComponent
+    ProfileStudySmartComponent,
+    ProfileLanguageSmartComponent
   ],
   imports: [
     CommonModule,

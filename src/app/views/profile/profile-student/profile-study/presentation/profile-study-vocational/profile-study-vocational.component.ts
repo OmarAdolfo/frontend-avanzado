@@ -10,8 +10,7 @@ import { TitleService } from 'src/app/shared/services/title.service';
 @Component({
   selector: 'app-profile-study-vocational',
   templateUrl: './profile-study-vocational.component.html',
-  styleUrls: ['./profile-study-vocational.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-study-vocational.component.scss']
 })
 export class ProfileStudyVocationalComponent implements OnInit {
 

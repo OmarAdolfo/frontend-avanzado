@@ -2,10 +2,12 @@ import { AuthActionTypes, LogIn, LogInSuccess, LogInFailure } from '../actions/a
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, catchError, tap } from 'rxjs/operators';
+import { map, switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
-import { LoadUser } from '../../user/actions/user.action';
+import { LoadUser, LogoutUser } from '../../user/actions/user.action';
+import { LogoutJobOffers, LoadJobOffers } from '../../job-offers/actions/job-offers.action';
+import { Student } from 'src/app/shared/models/user.model';
 
 @Injectable()
 export class AuthEffects {
@@ -30,15 +32,31 @@ export class AuthEffects {
     @Effect()
     loginSuccess$: Observable<any> = this.actions$.pipe(
         ofType(AuthActionTypes.LOGIN_SUCCESS),
-        map((action: LogIn) => action.payload),
-        switchMap(payload => of(new LoadUser(payload)))
+        map((action: LogInSuccess) => action.payload),
+        mergeMap(payload => {
+            if (payload.roles.find(rol => rol === 'student')) {
+                return [
+                    new LoadUser(payload),
+                    new LoadJobOffers((payload as Student).studies.map(study => study.title))
+                ]
+            } else {
+                return [
+                    new LoadUser(payload)
+                ]
+            }
+            
+        })
     );
 
-    @Effect({ dispatch: false })
+    @Effect()
     logout$ = this.actions$.pipe(
         ofType(AuthActionTypes.LOGOUT),
-        tap(() => {
+        mergeMap(() => {
             this.router.navigate(['/signin']);
+            return [
+                new LogoutUser(),
+                new LogoutJobOffers()
+            ]
         })
     );
 

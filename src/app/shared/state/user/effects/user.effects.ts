@@ -4,14 +4,13 @@ import { tap, switchMap, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserActionTypes, UpdateUser, UpdateUserSuccess, UpdateUserFailed } from '../actions/user.action';
 import { of } from 'rxjs';
-import { Logout } from '../../auth/actions/auth.actions';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Location } from '@angular/common';
 
 @Injectable()
 export class UserEffects {
 
-    routesNoNavigate = ['/profile'];
+    routesNoNavigate = ['/profile', '/favorites'];
 
     constructor(
         private actions$: Actions,
@@ -26,12 +25,6 @@ export class UserEffects {
         tap(() => {
             this.router.navigate(['dashboard']);
         })
-    );
-
-    @Effect()
-    logout$ = this.actions$.pipe(
-        ofType(UserActionTypes.LOGOUT),
-        switchMap(() => of(new Logout()))
     );
 
     @Effect()

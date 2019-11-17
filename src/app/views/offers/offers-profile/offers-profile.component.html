@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="container-fluid mt-5">
+  <form class="form-horizontal mt-5" [formGroup]="searchOffersForm" (ngSubmit)="search()">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-3">
+          <label class="control-label" for="date">Fecha de la oferta</label>
+        </div>
+        <div class="col-3">
+          <input [ngClass]="{'is-invalid': searchOffersForm.controls.date.invalid}" type="text" placeholder="DD/MM/YYYY"
+            class="form-control" id="date" formControlName="date" name="date">
+          <div
+            *ngIf="searchOffersForm.controls.date.errors?.dataNotValid && (searchOffersForm.touched || searchOffersForm.dirty)"
+            class="cross-validation-error-message alert alert-danger">
+            Debe introducir una fecha con el formato correcto y válida
+          </div>
+        </div>
+        <div class="col-3">
+          <label class="control-label" for="province">Provincia</label>
+        </div>
+        <div class="col-3">
+          <select class="custom-select" formControlName="province" id="province">
+            <option></option>
+            <option *ngFor="let province of provinces" [ngValue]="province">
+              {{province.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="buttons text-right">
+            <button type="submit" class="btn btn-success"
+              [disabled]="searchOffersForm.pristine || searchOffersForm.invalid">
+              <i class="fa fa-search" aria-hidden="true"></i> Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-12">
+      <h2>Ofertas de trabajo</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Puesto</th>
+            <th>Empresa</th>
+            <th>Familia profesional</th>
+            <th>Fecha</th>
+            <th>Provincia</th>
+            <th *ngIf="isMyJobOffer()">Estado</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let offer of offers">
+            <th scope="row">{{offer.job.name}}</th>
+            <td>{{offer.company.name}}</td>
+            <td>{{offer.category.name}}</td>
+            <td>{{offer.date}}</td>
+            <td>{{offer.province.name}}</td>
+            <td *ngIf="isMyJobOffer()"></td>
+            <td>
+              <button *ngIf="hasStudentRol" type="button" class="btn btn-success"
+                (click)="goToDetail(offer.id)">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </button>
+              <button *ngIf="!hasStudentRol" type="button" class="btn btn-success">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

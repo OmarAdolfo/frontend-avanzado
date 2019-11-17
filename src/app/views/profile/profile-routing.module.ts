@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
-import { ProfileLanguageComponent } from './profile-student/profile-language/profile-language.component';
 import { ProfileStudentPersonalInformationSmartComponent } from './profile-student/profile-student-personal-information/smart/profile-student-personal-information-smart.component';
 import { ProfileCompanyPersonalInformationSmartComponent } from './profile-company/profile-company-personal-information/smart/profile-company-personal-information-smart.component';
 import { ProfileExperienceSmartComponent } from './profile-student/profile-experience/smart/profile-experience-smart.component';
 import { ProfileStudySmartComponent } from './profile-student/profile-study/smart/profile-study-smart.component';
+import { ProfileLanguageSmartComponent } from './profile-student/profile-language/smart/profile-language-smart.component';
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'profile-language/:id',
-    component: ProfileLanguageComponent
+    component: ProfileLanguageSmartComponent
   },
   {
     path: 'profile-experience/:id',

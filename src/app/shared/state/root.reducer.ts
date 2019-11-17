@@ -4,11 +4,13 @@ import { environment } from '../../../environments/environment';
 import { routerReducer } from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { userReducer } from './user/reducers/user.reducer';
+import { jobOffersReducer } from './job-offers/reducers/job-offers.reducers';
 
 export const reducers = {
     router: routerReducer,
     auth: authReducer,
-    user: userReducer
+    user: userReducer,
+    jobOffers: jobOffersReducer
 };
 
 

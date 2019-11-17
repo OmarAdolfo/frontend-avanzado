@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Language, LanguageLevel, LanguageName } from 'src/app/shared/models/language.model';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
@@ -7,18 +7,20 @@ import { LanguageNameService } from 'src/app/shared/services/language-name.servi
 import { NoWhitespaceStartAndEndValidator } from 'src/app/shared/validators/noWhitespace.validator';
 import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChanged';
 import { LanguageService } from 'src/app/shared/services/language.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { User, Student } from 'src/app/shared/models/user.model';
-import { Location } from '@angular/common';
+import { Student } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-language',
   templateUrl: './profile-language.component.html',
-  styleUrls: ['./profile-language.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-language.component.scss']
 })
 export class ProfileLanguageComponent implements OnInit {
+
+  @Input() user: Student;
+
+  @Output() updateUser = new EventEmitter();
 
   model: Language;
 
@@ -33,15 +35,15 @@ export class ProfileLanguageComponent implements OnInit {
     private languageLevelService: LanguageLevelService,
     private languageNameService: LanguageNameService,
     private languageService: LanguageService,
-    private userService: UserService,
-    private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit() {
+    console.log(this.user);
     const id = this.activatedRoute.snapshot.params.id;
     if (id !== 'new') {
-      //this.model = (this.authService.getUserLoggedIn() as Student).languages.find(studie => studie.id == id);
+      this.model = this.user.languages.find(studie => studie.id == id);
     } else {
       this.model = {
         id: -1,
@@ -123,23 +125,15 @@ export class ProfileLanguageComponent implements OnInit {
   saveLanguage() {
     this.languageService.saveLanguage(this.model).subscribe(
       language => {
-        /*const user = (this.authService.getUserLoggedIn() as Student);
-        let index = user.languages.findIndex(({ id }) => id === language.id);
+        let languages = [...this.user.languages];
+        let index = languages.findIndex(({ id }) => id === language.id);
         if (index === -1) {
-          user.languages.push(language);
+          languages.push(language);
         } else {
-          user.languages[index] = language;
+          languages[index] = language;
         }
-        this.updateUser(user);*/
-      }
-    )
-  }
-
-  /* Actualiza el usuario */
-  updateUser(user: User) {
-    this.userService.saveUser(user).subscribe(
-      () => {
-        this.back();
+        const user: Student = {...this.user, languages};
+        this.updateUser.emit(user);
       }
     )
   }

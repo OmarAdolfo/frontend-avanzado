@@ -8,8 +8,7 @@ import { MunicipeService } from 'src/app/shared/services/municipe.service';
 @Component({
   selector: 'app-profile-company-personal-information',
   templateUrl: './profile-company-personal-information.component.html',
-  styleUrls: ['./profile-company-personal-information.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-company-personal-information.component.scss']
 })
 export class ProfileCompanyPersonalInformationComponent implements OnInit {
 

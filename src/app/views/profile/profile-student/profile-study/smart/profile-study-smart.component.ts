@@ -8,8 +8,7 @@ import { selectorUser } from 'src/app/shared/state/user/selectors/user.selectors
 @Component({
   selector: 'app-profile-study-smart',
   templateUrl: './profile-study-smart.component.html',
-  styleUrls: ['./profile-study-smart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-study-smart.component.scss']
 })
 export class ProfileStudySmartComponent implements OnInit {
 

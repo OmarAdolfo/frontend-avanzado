@@ -1,39 +1,34 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Configuration, NotificationProvince, User } from 'src/app/shared/models/user.model';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { LanguageNameService } from 'src/app/shared/services/language-name.service';
 import { LanguageName } from 'src/app/shared/models/language.model';
 import { ProvinceService } from 'src/app/shared/services/province.service';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
 
-  user: User;
-  model: Configuration;
+  @Input() user: User;
+  @Input() configuration: Configuration;
+  @Input() successMessage: string;
+
+  @Output() updateUser = new EventEmitter();
+
   configurationForm: FormGroup;
   languageNames: LanguageName[];
-  isUserUpdate = false;
   public checks: Array<NotificationProvince> = [];
 
   constructor(
     private fb: FormBuilder,
     private languageNameService: LanguageNameService,
-    private provinceService: ProvinceService,
-    private userService: UserService
+    private provinceService: ProvinceService
   ) { }
 
   ngOnInit() {
-    //this.model = this.authService.getUserLoggedIn().configuration;
-    //this.user = this.authService.getUserLoggedIn();
-    if (this.user.configuration) {
-      this.model = this.user.configuration;
-    }
     this.getLanguageNames();
     this.buildForm();
   }
@@ -50,7 +45,7 @@ export class FavoritesComponent implements OnInit {
   /* Construye el formulario de configuración */
   buildForm() {
     this.configurationForm = this.fb.group({
-      languageName: new FormControl(this.model.languageName),
+      languageName: new FormControl(this.configuration.languageName),
       notifications: this.fb.array([])
     });
     this.getProvinces();
@@ -95,13 +90,9 @@ export class FavoritesComponent implements OnInit {
 
   /* Guarda la información de configuración */
   save() {
-    this.model = Object.assign(this.model, this.configurationForm.value);
-    this.user.configuration = this.model;
-    this.userService.updateUser(this.user).subscribe(
-      () => {
-        this.isUserUpdate = true;
-      }
-    );
+    const configuration = {...this.configurationForm.value};
+    const user = {...this.user, configuration};
+    this.updateUser.emit(user);
   }
 
 }

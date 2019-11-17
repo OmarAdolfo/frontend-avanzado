@@ -4,12 +4,12 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CollegeStudy, VocationalStudy } from 'src/app/shared/models/study.model';
 import { StudyService } from 'src/app/shared/services/study.service';
 import { Student } from 'src/app/shared/models/user.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-study',
   templateUrl: './profile-study.component.html',
-  styleUrls: ['./profile-study.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-study.component.scss']
 })
 export class ProfileStudyComponent implements OnInit {
 
@@ -28,7 +28,8 @@ export class ProfileStudyComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private studyService: StudyService
+    private studyService: StudyService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -67,6 +68,10 @@ export class ProfileStudyComponent implements OnInit {
         this.updateUser.emit(user);
       }
     )
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

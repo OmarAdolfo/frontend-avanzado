@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container-fluid mt-5" *ngIf="model">
+<div class="container-fluid mt-5">
   <form class="form-horizontal mt-5" [formGroup]="configurationForm" (ngSubmit)="save()">
     <div class="form-group">
       <div class="row">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="isUserUpdate">
+      <div class="row" *ngIf="successMessage">
         <div class="col-4 offset-4">
           <div class="alert alert-success" role="alert">
             Se ha guardado correctamente la configuración

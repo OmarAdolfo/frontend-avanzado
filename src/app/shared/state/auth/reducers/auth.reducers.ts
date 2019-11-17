@@ -1,9 +1,5 @@
 import { All, AuthActionTypes } from '../actions/auth.actions';
-
-export interface AuthState {
-    isAuthenticated: boolean;
-    errorMessage: string | null;
-}
+import { AuthState } from '../state/auth.state';
 
 export const initialState: AuthState = {
     isAuthenticated: false,

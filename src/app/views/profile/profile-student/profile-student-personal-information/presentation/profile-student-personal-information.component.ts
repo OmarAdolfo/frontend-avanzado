@@ -5,12 +5,12 @@ import { ProvinceService } from 'src/app/shared/services/province.service';
 import { MunicipeService } from 'src/app/shared/services/municipe.service';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { DocumentNumberValidator } from 'src/app/shared/validators/document-number.validator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-student-personal-information',
   templateUrl: './profile-student-personal-information.component.html',
-  styleUrls: ['./profile-student-personal-information.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-student-personal-information.component.scss']
 })
 export class ProfileStudentPersonalInformationComponent implements OnInit {
 
@@ -30,7 +30,8 @@ export class ProfileStudentPersonalInformationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private provinceService: ProvinceService,
-    private municipeService: MunicipeService
+    private municipeService: MunicipeService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -101,6 +102,10 @@ export class ProfileStudentPersonalInformationComponent implements OnInit {
     };
     const user = { ...this.model, ...this.personalInformationForm.value, address };
     this.updateUser.emit(user);
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

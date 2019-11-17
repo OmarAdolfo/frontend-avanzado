@@ -13,7 +13,7 @@ export class LoadUser implements Action {
     constructor(public payload: any) { }
 }
 
-export class Logout implements Action {
+export class LogoutUser implements Action {
     readonly type = UserActionTypes.LOGOUT;
 }
 
@@ -34,7 +34,7 @@ export class UpdateUserFailed implements Action {
 
 export type All =
     | LoadUser
-    | Logout
+    | LogoutUser
     | UpdateUser
     | UpdateUserSuccess
     | UpdateUserFailed;

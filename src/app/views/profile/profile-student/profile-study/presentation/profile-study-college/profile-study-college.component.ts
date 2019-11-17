@@ -7,8 +7,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-profile-study-college',
   templateUrl: './profile-study-college.component.html',
-  styleUrls: ['./profile-study-college.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-study-college.component.scss']
 })
 export class ProfileStudyCollegeComponent implements OnInit {
 

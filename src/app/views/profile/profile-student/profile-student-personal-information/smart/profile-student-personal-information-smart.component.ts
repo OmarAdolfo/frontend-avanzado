@@ -8,8 +8,7 @@ import { UpdateUser } from 'src/app/shared/state/user/actions/user.action';
 @Component({
   selector: 'app-profile-student-personal-information-smart',
   templateUrl: './profile-student-personal-information-smart.component.html',
-  styleUrls: ['./profile-student-personal-information-smart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-student-personal-information-smart.component.scss']
 })
 export class ProfileStudentPersonalInformationSmartComponent {
 

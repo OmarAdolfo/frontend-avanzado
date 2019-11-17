@@ -5,8 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-profile-student',
   templateUrl: './profile-student.component.html',
-  styleUrls: ['./profile-student.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile-student.component.scss']
 })
 export class ProfileStudentComponent implements OnInit {
 
