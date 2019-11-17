@@ -54,8 +54,8 @@ export class ProfileExperienceComponent implements OnInit {
 
   /* Guarda la información del formulario */
   save() {
-    this.experience = Object.assign(this.experience, this.experienceForm.value);
-    this.experienceService.saveExperience(this.experienceForm.value).subscribe(
+    const experience = {...this.experience, ...this.experienceForm.value};
+    this.experienceService.saveExperience(experience).subscribe(
       experience => {
         let experiencies = [...this.user.experiencies];
         let index = experiencies.findIndex(({ id }) => id === experience.id);

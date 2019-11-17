@@ -47,7 +47,7 @@ export class FavoritesComponent implements OnInit {
       languageName: new FormControl(this.configuration.languageName),
       notifications: this.fb.array([])
     });
-    //this.getProvinces();
+    this.getProvinces();
   }
 
   /* Obtiene las provincias */
