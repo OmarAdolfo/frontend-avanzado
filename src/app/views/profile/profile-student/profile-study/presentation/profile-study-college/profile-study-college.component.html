@@ -24,13 +24,13 @@
                     </div>
                     <div class="row">
                         <div class="col-3">
-                            <label class="control-label" for="titleDate">Fecha del título</label>
+                            <label class="control-label" for="date">Fecha del título</label>
                         </div>
                         <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleDate.invalid}"
-                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="titleDate"
-                                formControlName="titleDate" name="titleDate">
-                            <div *ngIf="profileStudyCollegeForm.controls.titleDate.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
+                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.date.invalid}"
+                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="date"
+                                formControlName="date" name="date">
+                            <div *ngIf="profileStudyCollegeForm.controls.date.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir una fecha con el formato correcto y válida
                             </div>

@@ -63,3 +63,22 @@ export const getExperienceById = (id: string) => (state: UserState) => {
         }
     }
 };
+
+export const getLanguageById = (id: string) => (state: UserState) => {
+    if (id !== 'new') {
+        return (state.user as Student).languages.find(language => language.id == Number(id));
+    } else {
+        return {
+            id: -1,
+            level: null,
+            name: null,
+            date: ''
+        };
+    }
+};
+
+export const getStudyById = (id: string) => (state: UserState) => {
+    if (id !== 'new') {
+        return (state.user as Student).studies.find(study => study.id == Number(id));
+    }
+};

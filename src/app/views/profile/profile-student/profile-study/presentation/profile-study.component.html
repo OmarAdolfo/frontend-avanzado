@@ -17,13 +17,13 @@
             </div>
             <div class="row" *ngIf="profileStudyForm.controls.level.value.name === 'Título universitario'">
                 <div class="col-12">
-                    <app-profile-study-college [model]="model" (saveProfileStudy)="save($event)">
+                    <app-profile-study-college [model]="study" (saveProfileStudy)="save($event)">
                     </app-profile-study-college>
                 </div>
             </div>
             <div class="row" *ngIf="profileStudyForm.controls.level.value.name === 'Ciclo Formativo'">
                 <div class="col-12">
-                    <app-profile-study-vocational [model]="model" (saveProfileStudy)="save($event)">
+                    <app-profile-study-vocational [model]="study" (saveProfileStudy)="save($event)">
                     </app-profile-study-vocational>
                 </div>
             </div>

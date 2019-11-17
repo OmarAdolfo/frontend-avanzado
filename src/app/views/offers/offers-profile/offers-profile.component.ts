@@ -27,23 +27,6 @@ export class OffersProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* Opción para la opción de mis ofertas 
-    if (this.isMyJobOffer()) {
-      this.offers = (this.authService.getUserLoggedIn() as Student).offers;
-    } else {
-      Se diferencia si el usuario es estudiante o una empresa
-      if (this.authService.hasCompanyRol()) {
-        this.offers = (this.authService.getUserLoggedIn() as Enterprise).offers;
-      } else {
-        this.offerService.getOffers((this.authService.getUserLoggedIn() as Student).studies.map(study => study.title))
-          .subscribe(
-            offers => {
-              this.offers = offers;
-            }
-          );
-      }
-      
-    }*/
     this.getProvinces();
     this.buildForm();
   }

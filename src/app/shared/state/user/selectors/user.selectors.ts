@@ -33,3 +33,13 @@ export const getExperienceById = (id: string) => createSelector(
     selectUserState,
     userForm.getExperienceById(id)
 );
+
+export const getLanguageById = (id: string) => createSelector(
+    selectUserState,
+    userForm.getLanguageById(id)
+);
+
+export const getStudyById = (id: string) => createSelector(
+    selectUserState,
+    userForm.getStudyById(id)
+);

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
-import { CollegeStudy } from 'src/app/shared/models/study.model';
+import { CollegeStudy, TitleStudy } from 'src/app/shared/models/study.model';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { Location } from '@angular/common';
 
@@ -51,7 +51,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
     this.profileStudyCollegeForm = this.fb.group({
       institution: new FormControl(this.model.institution),
       titleName: new FormControl(this.model.title.name),
-      titleDate: new FormControl(this.model.date, DateValidator),
+      date: new FormControl(this.model.date, DateValidator),
       bilingue: new FormControl(this.model.bilingue),
       certificate: new FormControl(this.model.certificate)
     });
@@ -72,12 +72,10 @@ export class ProfileStudyCollegeComponent implements OnInit {
 
   /* Guarda la información relativa a un título universitario */
   save() {
-    this.model.bilingue = this.profileStudyCollegeForm.get('bilingue').value;
-    this.model.certificate = this.profileStudyCollegeForm.get('certificate').value;
-    this.model.date = this.profileStudyCollegeForm.get('titleDate').value;
-    this.model.institution = this.profileStudyCollegeForm.get('institution').value;
-    this.model.title.name = this.profileStudyCollegeForm.get('titleName').value;
-    this.saveProfileStudy.emit(this.model);
+    const title: TitleStudy = {...this.model.title};
+    title.name = this.profileStudyCollegeForm.get('titleName').value;
+    const collegeStudy: CollegeStudy = {...this.model, ...this.profileStudyCollegeForm.value, title};
+    this.saveProfileStudy.emit(collegeStudy);
   }
 
 }

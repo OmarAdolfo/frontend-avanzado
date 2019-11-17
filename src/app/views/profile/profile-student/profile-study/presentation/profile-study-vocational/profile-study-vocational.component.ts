@@ -15,7 +15,18 @@ import { TitleService } from 'src/app/shared/services/title.service';
 export class ProfileStudyVocationalComponent implements OnInit {
 
   @Input()
-  model: VocationalStudy;
+  model: VocationalStudy = {
+    id: -1,
+    level: { uid: -1, name: '' },
+    title: { uid: -1, name: '' },
+    certificate: false,
+    date: '',
+    bilingue: false,
+    institution: { uid: -1, name: '' },
+    category: { uid: -1, name: '' },
+    grade: { uid: -1, name: '' },
+    dual: false
+  };
 
   @Output()
   saveProfileStudy = new EventEmitter();
@@ -125,15 +136,8 @@ export class ProfileStudyVocationalComponent implements OnInit {
 
   /* Guarda la información relativa a un ciclo formativo */
   save() {
-    this.model.bilingue = this.profileStudyVocationalForm.get('bilingue').value;
-    this.model.certificate = this.profileStudyVocationalForm.get('certificate').value;
-    this.model.date = this.profileStudyVocationalForm.get('date').value;
-    this.model.institution = this.profileStudyVocationalForm.get('institution').value;
-    this.model.category = this.profileStudyVocationalForm.get('category').value;
-    this.model.grade = this.profileStudyVocationalForm.get('grade').value;
-    this.model.title = this.profileStudyVocationalForm.get('title').value;
-    this.model.dual = this.profileStudyVocationalForm.get('dual').value;
-    this.saveProfileStudy.emit(this.model);
+    const vocationalStudy: VocationalStudy = { ...this.model, ...this.profileStudyVocationalForm.value };
+    this.saveProfileStudy.emit(vocationalStudy);
   }
 
 }

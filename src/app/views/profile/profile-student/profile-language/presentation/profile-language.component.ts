@@ -19,10 +19,9 @@ import { Location } from '@angular/common';
 export class ProfileLanguageComponent implements OnInit {
 
   @Input() user: Student;
+  @Input() language: Language;
 
   @Output() updateUser = new EventEmitter();
-
-  model: Language;
 
   languageForm: FormGroup;
 
@@ -40,12 +39,11 @@ export class ProfileLanguageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.user);
     const id = this.activatedRoute.snapshot.params.id;
     if (id !== 'new') {
-      this.model = this.user.languages.find(studie => studie.id == id);
+      this.language = this.user.languages.find(studie => studie.id == id);
     } else {
-      this.model = {
+      this.language = {
         id: -1,
         level: null,
         name: null,
@@ -79,9 +77,9 @@ export class ProfileLanguageComponent implements OnInit {
   /* Construye el formulario de idioma */
   buildForm() {
     this.languageForm = this.fb.group({
-      date: new FormControl(this.model.date, DateValidator),
-      level: new FormControl(this.model.level),
-      languageName: new FormControl(this.model.name),
+      date: new FormControl(this.language.date, DateValidator),
+      level: new FormControl(this.language.level),
+      languageName: new FormControl(this.language.name),
       otherLanguage: new FormControl('')
     });
 
@@ -112,25 +110,25 @@ export class ProfileLanguageComponent implements OnInit {
   }
 
   /* Guardar un idioma escrito en el input de Otros */
-  saveOtherLanguage() {
+  saveOtherLanguage(language: Language) {
     this.languageNameService.addLanguageName({ id: -1, name: this.languageForm.get('otherLanguage').value }).subscribe(
-      language => {
-        this.model.name = language;
-        this.saveLanguage();
+      languageName => {
+        language.name = languageName;
+        this.saveLanguage(language);
       }
     )
   }
 
   /* Guardar idioma del estudiante */
-  saveLanguage() {
-    this.languageService.saveLanguage(this.model).subscribe(
-      language => {
+  saveLanguage(language: Language) {
+    this.languageService.saveLanguage(language).subscribe(
+      languageSave => {
         let languages = [...this.user.languages];
-        let index = languages.findIndex(({ id }) => id === language.id);
+        let index = languages.findIndex(({ id }) => id === languageSave.id);
         if (index === -1) {
-          languages.push(language);
+          languages.push(languageSave);
         } else {
-          languages[index] = language;
+          languages[index] = languageSave;
         }
         const user: Student = {...this.user, languages};
         this.updateUser.emit(user);
@@ -140,13 +138,14 @@ export class ProfileLanguageComponent implements OnInit {
 
   /* Comienza el proceso de guardar cuando el usuario pulsa sobre el botón Guardar */
   save() {
-    this.model.date = this.languageForm.get('date').value;
-    this.model.level = this.languageForm.get('level').value;
+    const language = {...this.language}
+    language.date = this.languageForm.get('date').value;
+    language.level = this.languageForm.get('level').value;
     if (this.languageForm.get('languageName').value.name === 'Otro') {
-      this.saveOtherLanguage();
+      this.saveOtherLanguage(language);
     } else {
-      this.model.name = this.languageForm.get('languageName').value;
-      this.saveLanguage();
+      language.name = this.languageForm.get('languageName').value;
+      this.saveLanguage(language);
     }
   }
 
