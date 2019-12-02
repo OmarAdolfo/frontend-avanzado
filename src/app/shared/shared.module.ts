@@ -27,18 +27,20 @@ import { LanguageNameService } from './services/language-name.service';
 import { LanguageService } from './services/language.service';
 import { OfferService } from './services/offer.service';
 import { ExperienceService } from './services/experience.service';
+import { MaterialModule } from './material.module';
 
 const classesToInclude = [AppComfirmComponent, HeaderComponent];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, MaterialModule],
 
   providers: [AppConfirmService],
   entryComponents: [AppComfirmComponent],
   declarations: classesToInclude,
   exports: [
     ...classesToInclude,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 
 })

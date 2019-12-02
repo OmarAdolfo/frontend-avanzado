@@ -1,62 +1,50 @@
-<div class="container-fluid mt-5">
-  <div class="row">
-    <div class="col-12 col-md-4 offset-md-4">
-      <img src="../../assets/uoc.png" alt="Logotipo de la Uoc">
-      <form class="form-horizontal mt-5" [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-2">
-              <label class="control-label" for="email">Email</label>
-            </div>
-            <div class="col-10">
-              <input [ngClass]="{'is-invalid': loginForm.controls.email.invalid}" type="text" class="form-control"
-                id="email" formControlName="email" name="email" autofocus>
-              <div
-                *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"
-                class="alert alert-danger">
-                <div *ngIf="loginForm.controls.email.errors.required">
-                  El correo electrónico es obligatorio
-                </div>
-                <div *ngIf="loginForm.controls.email.errors.email">
-                  El correo electrónico no tiene un formato correcto
-                </div>
+<div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+  <mat-card fxLayout="column">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <img class="img-logo" src="../../assets/uoc.png" alt="Logotipo de la Uoc">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-card-content fxLayout="column">
+        <div class="container" fxLayout="column" fxLayoutAlign="center">
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email" name="email" required autofocus>
+            <mat-error
+              *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+              <div *ngIf="loginForm.controls.email.errors.required">
+                El correo electrónico es obligatorio
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-2">
-              <label for="password">Password</label>
-            </div>
-            <div class="col-10">
-              <input [ngClass]="{'is-invalid': loginForm.controls.password.invalid}" type="password"
-                class="form-control" id="password" formControlName="password" name="password">
-              <div
-                *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
-                class="alert alert-danger">
-                <div *ngIf="loginForm.controls.password.errors.required">
-                  La contraseña es obligatoria
-                </div>
+              <div *ngIf="loginForm.controls.email.errors.email">
+                El correo electrónico no tiene un formato correcto
               </div>
-            </div>
-          </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" name="password" type="password" required>
+            <mat-error
+              *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+              <div *ngIf="loginForm.controls.password.errors.required">
+                La contraseña es obligatoria
+              </div>
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="buttons text-right">
-          <button type="submit" class="btn btn-success"
-            [disabled]="loginForm.pristine || loginForm.invalid || preloader">
-            <i class="fa" [ngClass]="{'fa-sign-in': !preloader, 'fa-spinner fa-spin': preloader}"
-              aria-hidden="true"></i> Login
-          </button>
-          <button type="button" class="btn btn-success">
-            <i class="fa" [ngClass]="{'fa-key': !preloader, 'fa-spinner fa-spin': preloader}" aria-hidden="true"></i>
-            Remember password
-          </button>
-        </div>
-      </form>
-      <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async">
-        El login no es correcto
-      </div>
-    </div>
-  </div>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
+        <button type="submit" mat-raised-button color="primary"
+          [disabled]="loginForm.pristine || loginForm.invalid || preloader">
+          Login
+        </button>
+        <button type="button" mat-button>
+          Forgot password
+        </button>
+      </mat-card-actions>
+      <hr>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+        <button type="button" mat-button>
+          Sign Up
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
 </div>

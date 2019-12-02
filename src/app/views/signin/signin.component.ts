@@ -3,8 +3,6 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { LogIn } from 'src/app/shared/state/auth/actions/auth.actions';
 import { AppStore } from 'src/app/shared/state/store.interface';
-import { Observable } from 'rxjs';
-import { userErrorMessage } from 'src/app/shared/state/auth/selectors/auth.selector';
 
 @Component({
   selector: 'app-signin',
@@ -14,14 +12,11 @@ import { userErrorMessage } from 'src/app/shared/state/auth/selectors/auth.selec
 export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
-  errorMessage$: Observable<any>;
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppStore>
-  ) {
-    this.errorMessage$ = this.store.select(userErrorMessage);
-  }
+  ) {}
 
   ngOnInit() {
     this.buildForm();

@@ -2,12 +2,13 @@ import { AuthActionTypes, LogIn, LogInSuccess, LogInFailure } from '../actions/a
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, catchError, mergeMap } from 'rxjs/operators';
+import { map, switchMap, catchError, mergeMap, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { LoadUser, LogoutUser } from '../../user/actions/user.action';
 import { LogoutJobOffers, LoadJobOffers } from '../../job-offers/actions/job-offers.action';
 import { Student } from 'src/app/shared/models/user.model';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +16,8 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private userService: UserService,
-        private router: Router
+        private router: Router,
+        public snackBar: MatSnackBar
     ) { }
 
     @Effect()
@@ -44,8 +46,18 @@ export class AuthEffects {
                     new LoadUser(payload)
                 ]
             }
-            
+
         })
+    );
+
+    @Effect({ dispatch: false })
+    loginFailed$ = this.actions$.pipe(
+        ofType(AuthActionTypes.LOGIN_FAILURE),
+        tap(() =>
+            this.snackBar.open('Error', 'Login Incorrecto', {
+                duration: 2000
+            })
+        )
     );
 
     @Effect()

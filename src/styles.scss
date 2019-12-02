@@ -1,15 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-img {
-    margin: 0 auto;
-    display: block;
-    width: 40%;
-    height: auto;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: lightgray }
+
+mat-card {
+    min-width: 40%;
+    border: 0;
+    padding: 0 !important;
 }
 
-.row {
-    margin-top: 15px;
+mat-card-header {
+    background-color: #3F51B5;
+    margin-bottom: 10px;
+    color: white;
+    padding: 10px;
 }
 
-.buttons button {
-    margin: 10px;
+mat-card-content {
+    padding: 10px;
+}
+
+mat-form-field.mat-form-field {
+    font-size: 18px;
+    margin-top: 25px;
 }
