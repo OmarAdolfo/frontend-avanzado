@@ -1,50 +1,53 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="login-main">
-  <mat-card fxLayout="column">
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <img class="img-logo" src="../../assets/uoc.png" alt="Logotipo de la Uoc">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <mat-card-content fxLayout="column">
-        <div class="container" fxLayout="column" fxLayoutAlign="center">
-          <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email" name="email" required autofocus>
-            <mat-error
-              *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
-              <div *ngIf="loginForm.controls.email.errors.required">
-                El correo electrónico es obligatorio
-              </div>
-              <div *ngIf="loginForm.controls.email.errors.email">
-                El correo electrónico no tiene un formato correcto
-              </div>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Password" formControlName="password" name="password" type="password" required>
-            <mat-error
-              *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
-              <div *ngIf="loginForm.controls.password.errors.required">
-                La contraseña es obligatoria
-              </div>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
-        <button type="submit" mat-raised-button color="primary"
-          [disabled]="loginForm.pristine || loginForm.invalid || preloader">
-          Login
-        </button>
-        <button type="button" mat-button>
-          Forgot password
-        </button>
-      </mat-card-actions>
-      <hr>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-        <button type="button" mat-button>
-          Sign Up
-        </button>
-      </mat-card-actions>
-    </form>
-  </mat-card>
+<div class="background">
+  <div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+    <mat-card fxLayout="column">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <img class="img-logo" src="../../assets/uoc.png" alt="Logotipo de la Uoc">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-card-content fxLayout="column">
+          <div class="container" fxLayout="column" fxLayoutAlign="center">
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" name="email" required autofocus>
+              <mat-error
+                *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+                <div *ngIf="loginForm.controls.email.errors.required">
+                  El correo electrónico es obligatorio
+                </div>
+                <div *ngIf="loginForm.controls.email.errors.email">
+                  El correo electrónico no tiene un formato correcto
+                </div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Password" formControlName="password" name="password" type="password"
+                required>
+              <mat-error
+                *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+                <div *ngIf="loginForm.controls.password.errors.required">
+                  La contraseña es obligatoria
+                </div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
+          <button type="submit" mat-raised-button color="primary"
+            [disabled]="loginForm.pristine || loginForm.invalid || preloader">
+            Login
+          </button>
+          <button type="button" mat-button>
+            Forgot password
+          </button>
+        </mat-card-actions>
+        <hr>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+          <button type="button" mat-button>
+            Sign Up
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
 </div>

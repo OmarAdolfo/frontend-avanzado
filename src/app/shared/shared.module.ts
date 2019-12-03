@@ -28,8 +28,10 @@ import { LanguageService } from './services/language.service';
 import { OfferService } from './services/offer.service';
 import { ExperienceService } from './services/experience.service';
 import { MaterialModule } from './material.module';
+import { SettingsService } from './services/settings.service';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
-const classesToInclude = [AppComfirmComponent, HeaderComponent];
+const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent];
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule, MaterialModule],
@@ -60,7 +62,8 @@ export class SharedModule {
         LanguageNameService,
         LanguageService,
         OfferService,
-        ExperienceService
+        ExperienceService,
+        SettingsService
       ]
     };
   }
