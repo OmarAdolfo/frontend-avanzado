@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 @Injectable()
 export class UserEffects {
 
-    routesNoNavigate = ['/profile', '/favorites'];
+    routesNoNavigate = ['/admin/profile', '/admin/favorites'];
 
     constructor(
         private actions$: Actions,
@@ -23,7 +23,7 @@ export class UserEffects {
     loadUser$ = this.actions$.pipe(
         ofType(UserActionTypes.LOAD_USER),
         tap(() => {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['admin/dashboard']);
         })
     );
 
@@ -43,6 +43,7 @@ export class UserEffects {
         ofType(UserActionTypes.UPDATE_USER_SUCCESS),
         map((action: UpdateUserSuccess) => action.payload),
         tap(() => {
+            console.log(this.router.url);
             if (this.routesNoNavigate.indexOf(this.router.url) === -1) {
                 this.location.back();
             }

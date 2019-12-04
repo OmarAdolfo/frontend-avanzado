@@ -12,6 +12,10 @@ export class ProfileStudentComponent implements OnInit {
   @Input() user: Student;
   @Output() updateUser = new EventEmitter();
 
+  displayedColumnsStudies: string[] = ['level', 'title', 'institution', 'date', 'certificate', 'options'];
+  displayedColumnsExperiences: string[] = ['company', 'position', 'dates', 'options'];
+  displayedColumnsLanguages: string[] = ['level', 'name', 'date', 'options'];
+
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,

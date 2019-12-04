@@ -30,8 +30,9 @@ import { ExperienceService } from './services/experience.service';
 import { MaterialModule } from './material.module';
 import { SettingsService } from './services/settings.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RootComponent } from './components/root/root.component';
 
-const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent];
+const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent, RootComponent];
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule, MaterialModule],

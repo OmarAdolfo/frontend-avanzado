@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { AuthGuard } from './shared/guards/auth.guard';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { RootComponent } from './shared/components/root/root.component';
 
 export const rootRouterConfig: Routes = [
   {
@@ -29,11 +29,19 @@ export const rootRouterConfig: Routes = [
     data: { title: "Signup" }
   },
   {
-    path: "dashboard",
-    component: DashboardComponent,
+    path: "admin",
+    component: RootComponent,
     canActivate: [AuthGuard],
-    data: { title: "Dashboard", breadcrumb: "DASHBOARD" },
     children: [
+      {
+        path: "dashboard",
+        loadChildren: () =>
+          import("./views/dashboard/dashboard.module").then(
+            m => m.DashboardModule
+          ),
+
+        data: { title: "Dashboard", breadcrumb: "DASHBOARD" }
+      },
       {
         path: "favorites",
         loadChildren: () =>

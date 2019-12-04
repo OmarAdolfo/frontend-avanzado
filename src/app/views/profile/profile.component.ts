@@ -8,7 +8,8 @@ import { UpdateUser } from 'src/app/shared/state/user/actions/user.action';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

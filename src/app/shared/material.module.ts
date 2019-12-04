@@ -23,7 +23,8 @@ import {
   MatSliderModule,
   MatProgressBarModule,
   MatAutocompleteModule,
-  MatInputModule
+  MatInputModule,
+  MatTableModule
 } from '@angular/material';
 
 @NgModule({
@@ -49,7 +50,8 @@ import {
     MatToolbarModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatRippleModule
+    MatRippleModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -73,7 +75,8 @@ import {
     MatToolbarModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatRippleModule
+    MatRippleModule,
+    MatTableModule
   ],
 })
 

@@ -1,6 +1,12 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ROUTES } from './sidebar-routes.config';
 import { SettingsService } from '../../services/settings.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../../state/store.interface';
+import { Observable } from 'rxjs';
+import { selectorUser } from '../../state/user/selectors/user.selectors';
+import { LogoutAuth } from '../../state/auth/actions/auth.actions';
 
 @Component({
     selector: 'app-sidebar',
@@ -13,7 +19,14 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     public activeFontColor: string;
     public normalFontColor: string;
     public dividerBgColor: string;
-    constructor(public settingsService: SettingsService) {
+    user$: Observable<any>;
+    constructor(
+        public settingsService: SettingsService,
+        private router: Router,
+        private store: Store<AppStore>,
+        private activatedRoute: ActivatedRoute
+    ) {
+        this.user$ = this.store.select(selectorUser);
         this.menuItems = ROUTES;
         this.activeFontColor = 'rgba(0,0,0,.6)';
         this.normalFontColor = 'rgba(255,255,255,.8)';
@@ -46,5 +59,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
+    }
+
+    logout() {
+        this.store.dispatch(new LogoutAuth());
     }
 }
