@@ -53,6 +53,10 @@ html, body {
     margin: 0;
     color: #999;
   }
+
+  .strong-text {
+    font-weight: 700;
+  }
   
   a {
     color: #9c27b0;
@@ -420,13 +424,13 @@ html, body {
   }
 
   .buttons {
-    margin-top: 10px;
+    margin: 20px 0;
   }
-  
-  /* table */
-  table {
-    width: 100%;
+
+  .buttons button {
+    margin: 5px;
   }
+
   
   /* text color */
   .text-primary, .alert-primary .alert-icon{
@@ -547,7 +551,23 @@ mat-card-content {
     padding: 10px;
 }
 
+.full-width-mat-form-field {
+  width: 100%;
+}
+
 mat-form-field.mat-form-field {
     font-size: 18px;
     margin-top: 25px;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}
+
+.content {
+  margin-top: 20px;
 }

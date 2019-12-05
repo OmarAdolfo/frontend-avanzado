@@ -1,0 +1,15 @@
+<div class="nav-bar">
+  <div id="menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div *ngFor="let menuItem of menuItems">
+        <a mat-menu-item (click)="navigate(menuItem.path)">
+          <mat-icon>{{menuItem.icon}}</mat-icon>
+          <span>{{menuItem.title}}</span>
+        </a>
+      </div>
+    </mat-menu>
+  </div>
+</div>

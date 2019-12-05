@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
 import { LoadUser, LogoutUser } from '../../user/actions/user.action';
 import { LogoutJobOffers, LoadJobOffers } from '../../job-offers/actions/job-offers.action';
 import { Student } from 'src/app/shared/models/user.model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
 declare const $: any;
 
 @Injectable()
 export class AuthEffects {
+
+    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
 
     constructor(
         private actions$: Actions,
@@ -45,7 +48,7 @@ export class AuthEffects {
             } else {
                 return [
                     new LoadUser(payload)
-                ]
+                ];
             }
 
         })
@@ -55,17 +58,10 @@ export class AuthEffects {
     loginFailed$ = this.actions$.pipe(
         ofType(AuthActionTypes.LOGIN_FAILURE),
         tap(() =>
-            $.notify({
-                message: 'Login incorrecto',
-            }, {
-                placement: { from: 'top', align: 'right' },
-                offset: { x: 20, y: 35 },
-                type: 'danger',
-                template: `<div class="alert alert-{0} alert-with-icon col-md-2">
-                <i class="material-icons alert-icon">notifications</i>
-                <button class="close" type="button" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button>
-                <span>{2}</span>
-              </div>`
+            this.snackBar.open('Error', 'Login incorrecto.', {
+                verticalPosition: this.verticalPosition,
+                horizontalPosition: this.horizontalPosition,
+                duration: 2000,
             })
         )
     );

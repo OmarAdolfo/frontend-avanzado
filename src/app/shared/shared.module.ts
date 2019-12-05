@@ -31,8 +31,9 @@ import { MaterialModule } from './material.module';
 import { SettingsService } from './services/settings.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RootComponent } from './components/root/root.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
-const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent, RootComponent];
+const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent, RootComponent, NavbarComponent];
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule, MaterialModule],

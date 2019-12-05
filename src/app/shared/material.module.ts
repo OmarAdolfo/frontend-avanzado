@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { CdkTableModule } from '@angular/cdk/table';
+
 import {
   MatSidenavModule,
   MatListModule,
@@ -29,6 +31,7 @@ import {
 
 @NgModule({
   imports: [
+    CdkTableModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
@@ -51,9 +54,10 @@ import {
     MatRadioModule,
     MatCheckboxModule,
     MatRippleModule,
-    MatTableModule
+    MatTableModule,
   ],
   exports: [
+    CdkTableModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,

@@ -1,215 +1,201 @@
-<div class="container-fluid mt-5" *ngIf="model">
-    <form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="save()">
-        <div class="row">
-            <div class="col-2">
-                <img src="../../assets/user.png" alt="Logotipo de la Uoc">
+<form class="form-horizontal mt-5" [formGroup]="personalInformationForm" (ngSubmit)="save()">
+    <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <div fxFlex="40">
+            <div class="profile-img">
+                <img src="../../assets/img/marc.jpg" alt="Imagen de perfil">
             </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="name">Nombre</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.name.invalid}" type="text"
-                                class="form-control" id="name" formControlName="name" name="name">
-                            <div *ngIf="personalInformationForm.controls.name.invalid && (personalInformationForm.controls.name.dirty || personalInformationForm.controls.name.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.name.errors.required">
-                                    El nombre es obligatorio
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.name.errors.minlength">
-                                    El nombre debe ser mínimo 3 carácteres
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.name.errors.maxlength">
-                                    El nombre debe ser máximo 55 carácteres
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.name.errors.pattern">
-                                    El nombre no puede contener espacios ni al final ni al principio ni tampoco
-                                    carácteres especiales
-                                </div>
+        </div>
+        <div fxFlex="60">
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Nombre" formControlName="name" name="name" required>
+                        <mat-error
+                            *ngIf="personalInformationForm.controls.name.invalid && (personalInformationForm.controls.name.dirty || personalInformationForm.controls.name.touched)">
+                            <div *ngIf="personalInformationForm.controls.name.errors.required">
+                                El nombre es obligatorio
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <label class="control-label" for="surname">Apellidos</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.surname.invalid}"
-                                type="text" class="form-control" id="surname" formControlName="surname" name="surname">
-                            <div *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.surname.errors.required">
-                                    El apellido es obligatorio
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.surname.errors.minlength">
-                                    El apellido debe ser mínimo 3 carácteres
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.surname.errors.maxlength">
-                                    El apellido debe ser máximo 55 carácteres
-                                </div>
-                                <div *ngIf="personalInformationForm.controls.surname.errors.pattern">
-                                    El apellido no puede contener espacios ni al final ni al principio ni tampoco
-                                    carácteres
-                                    especiales
-                                </div>
+                            <div *ngIf="personalInformationForm.controls.name.errors.minlength">
+                                El nombre debe ser mínimo 3 carácteres
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="birthdate">Fecha de nacimiento</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.birthdate.invalid}"
-                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="birthdate"
-                                formControlName="birthdate" name="birthdate">
+                            <div *ngIf="personalInformationForm.controls.name.errors.maxlength">
+                                El nombre debe ser máximo 55 carácteres
+                            </div>
+                            <div *ngIf="personalInformationForm.controls.name.errors.pattern">
+                                El nombre no puede contener espacios ni al final ni al principio ni tampoco
+                                carácteres especiales
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Apellidos" formControlName="surname" name="surname" required>
+                        <mat-error
+                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
+                            <div *ngIf="personalInformationForm.controls.surname.errors.required">
+                                El apellido es obligatorio
+                            </div>
+                            <div *ngIf="personalInformationForm.controls.surname.errors.minlength">
+                                El apellido debe ser mínimo 3 carácteres
+                            </div>
+                            <div *ngIf="personalInformationForm.controls.surname.errors.maxlength">
+                                El apellido debe ser máximo 55 carácteres
+                            </div>
+                            <div *ngIf="personalInformationForm.controls.surname.errors.pattern">
+                                El apellido no puede contener espacios ni al final ni al principio ni tampoco
+                                carácteres
+                                especiales
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Fecha de nacimiento" formControlName="birthdate" name="birthdate">
+                        <mat-error
+                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
                             <div *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir una fecha con el formato correcto y válida
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="phone">Teléfono</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.phone.invalid}"
-                                type="text" class="form-control" id="phone" formControlName="phone" name="phone">
-                        </div>
-                        <div class="col-3">
-                            <label class="control-label" for="phone2">Teléfono 2</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.phone2.invalid}"
-                                type="text" class="form-control" id="phone2" formControlName="phone2" name="phone2">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="documentType">Tipo de documento</label>
-                        </div>
-                        <div class="col-3">
-                            <select class="custom-select" formControlName="documentType" [compareWith]="compare"
-                                id="documentType">
-                                <option></option>
-                                <option *ngFor="let documentType of documentTypes" [ngValue]="documentType">
-                                    {{documentType.name}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <label class="control-label" for="documentNumber">Número documento</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.documentNumber.invalid}"
-                                type="text" class="form-control" id="documentNumber" formControlName="documentNumber"
-                                name="documentNumber">
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Teléfono" formControlName="phone" name="phone">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Fecha de nacimiento" formControlName="birthdate" name="birthdate">
+                        <mat-error
+                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
+                            <div *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
+                                class="cross-validation-error-message alert alert-danger">
+                                Debe introducir una fecha con el formato correcto y válida
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Teléfono" formControlName="phone" name="phone">
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Teléfono 2" formControlName="phone2" name="phone2">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <mat-label>Tipo de documento</mat-label>
+                        <mat-select formControlName="documentType" [compareWith]="compare">
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let documentType of documentTypes" [value]="documentType">
+                                {{documentType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Número documento" formControlName="documentNumber"
+                            name="documentNumber">
+                        <mat-error
+                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
                             <div *ngIf="personalInformationForm.errors?.numeroDocumentoNoValido && (personalInformationForm.touched || personalInformationForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir un número de documento válido respecto al tipo de documento
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="direccion">Dirección</label>
-                        </div>
-                        <div class="col-9">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.direccion.invalid}"
-                                type="text" class="form-control" id="direccion" formControlName="direccion"
-                                name="direccion">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="province">Provincias</label>
-                        </div>
-                        <div class="col-3">
-                            <select class="custom-select" formControlName="province" [compareWith]="compare"
-                                id="province">
-                                <option></option>
-                                <option *ngFor="let province of provinces" [ngValue]="province">
-                                    {{province.name}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <label class="control-label" for="municipie">Municipio</label>
-                        </div>
-                        <div class="col-3">
-                            <select class="custom-select" formControlName="municipie" [compareWith]="compare"
-                                id="municipie">
-                                <option></option>
-                                <option *ngFor="let municipie of municipies" [ngValue]="municipie">
-                                    {{municipie.name}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="license">Permiso de conducir</label>
-                        </div>
-                        <div class="col-9">
-                            <input [ngClass]="{'is-invalid': personalInformationForm.controls.license.invalid}"
-                                type="text" class="form-control" id="license" formControlName="license" name="license">
-                            <div *ngIf="personalInformationForm.controls.license.invalid && (personalInformationForm.controls.license.dirty || personalInformationForm.controls.license.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.license.errors.maxlength">
-                                    El permiso de conducción debe ser máximo 5 carácteres
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="aboutMe">Sobre mí</label>
-                        </div>
-                        <div class="col-9">
-                            <textarea [ngClass]="{'is-invalid': personalInformationForm.controls.aboutMe.invalid}"
-                                class="form-control rounded-0" rows="5" id="aboutMe" formControlName="aboutMe"
-                                name="aboutMe"></textarea>
-                            <div *ngIf="personalInformationForm.controls.aboutMe.invalid && (personalInformationForm.controls.aboutMe.dirty || personalInformationForm.controls.aboutMe.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.aboutMe.errors.minlength">
-                                    El texto sobre mí debe ser mínimo 10 carácteres
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="otherCompetences">Otras competencias</label>
-                        </div>
-                        <div class="col-9">
-                            <textarea
-                                [ngClass]="{'is-invalid': personalInformationForm.controls.otherCompetences.invalid}"
-                                class="form-control rounded-0" rows="5" id="otherCompetences"
-                                formControlName="otherCompetences" name="otherCompetences"></textarea>
-                            <div *ngIf="personalInformationForm.controls.otherCompetences.invalid && (personalInformationForm.controls.otherCompetences.dirty || personalInformationForm.controls.otherCompetences.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="personalInformationForm.controls.otherCompetences.errors.minlength">
-                                    El texto de otras competencias debe ser mínimo 10 carácteres
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="buttons text-right">
-                                <button type="button" class="btn btn-primary" (click)="back()">
-                                    <i class="fa fa-back" aria-hidden="true"></i> Volver
-                                </button>
-                                <button type="submit" class="btn btn-success"
-                                    [disabled]="personalInformationForm.pristine || personalInformationForm.invalid">
-                                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                        </mat-error>
+                    </mat-form-field>
                 </div>
             </div>
+            <div fxLayout="row">
+                <mat-form-field class="full-width-mat-form-field">
+                    <input matInput placeholder="Dirección" formControlName="direccion" name="direccion">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <mat-label>Provincia</mat-label>
+                        <mat-select formControlName="province" [compareWith]="compare">
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let province of provinces" [value]="province">
+                                {{province.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <mat-label>Municipio</mat-label>
+                        <mat-select formControlName="municipie" [compareWith]="compare">
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let municipie of municipies" [value]="municipie">
+                                {{municipie.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <mat-form-field class="full-width-mat-form-field">
+                    <input matInput placeholder="Permiso de conducir" formControlName="license" name="license">
+                    <mat-error
+                        *ngIf="personalInformationForm.controls.license.invalid && (personalInformationForm.controls.license.dirty || personalInformationForm.controls.license.touched)">
+                        <div *ngIf="personalInformationForm.controls.license.errors.maxlength">
+                            El permiso de conducción debe ser máximo 5 carácteres
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <mat-form-field class="full-width-mat-form-field">
+                    <textarea matInput placeholder="Sobre mí" formControlName="aboutMe" name="aboutMe"></textarea>
+                    <mat-error
+                        *ngIf="personalInformationForm.controls.aboutMe.invalid && (personalInformationForm.controls.aboutMe.dirty || personalInformationForm.controls.aboutMe.touched)">
+                        <div *ngIf="personalInformationForm.controls.aboutMe.errors.minlength">
+                            El texto sobre mí debe ser mínimo 10 carácteres
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <mat-form-field class="full-width-mat-form-field">
+                    <textarea matInput placeholder="Otras competencias" formControlName="otherCompetences"
+                        name="otherCompetences"></textarea>
+                    <mat-error
+                        *ngIf="personalInformationForm.controls.otherCompetences.invalid && (personalInformationForm.controls.otherCompetences.dirty || personalInformationForm.controls.otherCompetences.touched)">
+                        <div *ngIf="personalInformationForm.controls.otherCompetences.errors.minlength">
+                            El texto de otras competencias debe ser mínimo 10 carácteres
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+    <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="default" type="button" (click)="back()">
+            <i class="fa fa-back" aria-hidden="true"></i>
+            Volver
+        </button>
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="personalInformationForm.pristine || personalInformationForm.invalid">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Guardar
+        </button>
+    </div>
+</form>

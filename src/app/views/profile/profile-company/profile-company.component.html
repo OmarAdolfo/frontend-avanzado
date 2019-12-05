@@ -1,80 +1,79 @@
-<div class="container mt-5" *ngIf="user">
-    <div class="row">
-        <div class="col-3">
-            <b>Nombre Comercial</b>
+<div class="content" fxLayout='row' fxLayout.xs="column" fxLayoutGap="30px" fxLayoutAlign="space-around center"
+    fxLayoutAlign.xs="start start">
+    <div>
+        <div>
+            <span class="strong-text">Nombre Comercial</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.comercialName}}
         </div>
-        <div class="col-3">
-            <b>Razón social</b>
+        <div>
+            <span class="strong-text">Razón social</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.businessName}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-3">
-            <b>CIF</b>
+    <div>
+        <div>
+            <span class="strong-text">CIF</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.documentNumber}}
         </div>
-        <div class="col-3">
-            <b>Dirección</b>
+        <div>
+            <span class="strong-text">Dirección</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.address.street}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-3">
-            <b>Provincia</b>
+    <div>
+        <div>
+            <span class="strong-text">Provincia</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.address.province.name}}
         </div>
-        <div class="col-3">
-            <b>Municipio</b>
+        <div>
+            <span class="strong-text">Municipio</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.address.municipe.name}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-3">
-            <b>Url</b>
+    <div>
+        <div>
+            <span class="strong-text">Url</span>
         </div>
-        <div class="col-3">
+        <div>
             <a href="{{user.url}}">{{user.url}}</a>
         </div>
-        <div class="col-3">
-            <b>Nombre y apellidos persona contacto</b>
+        <div>
+            <span class="strong-text">Nombre y apellidos persona contacto</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.name + ' ' + user.surname}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-3">
-            <b>Teléfono persona contacto</b>
+    <div>
+        <div>
+            <span class="strong-text">Teléfono persona contacto</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.phone}}
         </div>
-        <div class="col-3">
-            <b>Correo electrónico persona contacto</b>
+        <div>
+            <span class="strong-text">Correo electrónico persona contacto</span>
         </div>
-        <div class="col-3">
+        <div>
             {{user.email}}
         </div>
     </div>
-    <div class="row">
-        <div class="buttons text-right mb-5">
-            <button type="submit" class="btn btn-success" (click)="goToPersonalInformation()">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-                Editar
-            </button>
-        </div>
-    </div>
+</div>
+<div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" type="button" (click)="goToPersonalInformation()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        Editar
+    </button>
 </div>

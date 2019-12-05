@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTES } from './sidebar-routes.config';
 import { SettingsService } from '../../services/settings.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../state/store.interface';
 import { Observable } from 'rxjs';
 import { selectorUser } from '../../state/user/selectors/user.selectors';
 import { LogoutAuth } from '../../state/auth/actions/auth.actions';
+import { ROUTES_STUDENT, ROUTES_COMPANY } from '../../config/routes.config';
 
 @Component({
     selector: 'app-sidebar',
@@ -22,12 +21,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     user$: Observable<any>;
     constructor(
         public settingsService: SettingsService,
-        private router: Router,
         private store: Store<AppStore>,
-        private activatedRoute: ActivatedRoute
     ) {
         this.user$ = this.store.select(selectorUser);
-        this.menuItems = ROUTES;
         this.activeFontColor = 'rgba(0,0,0,.6)';
         this.normalFontColor = 'rgba(255,255,255,.8)';
         this.dividerBgColor = 'rgba(255, 255, 255, 0.5)';
@@ -35,6 +31,17 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit() {
         this.color = this.settingsService.getSidebarFilter();
+        this.store.select(selectorUser).subscribe(
+            user => {
+                if (user) {
+                    if (user.roles.find(rol => rol === 'student')) {
+                        this.menuItems = ROUTES_STUDENT;
+                    } else {
+                        this.menuItems = ROUTES_COMPANY;
+                    }
+                }
+            }
+        );
         this.settingsService.sidebarFilterUpdate.subscribe((filter: string) => {
             this.color = filter;
             if (filter === '#fff') {

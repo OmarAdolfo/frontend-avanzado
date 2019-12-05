@@ -1,7 +1,16 @@
-<div class="container"> 
-    <ng-container *ngIf="user$ | async as user">
-        <app-profile-student [user]="user" (updateUser)="updateUser($event)" *ngIf="hasStudentRol(user)">
-        </app-profile-student>
-        <app-profile-company [user]="user" *ngIf="hasCompanyRol(user)"></app-profile-company>
-    </ng-container>
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="card">
+        <div class="card-header">
+            <i class="material-icons">perm_identity</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Información personal</h4>
+            <ng-container *ngIf="user$ | async as user">
+                <app-profile-student [user]="user" (updateUser)="updateUser($event)" *ngIf="hasStudentRol(user)">
+                </app-profile-student>
+                <app-profile-company [user]="user" *ngIf="hasCompanyRol(user)"></app-profile-company>
+            </ng-container>
+        </div>
+    </div>
 </div>
