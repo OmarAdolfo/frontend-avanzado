@@ -1,4 +1,5 @@
-<div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="center start" fxFlexFill fxLayoutGap="20px">
+<div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="center start"
+    fxFlexFill fxLayoutGap="20px">
     <div class="profile" fxFlex="25">
         <img src="../../assets/img/marc.jpg" alt="Imagen del usuario">
         <div class="text-center">{{user.name}}</div>
@@ -115,80 +116,88 @@
         Nueva
     </button>
 </div>
-<mat-card-title>Experiencia laboral</mat-card-title>
-<table mat-table [dataSource]="user.experiencies" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef> Empresa </th>
-        <td mat-cell *matCellDef="let element"> {{element.company}} </td>
-    </ng-container>
+<div fxLayout="column">
+    <mat-card-title>Experiencia laboral</mat-card-title>
+    <table mat-table [dataSource]="user.experiencies" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Puesto </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
+        <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef> Empresa </th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="dates">
-        <th mat-header-cell *matHeaderCellDef> Fechas </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.dateInitial + ' - ' + element.dateEnd}} </td>
-    </ng-container>
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Puesto </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef> Opciones </th>
-        <td mat-cell *matCellDef="let element">
-            <button type="button" mat-raised-button color="primary" (click)="goToExperience(element.id)">
-                <i class="fa fa-edit" aria-hidden="true"></i>
-            </button>
-            <button type="button" mat-raised-button color="warn" (click)="removeExperience(element.id)">
-                <i class="fa fa-remove" aria-hidden="true"></i>
-            </button>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="dates">
+            <th mat-header-cell *matHeaderCellDef> Fechas </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.dateInitial + ' - ' + element.dateEnd}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumnsExperiences"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumnsExperiences;"></tr>
-</table>
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let element">
+                <button type="button" mat-raised-button color="primary" (click)="goToExperience(element.id)">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </button>
+                <button type="button" mat-raised-button color="warn" (click)="removeExperience(element.id)">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsExperiences"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsExperiences;"></tr>
+    </table>
+</div>
+
 <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
     <button type="button" mat-raised-button color="primary" (click)="goToExperience()">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Nueva
     </button>
 </div>
-<mat-card-title>Idiomas</mat-card-title>
-<table mat-table [dataSource]="user.languages" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="level">
-        <th mat-header-cell *matHeaderCellDef> Nivel </th>
-        <td mat-cell *matCellDef="let element"> {{element.level.name}} </td>
-    </ng-container>
+<div fxLayout="column">
+    <mat-card-title>Idiomas</mat-card-title>
+    <table mat-table [dataSource]="user.languages" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Idioma </th>
-        <td mat-cell *matCellDef="let element"> {{element.name.name}} </td>
-    </ng-container>
+        <ng-container matColumnDef="level">
+            <th mat-header-cell *matHeaderCellDef> Nivel </th>
+            <td mat-cell *matCellDef="let element"> {{element.level.name}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.date}} </td>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Idioma </th>
+            <td mat-cell *matCellDef="let element"> {{element.name.name}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef> Opciones </th>
-        <td mat-cell *matCellDef="let element">
-            <button type="button" mat-raised-button color="primary" (click)="goToProfileLanguage(element.id)">
-                <i class="fa fa-edit" aria-hidden="true"></i>
-            </button>
-            <button type="button" mat-raised-button color="warn" (click)="removeLanguage(element.id)">
-                <i class="fa fa-remove" aria-hidden="true"></i>
-            </button>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.date}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumnsLanguages"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumnsLanguages;"></tr>
-</table>
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let element">
+                <button type="button" mat-raised-button color="primary" (click)="goToProfileLanguage(element.id)">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </button>
+                <button type="button" mat-raised-button color="warn" (click)="removeLanguage(element.id)">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsLanguages"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsLanguages;"></tr>
+    </table>
+</div>
+
 <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
     <button type="button" mat-raised-button color="primary" (click)="goToProfileLanguage()">
         <i class="fa fa-plus" aria-hidden="true"></i>

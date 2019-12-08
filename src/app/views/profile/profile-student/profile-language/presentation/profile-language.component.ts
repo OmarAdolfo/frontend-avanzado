@@ -10,6 +10,7 @@ import { LanguageService } from 'src/app/shared/services/language.service';
 import { Student } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-language',
@@ -77,7 +78,7 @@ export class ProfileLanguageComponent implements OnInit {
   /* Construye el formulario de idioma */
   buildForm() {
     this.languageForm = this.fb.group({
-      date: new FormControl(this.language.date, DateValidator),
+      date: new FormControl(moment(this.language.date, 'DD/MM/YYYY').toDate(), DateValidator),
       level: new FormControl(this.language.level),
       languageName: new FormControl(this.language.name),
       otherLanguage: new FormControl('')
@@ -139,7 +140,7 @@ export class ProfileLanguageComponent implements OnInit {
   /* Comienza el proceso de guardar cuando el usuario pulsa sobre el botón Guardar */
   save() {
     const language = {...this.language}
-    language.date = this.languageForm.get('date').value;
+    language.date = moment(this.languageForm.get('date').value).format('DD/MM/YYYY');;
     language.level = this.languageForm.get('level').value;
     if (this.languageForm.get('languageName').value.name === 'Otro') {
       this.saveOtherLanguage(language);

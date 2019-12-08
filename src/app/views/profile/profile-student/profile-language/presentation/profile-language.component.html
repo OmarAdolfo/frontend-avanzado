@@ -54,8 +54,8 @@
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <mat-error
-                    *ngIf="profileStudyVocationalForm.controls.date.errors?.dataNotValid && (profileStudyVocationalForm.touched || profileStudyVocationalForm.dirty)">
-                    <div *ngIf="profileStudyVocationalForm.controls.date.errors?.dataNotValid && (profileStudyVocationalForm.touched || profileStudyVocationalForm.dirty)"
+                    *ngIf="languageForm.controls.date.errors?.dataNotValid && (languageForm.touched || languageForm.dirty)">
+                    <div *ngIf="languageForm.controls.date.errors?.dataNotValid && (languageForm.touched || languageForm.dirty)"
                         class="cross-validation-error-message alert alert-danger">
                         Debe introducir una fecha con el formato correcto y válida
                     </div>

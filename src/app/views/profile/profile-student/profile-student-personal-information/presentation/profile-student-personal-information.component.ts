@@ -101,7 +101,8 @@ export class ProfileStudentPersonalInformationComponent implements OnInit {
       province: this.personalInformationForm.get('province').value,
       street: this.personalInformationForm.get('direccion').value
     };
-    const user = { ...this.model, ...this.personalInformationForm.value, address };
+    let user: Student = { ...this.model, ...this.personalInformationForm.value, address };
+    user.birthdate = moment(user.birthdate).format('DD/MM/YYYY');
     this.updateUser.emit(user);
   }
 
