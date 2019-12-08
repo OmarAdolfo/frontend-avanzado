@@ -54,28 +54,12 @@
             <div fxLayout="row">
                 <div fxFlex="50">
                     <mat-form-field>
-                        <input matInput placeholder="Fecha de nacimiento" formControlName="birthdate" name="birthdate">
+                        <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento"
+                            formControlName="birthdate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                         <mat-error
-                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
-                            <div *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
-                                class="cross-validation-error-message alert alert-danger">
-                                Debe introducir una fecha con el formato correcto y válida
-                            </div>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxFlex="50">
-                    <mat-form-field>
-                        <input matInput placeholder="Teléfono" formControlName="phone" name="phone">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div fxLayout="row">
-                <div fxFlex="50">
-                    <mat-form-field>
-                        <input matInput placeholder="Fecha de nacimiento" formControlName="birthdate" name="birthdate">
-                        <mat-error
-                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
+                            *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)">
                             <div *ngIf="personalInformationForm.controls.birthdate.errors?.dataNotValid && (personalInformationForm.touched || personalInformationForm.dirty)"
                                 class="cross-validation-error-message alert alert-danger">
                                 Debe introducir una fecha con el formato correcto y válida
@@ -112,18 +96,15 @@
                     <mat-form-field>
                         <input matInput placeholder="Número documento" formControlName="documentNumber"
                             name="documentNumber">
-                        <mat-error
-                            *ngIf="personalInformationForm.controls.surname.invalid && (personalInformationForm.controls.surname.dirty || personalInformationForm.controls.surname.touched)">
-                            <div *ngIf="personalInformationForm.errors?.numeroDocumentoNoValido && (personalInformationForm.touched || personalInformationForm.dirty)"
-                                class="cross-validation-error-message alert alert-danger">
-                                Debe introducir un número de documento válido respecto al tipo de documento
-                            </div>
-                        </mat-error>
                     </mat-form-field>
+                    <div *ngIf="personalInformationForm.errors?.numeroDocumentoNoValido && (personalInformationForm.touched || personalInformationForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir un número de documento válido respecto al tipo de documento
+                    </div>
                 </div>
             </div>
             <div fxLayout="row">
-                <mat-form-field class="full-width-mat-form-field">
+                <mat-form-field>
                     <input matInput placeholder="Dirección" formControlName="direccion" name="direccion">
                 </mat-form-field>
             </div>
@@ -152,7 +133,7 @@
                 </div>
             </div>
             <div fxLayout="row">
-                <mat-form-field class="full-width-mat-form-field">
+                <mat-form-field>
                     <input matInput placeholder="Permiso de conducir" formControlName="license" name="license">
                     <mat-error
                         *ngIf="personalInformationForm.controls.license.invalid && (personalInformationForm.controls.license.dirty || personalInformationForm.controls.license.touched)">
@@ -163,7 +144,7 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row">
-                <mat-form-field class="full-width-mat-form-field">
+                <mat-form-field>
                     <textarea matInput placeholder="Sobre mí" formControlName="aboutMe" name="aboutMe"></textarea>
                     <mat-error
                         *ngIf="personalInformationForm.controls.aboutMe.invalid && (personalInformationForm.controls.aboutMe.dirty || personalInformationForm.controls.aboutMe.touched)">
@@ -174,7 +155,7 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row">
-                <mat-form-field class="full-width-mat-form-field">
+                <mat-form-field>
                     <textarea matInput placeholder="Otras competencias" formControlName="otherCompetences"
                         name="otherCompetences"></textarea>
                     <mat-error

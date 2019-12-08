@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { CollegeStudy, VocationalStudy } from 'src/app/shared/models/study.model';
+import { CollegeStudy, VocationalStudy, Study } from 'src/app/shared/models/study.model';
 import { StudyService } from 'src/app/shared/services/study.service';
 import { Student } from 'src/app/shared/models/user.model';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-study',
@@ -47,8 +48,9 @@ export class ProfileStudyComponent implements OnInit {
 
   /* Guarda los estudios de un estudiante */
   save(eve: any) {
-    const study = eve;
+    const study: VocationalStudy | CollegeStudy = eve;
     study.level = this.profileStudyForm.get('level').value;
+    study.date = moment(study.date).format('DD/MM/YYYY');
     this.studyService.saveStudy(study).subscribe(
       study => {
         let studies = [...this.user.studies];

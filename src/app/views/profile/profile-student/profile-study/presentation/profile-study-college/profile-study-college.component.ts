@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CollegeStudy, TitleStudy } from 'src/app/shared/models/study.model';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-study-college',
@@ -51,7 +52,7 @@ export class ProfileStudyCollegeComponent implements OnInit {
     this.profileStudyCollegeForm = this.fb.group({
       institution: new FormControl(this.model.institution),
       titleName: new FormControl(this.model.title.name),
-      date: new FormControl(this.model.date, DateValidator),
+      date: new FormControl(moment(this.model.date, 'DD/MM/YYYY').toDate(), DateValidator),
       bilingue: new FormControl(this.model.bilingue),
       certificate: new FormControl(this.model.certificate)
     });

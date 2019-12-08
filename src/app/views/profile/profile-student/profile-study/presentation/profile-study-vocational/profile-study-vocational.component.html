@@ -3,109 +3,94 @@
         <mat-card-title>Opción Ciclo Formativo</mat-card-title>
     </div>
 
-
-    <div class="form-group">
-        <div class="row">
-            <div class="col-12">
-                <h3>Opción Ciclo Formativo</h3>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="institution">Centro educativo</label>
-                    </div>
-                    <div class="col-3">
-                        <select class="custom-select" formControlName="institution" [compareWith]="compare"
-                            id="institution">
-                            <option></option>
-                            <option *ngFor="let institution of institutions" [ngValue]="institution">
-                                {{institution.name}}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <label class="control-label" for="category">Familia profesional</label>
-                    </div>
-                    <div class="col-3">
-                        <select class="custom-select" formControlName="category" [compareWith]="compare" id="category">
-                            <option></option>
-                            <option *ngFor="let category of categories" [ngValue]="category">
-                                {{category.name}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="grade">Grado</label>
-                    </div>
-                    <div class="col-3">
-                        <select class="custom-select" formControlName="grade" [compareWith]="compare" id="grade">
-                            <option></option>
-                            <option *ngFor="let grade of grades" [ngValue]="grade">
-                                {{grade.name}}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <label class="control-label" for="title">Ciclo</label>
-                    </div>
-                    <div class="col-3">
-                        <select class="custom-select" formControlName="title" [compareWith]="compare" id="title">
-                            <option></option>
-                            <option *ngFor="let title of titles" [ngValue]="title">
-                                {{title.name}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="date">Fecha de obtención del título</label>
-                    </div>
-                    <div class="col-3">
-                        <input [ngClass]="{'is-invalid': profileStudyVocationalForm.controls.date.invalid}" type="text"
-                            placeholder="DD/MM/YYYY" class="form-control" id="date" formControlName="date" name="date">
-                        <div *ngIf="profileStudyVocationalForm.controls.date.errors?.dataNotValid && (profileStudyVocationalForm.touched || profileStudyVocationalForm.dirty)"
-                            class="cross-validation-error-message alert alert-danger">
-                            Debe introducir una fecha con el formato correcto y válida
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="dual" formControlName="dual"
-                                name="dual">
-                            <label class="form-check-label" for="dual">
-                                Formación dual
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="bilingue"
-                                formControlName="bilingue" name="bilingue">
-                            <label class="form-check-label" for="bilingue">
-                                Formación bilingue
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label for="certificate">Seleccione un fichero</label>
-                        <input type="file" class="form-control-file" id="certificate"
-                            (change)="handleFileInput($event.target.files)" name="certificate">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="buttons text-right">
-                            <button type="submit" class="btn btn-success"
-                                [disabled]="profileStudyVocationalForm.pristine || profileStudyVocationalForm.invalid">
-                                <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <mat-label>Centro educativo</mat-label>
+                <mat-select formControlName="institution" [compareWith]="compare">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let institution of institutions" [value]="institution">
+                        {{institution.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field>
+                <mat-label>Familia profesional</mat-label>
+                <mat-select formControlName="category" [compareWith]="compare">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                        {{category.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <mat-label>Grado</mat-label>
+                <mat-select formControlName="grade" [compareWith]="compare">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let grade of grades" [value]="grade">
+                        {{grade.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field>
+                <mat-label>Ciclo</mat-label>
+                <mat-select formControlName="title" [compareWith]="compare">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let title of titles" [value]="title">
+                        {{title.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Fecha de obtención del título"
+                    formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error
+                    *ngIf="profileStudyVocationalForm.controls.date.errors?.dataNotValid && (profileStudyVocationalForm.touched || profileStudyVocationalForm.dirty)">
+                    <div *ngIf="profileStudyVocationalForm.controls.date.errors?.dataNotValid && (profileStudyVocationalForm.touched || profileStudyVocationalForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir una fecha con el formato correcto y válida
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-checkbox class="example-margin" formControlName="dual">Formación dual</mat-checkbox>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-checkbox class="example-margin" formControlName="bilingue">Formación bilingue</mat-checkbox>
+        </div>
+        <div fxFlex="50">
+            <label for="certificate">Seleccione un fichero</label>
+            <input type="file" class="form-control-file" id="certificate"
+                (change)="handleFileInput($event.target.files)" name="certificate">
+        </div>
+    </div>
+
+    <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="profileStudyVocationalForm.pristine || profileStudyVocationalForm.invalid">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Guardar
+        </button>
+    </div>
+
 </form>

@@ -25,7 +25,7 @@ export class OffersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myOffers = this.route.url === '/my-offers';
+    this.myOffers = this.route.url === '/admin/my-offers';
     this.rolStudent$ = this.store.select(userHasRol('student'));
     this.rolCompany$ = this.store.select(userHasRol('company'));
     this.offersList$ = this.store.select(selectorJobOffers);

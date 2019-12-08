@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
         private store: Store<AppStore>,
     ) {
         this.user$ = this.store.select(selectorUser);
-        this.activeFontColor = 'rgba(0,0,0,.6)';
+        this.activeFontColor = 'black';
         this.normalFontColor = 'rgba(255,255,255,.8)';
         this.dividerBgColor = 'rgba(255, 255, 255, 0.5)';
     }
@@ -45,14 +45,14 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.settingsService.sidebarFilterUpdate.subscribe((filter: string) => {
             this.color = filter;
             if (filter === '#fff') {
-                this.activeFontColor = 'rgba(0,0,0,.6)';
+                this.activeFontColor = 'black';
             } else {
                 this.activeFontColor = 'rgba(255,255,255,.8)';
             }
         });
         this.settingsService.sidebarColorUpdate.subscribe((color: string) => {
             if (color === '#fff') {
-                this.normalFontColor = 'rgba(0,0,0,.6)';
+                this.normalFontColor = 'black';
                 this.dividerBgColor = 'rgba(0,0,0,.1)';
             } else {
                 this.normalFontColor = 'rgba(255,255,255,.8)';

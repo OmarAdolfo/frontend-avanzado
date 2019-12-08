@@ -48,7 +48,7 @@ export class ProfileService {
           uid: 0,
           company: 'Suma',
           position: 'Junior',
-          date: '1548320228'
+          date: '20/01/2010'
         },
         {
           uid: 0,

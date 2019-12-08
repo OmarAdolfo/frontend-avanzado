@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NoWhitespaceValidator } from 'src/app/shared/validators/noWhitespace.validator';
 import { ProvinceService } from 'src/app/shared/services/province.service';
 import { MunicipeService } from 'src/app/shared/services/municipe.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-company-personal-information',
@@ -23,7 +24,8 @@ export class ProfileCompanyPersonalInformationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private provinceService: ProvinceService,
-    private municipeService: MunicipeService
+    private municipeService: MunicipeService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -97,6 +99,10 @@ export class ProfileCompanyPersonalInformationComponent implements OnInit {
     };
     const user = { ...this.model, ...this.personalInformationForm.value, address };
     this.updateUser.emit(user);
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

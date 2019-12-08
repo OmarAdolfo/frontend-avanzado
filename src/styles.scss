@@ -431,6 +431,10 @@ html, body {
     margin: 5px;
   }
 
+  mat-table {
+    width: 100%;
+    margin-top: 15px;
+  }
   
   /* text color */
   .text-primary, .alert-primary .alert-icon{
@@ -551,8 +555,13 @@ mat-card-content {
     padding: 10px;
 }
 
-.full-width-mat-form-field {
+mat-form-field {
   width: 100%;
+  padding: 10px;
+}
+
+.example-margin {
+  margin: 0 10px;
 }
 
 mat-form-field.mat-form-field {

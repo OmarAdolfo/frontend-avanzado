@@ -1,94 +1,74 @@
-<div class="container-fluid mt-5">
-  <form class="form-horizontal mt-5" [formGroup]="offerForm" (ngSubmit)="register()">
-    <div class="form-group">
-      <fieldset>
-        <legend>Oferta</legend>
-        <div class="row">
-          <div class="col-3">
-            <label class="control-label" for="company">Empresa</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.company.invalid}" type="text" class="form-control"
-              id="company" formControlName="company" name="company">
-          </div>
-          <div class="col-3">
-            <label class="control-label" for="jobName">Puesto</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.jobName.invalid}" type="text" class="form-control"
-              id="jobName" formControlName="jobName" name="jobName">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <label class="control-label" for="jobDescription">Descripción</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.jobDescription.invalid}" type="text"
-              class="form-control" id="jobDescription" formControlName="jobDescription" name="jobDescription">
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Municipio</legend>
-        <div class="row">
-          <div class="col-3">
-            <label class="control-label" for="province">Provincia</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.province.invalid}" type="text" class="form-control"
-              id="province" formControlName="province" name="province">
-          </div>
-          <div class="col-3">
-            <label class="control-label" for="municipe">Municipio</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.municipe.invalid}" type="text" class="form-control"
-              id="municipe" formControlName="municipe" name="municipe">
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Destinado a persona de</legend>
-        <div class="row">
-          <div class="col-3">
-            <label class="control-label" for="category">Familia profesional</label>
-          </div>
-          <div class="col-3">
-            <input [ngClass]="{'is-invalid': offerForm.controls.category.invalid}" type="text" class="form-control"
-              id="category" formControlName="category" name="category">
-          </div>
-          <div class="col-6">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Títulos a los que va destinado la oferta</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let title of offer.title">
-                  <th scope="row">{{title.name}}</th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="buttons text-right">
-              <button type="button" class="btn btn-primary" (click)="back()">
-                <i class="fa fa-back" aria-hidden="true"></i> Volver
-              </button>
-              <button *ngIf="!isMyJobOffer()" type="submit" class="btn btn-success">
-                Inscribirse
-              </button>
-              <button *ngIf="isMyJobOffer()" type="submit" class="btn btn-success">
-                Borrarse
-              </button>
-            </div>
-          </div>
-        </div>
-      </fieldset>
+<form class="form-horizontal mt-5" [formGroup]="offerForm" (ngSubmit)="register()">
+
+  <div fxLayout="row">
+    <div fxFlex="50">
+      <mat-form-field>
+        <input matInput placeholder="Empresa" formControlName="company" name="company">
+      </mat-form-field>
     </div>
-  </form>
-</div>
+    <div fxFlex="50">
+      <mat-form-field>
+        <input matInput placeholder="Puesto" formControlName="jobName" name="jobName">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <mat-form-field>
+      <input matInput placeholder="Descripción" formControlName="jobDescription" name="jobDescription">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+    <mat-card-title>Municipio</mat-card-title>
+  </div>
+
+  <div fxLayout="row">
+    <div fxFlex="50">
+      <mat-form-field>
+        <input matInput placeholder="Provincia" formControlName="province" name="province">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50">
+      <mat-form-field>
+        <input matInput placeholder="Municipio" formControlName="municipe" name="municipe">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+    <mat-card-title>Destinado a persona de</mat-card-title>
+  </div>
+
+  <div fxLayout="row">
+    <div fxFlex="50">
+      <mat-form-field>
+        <input matInput placeholder="Familia profesional" formControlName="category" name="category">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50">
+      <mat-card-title>Títulos a los que va destinado la oferta</mat-card-title>
+      <div fxLayout="column">
+        <div *ngFor="let title of offer.title">
+          {{title.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="default" type="button" (click)="back()">
+      <i class="fa fa-back" aria-hidden="true"></i>
+      Volver
+    </button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="!isMyJobOffer()">
+      <i class="fa fa-save" aria-hidden="true"></i>
+      Inscribirse
+    </button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="isMyJobOffer()">
+      <i class="fa fa-save" aria-hidden="true"></i>
+      Borrarse
+    </button>
+  </div>
+
+</form>

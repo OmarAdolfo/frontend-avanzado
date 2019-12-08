@@ -6,6 +6,7 @@ import { InstitutionService } from 'src/app/shared/services/institution.service'
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { GradeService } from 'src/app/shared/services/grade.service';
 import { TitleService } from 'src/app/shared/services/title.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-study-vocational',
@@ -114,7 +115,7 @@ export class ProfileStudyVocationalComponent implements OnInit {
       category: new FormControl(this.model.category),
       grade: new FormControl(this.model.grade),
       title: new FormControl(this.model.title),
-      date: new FormControl(this.model.date, DateValidator),
+      date: new FormControl(moment(this.model.date, 'DD/MM/YYYY').toDate(), DateValidator),
       dual: new FormControl(this.model.dual),
       bilingue: new FormControl(this.model.bilingue),
       certificate: new FormControl(this.model.certificate)

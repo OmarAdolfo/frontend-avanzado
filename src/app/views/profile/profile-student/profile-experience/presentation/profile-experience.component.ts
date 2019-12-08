@@ -5,6 +5,7 @@ import { ExperienceService } from 'src/app/shared/services/experience.service';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { Student } from 'src/app/shared/models/user.model';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-experience',
@@ -40,8 +41,8 @@ export class ProfileExperienceComponent implements OnInit {
         Validators.maxLength(255),
         Validators.pattern(this.withOutBlankSpacesInitiallyRegExp)
       ]),
-      dateInitial: new FormControl(this.experience.dateInitial, DateValidator),
-      dateEnd: new FormControl(this.experience.dateEnd, DateValidator),
+      dateInitial: new FormControl(moment(this.experience.dateInitial, 'DD/MM/YYYY').toDate(), DateValidator),
+      dateEnd: new FormControl(moment(this.experience.dateEnd, 'DD/MM/YYYY').toDate(), DateValidator),
       position: new FormControl(this.experience.position, [
         Validators.required,
         Validators.minLength(3),
@@ -54,7 +55,9 @@ export class ProfileExperienceComponent implements OnInit {
 
   /* Guarda la información del formulario */
   save() {
-    const experience = {...this.experience, ...this.experienceForm.value};
+    let experience: Experience = {...this.experience, ...this.experienceForm.value};
+    experience.dateInitial = moment(experience.dateInitial).format('DD/MM/YYYY');
+    experience.dateEnd = moment(experience.dateEnd).format('DD/MM/YYYY');
     this.experienceService.saveExperience(experience).subscribe(
       experience => {
         let experiencies = [...this.user.experiencies];

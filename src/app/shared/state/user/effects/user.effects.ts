@@ -6,17 +6,21 @@ import { UserActionTypes, UpdateUser, UpdateUserSuccess, UpdateUserFailed } from
 import { of } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Location } from '@angular/common';
+import { MatSnackBarVerticalPosition, MatSnackBarHorizontalPosition, MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class UserEffects {
 
-    routesNoNavigate = ['/admin/profile', '/admin/favorites'];
+    routesNoNavigate = ['/admin/profile', '/admin/favorites'];ç
+    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
 
     constructor(
         private actions$: Actions,
         private router: Router,
         private userService: UserService,
-        private location: Location
+        private location: Location,
+        public snackBar: MatSnackBar
     ) { }
 
     @Effect({ dispatch: false })
@@ -43,9 +47,14 @@ export class UserEffects {
         ofType(UserActionTypes.UPDATE_USER_SUCCESS),
         map((action: UpdateUserSuccess) => action.payload),
         tap(() => {
-            console.log(this.router.url);
             if (this.routesNoNavigate.indexOf(this.router.url) === -1) {
                 this.location.back();
+            } else {
+                this.snackBar.open('Éxito', 'Se han modificado los datos del usuario', {
+                    verticalPosition: this.verticalPosition,
+                    horizontalPosition: this.horizontalPosition,
+                    duration: 2000,
+                })
             }
         }));
 }

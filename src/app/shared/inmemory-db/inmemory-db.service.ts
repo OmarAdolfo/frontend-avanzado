@@ -109,16 +109,16 @@ export class FakeBackendService implements InMemoryDbService {
           {
             id: 1,
             company: 'Suma',
-            dateInitial: '1548320228',
-            dateEnd: '1548320228',
+            dateInitial: '20/01/2010',
+            dateEnd: '20/03/2010',
             position: 'Junior',
             tasks: 'Lore ipsum'
           },
           {
             id: 2,
             company: 'Indra',
-            dateInitial: '1548320228',
-            dateEnd: '1548320228',
+            dateInitial: '25/02/2012',
+            dateEnd: '25/06/2012',
             position: 'Ingeniero',
             tasks: 'Lore ipsum'
           }

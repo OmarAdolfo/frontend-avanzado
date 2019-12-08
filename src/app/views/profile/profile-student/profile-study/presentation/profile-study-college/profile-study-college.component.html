@@ -1,67 +1,53 @@
-<div class="container-fluid mt-5" *ngIf="model">
-    <form class="form-horizontal mt-5" [formGroup]="profileStudyCollegeForm" (ngSubmit)="save()">
-        <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <h3>Opción Título Universitario</h3>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="institution">Nombre de centro</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.institution.invalid}"
-                                type="text" class="form-control" id="institution" formControlName="institution"
-                                name="institution">
-                        </div>
-                        <div class="col-3">
-                            <label class="control-label" for="titleName">Título</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.titleName.invalid}"
-                                type="text" class="form-control" id="titleName" formControlName="titleName"
-                                name="titleName">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="control-label" for="date">Fecha del título</label>
-                        </div>
-                        <div class="col-3">
-                            <input [ngClass]="{'is-invalid': profileStudyCollegeForm.controls.date.invalid}"
-                                type="text" placeholder="DD/MM/YYYY" class="form-control" id="date"
-                                formControlName="date" name="date">
-                            <div *ngIf="profileStudyCollegeForm.controls.date.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
-                                class="cross-validation-error-message alert alert-danger">
-                                Debe introducir una fecha con el formato correcto y válida
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="bilingue"
-                                    formControlName="bilingue" name="bilingue">
-                                <label class="form-check-label" for="bilingue">
-                                    Formación bilingue
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="certificate">Seleccione un fichero</label>
-                            <input type="file" class="form-control-file" id="certificate"
-                                (change)="handleFileInput($event.target.files)" name="certificate">
-                        </div>
-                        <div class="col-6">
-                            <div class="buttons text-right">
-                                <button type="submit" class="btn btn-success"
-                                    [disabled]="profileStudyCollegeForm.pristine || profileStudyCollegeForm.invalid">
-                                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<form class="form-horizontal mt-5" [formGroup]="profileStudyCollegeForm" (ngSubmit)="save()">
+    <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <mat-card-title>Opción Título Universitario</mat-card-title>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput placeholder="Nombre de centro" formControlName="institution" name="institution">
+            </mat-form-field>
         </div>
-    </form>
-</div>
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput placeholder="Título" formControlName="titleName" name="titleName">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Fecha de obtención del título"
+                    formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error
+                    *ngIf="profileStudyCollegeForm.controls.date.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)">
+                    <div *ngIf="profileStudyCollegeForm.controls.date.errors?.dataNotValid && (profileStudyCollegeForm.touched || profileStudyCollegeForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir una fecha con el formato correcto y válida
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-checkbox class="example-margin" formControlName="bilingue">Formación bilingue</mat-checkbox>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <label for="certificate">Seleccione un fichero</label>
+        <input type="file" class="form-control-file" id="certificate" (change)="handleFileInput($event.target.files)"
+            name="certificate">
+    </div>
+
+    <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="profileStudyCollegeForm.pristine || profileStudyCollegeForm.invalid">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Guardar
+        </button>
+    </div>
+</form>

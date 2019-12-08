@@ -1,7 +1,20 @@
-<div *ngIf="rolStudent$ | async as hasRolStudent">
-  <app-offers-list *ngIf="!myOffers" [offers]="offersList$ | async" [hasStudentRol]="hasRolStudent"></app-offers-list>
-  <app-offers-profile *ngIf="myOffers" [offers]="offersProfile$ | async" [hasStudentRol]="hasRolStudent"></app-offers-profile>
-</div>
-<div *ngIf="rolCompany$ | async as hasRolCompany">
-  <app-offers-profile [offers]="offersProfile$ | async" [hasStudentRol]="!hasRolCompany"></app-offers-profile>
+<div class="container">
+  <app-navbar></app-navbar>
+  <div class="card">
+    <div class="card-header">
+      <i class="material-icons">notifications</i>
+    </div>
+    <div class="card-content">
+      <h4 class="card-title">Ofertas de trabajo</h4>
+      <div *ngIf="rolStudent$ | async as hasRolStudent">
+        <app-offers-list *ngIf="!myOffers" [offers]="offersList$ | async" [hasStudentRol]="hasRolStudent">
+        </app-offers-list>
+        <app-offers-profile *ngIf="myOffers" [offers]="offersProfile$ | async" [hasStudentRol]="hasRolStudent">
+        </app-offers-profile>
+      </div>
+      <div *ngIf="rolCompany$ | async as hasRolCompany">
+        <app-offers-profile [offers]="offersProfile$ | async" [hasStudentRol]="!hasRolCompany"></app-offers-profile>
+      </div>
+    </div>
+  </div>
 </div>

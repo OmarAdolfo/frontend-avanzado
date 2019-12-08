@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Configuration, NotificationProvince, User } from 'src/app/shared/models/user.model';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { LanguageNameService } from 'src/app/shared/services/language-name.service';
 import { LanguageName } from 'src/app/shared/models/language.model';
 import { ProvinceService } from 'src/app/shared/services/province.service';
+import { MatCheckbox } from '@angular/material';
 
 @Component({
   selector: 'app-favorites',
@@ -17,6 +18,8 @@ export class FavoritesComponent implements OnInit {
 
   @Output() updateUser = new EventEmitter();
 
+  @ViewChild('checkboxAll', { static: false }) checkboxAll: MatCheckbox;
+
   configurationForm: FormGroup;
   languageNames: LanguageName[];
   public checks: Array<NotificationProvince> = [];
@@ -28,6 +31,7 @@ export class FavoritesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.checkAllCheckBox();
     this.getLanguageNames();
     this.buildForm();
   }
@@ -83,14 +87,33 @@ export class FavoritesComponent implements OnInit {
     this.configurationForm.updateValueAndValidity();
   }
 
+  setValueCheckbox(index: number) {
+    const notifications = this.configurationForm.get('notifications') as FormArray;
+    const value = !notifications.controls[index].get('notified').value;
+    notifications.controls[index].get('notified').setValue(value);
+  }
+
+  checkAllCheckBox() {
+    if (this.configurationForm) {
+      const notifications = this.configurationForm.get('notifications') as FormArray;
+      for (let index in notifications.value) {
+        if (!notifications.controls[index].get('notified').value) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
   compare(val1: any, val2: any) {
     return val1 && val2 ? val1.id === val2.id : val1 === val2;
   }
 
   /* Guarda la información de configuración */
   save() {
-    const configuration = {...this.configurationForm.value};
-    const user = {...this.user, configuration};
+    const configuration = { ...this.configurationForm.value };
+    const user = { ...this.user, configuration };
     this.updateUser.emit(user);
   }
 

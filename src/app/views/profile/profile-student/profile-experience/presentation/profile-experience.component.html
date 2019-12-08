@@ -1,110 +1,102 @@
-<div class="container-fluid mt-5">
-    <form class="form-horizontal mt-5" [formGroup]="experienceForm" (ngSubmit)="save()">
-        <div class="form-group">
-            <fieldset>
-                <legend>Experiencia laboral</legend>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="company">Nombre de la empresa</label>
+<form class="form-horizontal mt-5" [formGroup]="experienceForm" (ngSubmit)="save()">
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput placeholder="Nombre de la empresa" formControlName="company" name="company" required>
+                <mat-error
+                    *ngIf="experienceForm.controls.company.invalid && (experienceForm.controls.company.dirty || experienceForm.controls.company.touched)">
+                    <div *ngIf="experienceForm.controls.company.errors.required">
+                        El nombre de la empresa es obligatorio
                     </div>
-                    <div class="col-3">
-                        <input [ngClass]="{'is-invalid': experienceForm.controls.company.invalid}" type="text"
-                            class="form-control" id="company" formControlName="company" name="company">
-                        <div *ngIf="experienceForm.controls.company.invalid && (experienceForm.controls.company.dirty || experienceForm.controls.company.touched)"
-                            class="alert alert-danger">
-                            <div *ngIf="experienceForm.controls.company.errors.required">
-                                El nombre de la empresa es obligatorio
-                            </div>
-                            <div *ngIf="experienceForm.controls.company.errors.minlength">
-                                El nombre de la empresa debe ser mínimo 3 carácteres
-                            </div>
-                            <div *ngIf="experienceForm.controls.company.errors.maxlength">
-                                El nombre de la empresa debe ser máximo 255 carácteres
-                            </div>
-                            <div *ngIf="experienceForm.controls.company.errors.pattern">
-                                El nombre de la empresa no puede tener espacios en blanco al principio
-                            </div>
-                        </div>
+                    <div *ngIf="experienceForm.controls.company.errors.minlength">
+                        El nombre de la empresa debe ser mínimo 3 carácteres
                     </div>
-                    <div class="col-3">
-                        <label class="control-label" for="dateInitial">Fecha de inicio</label>
+                    <div *ngIf="experienceForm.controls.company.errors.maxlength">
+                        El nombre de la empresa debe ser máximo 255 carácteres
                     </div>
-                    <div class="col-3">
-                        <input [ngClass]="{'is-invalid': experienceForm.controls.dateInitial.invalid}" type="text"
-                            placeholder="DD/MM/YYYY" class="form-control" id="dateInitial" formControlName="dateInitial"
-                            name="dateInitial">
-                        <div *ngIf="experienceForm.controls.dateInitial.errors?.dataNotValid && (experienceForm.touched || experienceForm.dirty)"
-                            class="cross-validation-error-message alert alert-danger">
-                            Debe introducir una fecha con el formato correcto y válida
-                        </div>
+                    <div *ngIf="experienceForm.controls.company.errors.pattern">
+                        El nombre de la empresa no puede tener espacios en blanco al principio
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="dateEnd">Fecha de final</label>
-                    </div>
-                    <div class="col-3">
-                        <input [ngClass]="{'is-invalid': experienceForm.controls.dateEnd.invalid}" type="text"
-                            placeholder="DD/MM/YYYY" class="form-control" id="dateEnd" formControlName="dateEnd"
-                            name="dateEnd">
-                        <div *ngIf="experienceForm.controls.dateEnd.errors?.dataNotValid && (experienceForm.touched || experienceForm.dirty)"
-                            class="cross-validation-error-message alert alert-danger">
-                            Debe introducir una fecha con el formato correcto y válida
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <label class="control-label" for="company">Puesto desempeñado</label>
-                    </div>
-                    <div class="col-3">
-                        <input [ngClass]="{'is-invalid': experienceForm.controls.position.invalid}" type="text"
-                            class="form-control" id="position" formControlName="position" name="position">
-                        <div *ngIf="experienceForm.controls.position.invalid && (experienceForm.controls.position.dirty || experienceForm.controls.position.touched)"
-                            class="alert alert-danger">
-                            <div *ngIf="experienceForm.controls.position.errors.required">
-                                El puesto desempeñado es obligatorio
-                            </div>
-                            <div *ngIf="experienceForm.controls.position.errors.minlength">
-                                El puesto desempeñado debe ser mínimo 3 carácteres
-                            </div>
-                            <div *ngIf="experienceForm.controls.position.errors.maxlength">
-                                El puesto desempeñado debe ser máximo 255 carácteres
-                            </div>
-                            <div *ngIf="experienceForm.controls.position.errors.pattern">
-                                El puesto desempeñado no puede tener espacios en blanco al principio
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <label class="control-label" for="tasks">Tareas realizadas en el puesto desempeñado</label>
-                    </div>
-                    <div class="col-9">
-                        <textarea [ngClass]="{'is-invalid': experienceForm.controls.tasks.invalid}"
-                            class="form-control rounded-0" rows="5" id="tasks" formControlName="tasks"
-                            name="tasks"></textarea>
-                        <div *ngIf="experienceForm.controls.tasks.invalid && (experienceForm.controls.tasks.dirty || experienceForm.controls.tasks.touched)"
-                            class="alert alert-danger">
-                            <div *ngIf="experienceForm.controls.tasks.errors.minlength">
-                                El texto debe ser mínimo 10 carácteres
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="buttons text-right">
-                            <button type="button" class="btn btn-primary" (click)="back()">
-                                <i class="fa fa-back" aria-hidden="true"></i> Volver
-                            </button>
-                            <button type="submit" class="btn btn-success"
-                                [disabled]="experienceForm.pristine || experienceForm.invalid">
-                                <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
+                </mat-error>
+            </mat-form-field>
         </div>
-    </form>
-</div>
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Fecha de inicio" formControlName="dateInitial">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error
+                    *ngIf="experienceForm.controls.dateInitial.invalid && (experienceForm.controls.dateInitial.dirty || experienceForm.controls.dateInitial.touched)">
+                    <div *ngIf="experienceForm.controls.dateInitial.errors?.dataNotValid && (experienceForm.touched || experienceForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir una fecha con el formato correcto y válida
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Fecha de final" formControlName="dateEnd">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error
+                    *ngIf="experienceForm.controls.dateEnd.invalid && (experienceForm.controls.dateEnd.dirty || experienceForm.controls.dateEnd.touched)">
+                    <div *ngIf="experienceForm.controls.dateEnd.errors?.dataNotValid && (experienceForm.touched || experienceForm.dirty)"
+                        class="cross-validation-error-message alert alert-danger">
+                        Debe introducir una fecha con el formato correcto y válida
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <mat-form-field>
+                <input matInput placeholder="Puesto desempeñado" formControlName="position" name="position" required>
+                <mat-error
+                    *ngIf="experienceForm.controls.position.invalid && (experienceForm.controls.position.dirty || experienceForm.controls.position.touched)">
+                    <div *ngIf="experienceForm.controls.position.errors.required">
+                        El puesto desempeñado es obligatorio
+                    </div>
+                    <div *ngIf="experienceForm.controls.position.errors.minlength">
+                        El puesto desempeñado debe ser mínimo 3 carácteres
+                    </div>
+                    <div *ngIf="experienceForm.controls.position.errors.maxlength">
+                        El puesto desempeñado debe ser máximo 255 carácteres
+                    </div>
+                    <div *ngIf="experienceForm.controls.position.errors.pattern">
+                        El puesto desempeñado no puede tener espacios en blanco al principio
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <mat-form-field>
+            <textarea matInput placeholder="Tareas realizadas en el puesto desempeñado" formControlName="tasks"
+                name="tasks"></textarea>
+            <mat-error
+                *ngIf="experienceForm.controls.tasks.invalid && (experienceForm.controls.tasks.dirty || experienceForm.controls.tasks.touched)">
+                <div *ngIf="experienceForm.controls.tasks.errors.minlength">
+                    El texto debe ser mínimo 10 carácteres
+                </div>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="default" type="button" (click)="back()">
+            <i class="fa fa-back" aria-hidden="true"></i>
+            Volver
+        </button>
+        <button mat-raised-button color="primary" type="submit"
+            [disabled]="experienceForm.pristine || experienceForm.invalid">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Guardar
+        </button>
+    </div>
+
+</form>

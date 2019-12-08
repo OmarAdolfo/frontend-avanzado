@@ -6,6 +6,7 @@ import { MunicipeService } from 'src/app/shared/services/municipe.service';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
 import { DocumentNumberValidator } from 'src/app/shared/validators/document-number.validator';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-student-personal-information',
@@ -73,7 +74,7 @@ export class ProfileStudentPersonalInformationComponent implements OnInit {
         Validators.maxLength(55),
         Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+)([\s][A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+)*$/)
       ]),
-      birthdate: new FormControl(this.model.birthdate, DateValidator),
+      birthdate: new FormControl(moment(this.model.birthdate, 'DD/MM/YYYY').toDate(), DateValidator),
       phone: new FormControl(this.model.phone, []),
       phone2: new FormControl(this.model.phone2, []),
       documentType: new FormControl(this.model.documentType, []),

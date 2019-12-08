@@ -26,7 +26,10 @@ import {
   MatProgressBarModule,
   MatAutocompleteModule,
   MatInputModule,
-  MatTableModule
+  MatTableModule, 
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSortModule
 } from '@angular/material';
 
 @NgModule({
@@ -55,6 +58,9 @@ import {
     MatCheckboxModule,
     MatRippleModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSortModule
   ],
   exports: [
     CdkTableModule,
@@ -80,7 +86,10 @@ import {
     MatRadioModule,
     MatCheckboxModule,
     MatRippleModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSortModule
   ],
 })
 

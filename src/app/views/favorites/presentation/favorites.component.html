@@ -1,43 +1,33 @@
-<div class="container-fluid mt-5">
-  <form class="form-horizontal mt-5" [formGroup]="configurationForm" (ngSubmit)="save()">
-    <div class="form-group">
-      <div class="row">
-        <div class="col-3">
-          <label class="control-label" for="languageName">Idioma</label>
-        </div>
-        <div class="col-3">
-          <select class="custom-select" formControlName="languageName" [compareWith]="compare" id="languageName">
-            <option></option>
-            <option *ngFor="let languageName of languageNames" [ngValue]="languageName">
-              {{languageName.name}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" (change)="handleSelected($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1">Todos</label>
-          </div>
-          <div formArrayName="notifications"
-            *ngFor="let configuration of configurationForm.controls.notifications?.value; let i = index;">
-            <div [formGroupName]="i" class="form-check">
-              <input type="checkbox" class="form-check-input" formControlName="notified">
-              <label class="form-check-label" for="exampleCheck1">{{getNameProvince(i)}}</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="buttons text-right">
-            <button type="submit" class="btn btn-success" [disabled]="configurationForm.invalid">
-              <i class="fa fa-save" aria-hidden="true"></i> Guardar
-            </button>
-          </div>
-        </div>
+<form class="form-horizontal mt-5" [formGroup]="configurationForm" (ngSubmit)="save()">
+  <div fxLayout="row">
+    <mat-form-field>
+      <mat-label>Idioma</mat-label>
+      <mat-select formControlName="languageName" [compareWith]="compare">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let languageName of languageNames" [value]="languageName">
+          {{languageName.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column">
+    <mat-checkbox [checked]="checkAllCheckBox()" class="example-margin" (change)="handleSelected($event.checked)">
+      Todos</mat-checkbox>
+    <div formArrayName="notifications"
+      *ngFor="let configuration of configurationForm.controls.notifications?.value; let i = index;">
+      <div [formGroupName]="i" class="form-check">
+        <mat-checkbox class="example-margin" (click)="setValueCheckbox(i)" formControlName="notified">
+          {{getNameProvince(i)}}</mat-checkbox>
       </div>
     </div>
-  </form>
-</div>
+  </div>
+
+  <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" type="submit" [disabled]="configurationForm.invalid">
+      <i class="fa fa-save" aria-hidden="true"></i>
+      Guardar
+    </button>
+  </div>
+
+</form>

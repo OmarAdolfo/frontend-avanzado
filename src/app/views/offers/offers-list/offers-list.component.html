@@ -1,78 +1,50 @@
-<div class="container-fluid mt-5">
-  <form class="form-horizontal mt-5" [formGroup]="searchOffersForm" (ngSubmit)="search()">
-    <div class="form-group">
-      <div class="row">
-        <div class="col-3">
-          <label class="control-label" for="date">Fecha de la oferta</label>
-        </div>
-        <div class="col-3">
-          <input [ngClass]="{'is-invalid': searchOffersForm.controls.date.invalid}" type="text" placeholder="DD/MM/YYYY"
-            class="form-control" id="date" formControlName="date" name="date">
-          <div
-            *ngIf="searchOffersForm.controls.date.errors?.dataNotValid && (searchOffersForm.touched || searchOffersForm.dirty)"
-            class="cross-validation-error-message alert alert-danger">
-            Debe introducir una fecha con el formato correcto y válida
-          </div>
-        </div>
-        <div class="col-3">
-          <label class="control-label" for="province">Provincia</label>
-        </div>
-        <div class="col-3">
-          <select class="custom-select" formControlName="province" id="province">
-            <option></option>
-            <option *ngFor="let province of provinces" [ngValue]="province">
-              {{province.name}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="buttons text-right">
-            <button type="submit" class="btn btn-success"
-              [disabled]="searchOffersForm.pristine || searchOffersForm.invalid">
-              <i class="fa fa-search" aria-hidden="true"></i> Buscar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-  <div class="row">
-    <div class="col-12">
-      <h2>Ofertas de trabajo</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Puesto</th>
-            <th>Empresa</th>
-            <th>Familia profesional</th>
-            <th>Fecha</th>
-            <th>Provincia</th>
-            <th *ngIf="isMyJobOffer()">Estado</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let offer of offers">
-            <th scope="row">{{offer.job.name}}</th>
-            <td>{{offer.company.name}}</td>
-            <td>{{offer.category.name}}</td>
-            <td>{{offer.date}}</td>
-            <td>{{offer.province.name}}</td>
-            <td *ngIf="isMyJobOffer()"></td>
-            <td>
-              <button *ngIf="hasStudentRol" type="button" class="btn btn-success"
-                (click)="goToDetail(offer.id)">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-              </button>
-              <button *ngIf="!hasStudentRol" type="button" class="btn btn-success">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div fxLayout="column">
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar...">
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container cdkColumnDef="job">
+      <mat-header-cell *cdkHeaderCellDef> Puesto </mat-header-cell>
+      <mat-cell *cdkCellDef="let element"> {{element.job.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="company">
+      <mat-header-cell *cdkHeaderCellDef> Empresa </mat-header-cell>
+      <mat-cell *cdkCellDef="let element"> {{element.company.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="category">
+      <mat-header-cell *cdkHeaderCellDef> Familia profesional </mat-header-cell>
+      <mat-cell *cdkCellDef="let element"> {{element.category.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef> Fecha </mat-header-cell>
+      <mat-cell *cdkCellDef="let element"> {{element.date}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="province">
+      <mat-header-cell *cdkHeaderCellDef> Provincia </mat-header-cell>
+      <mat-cell *cdkCellDef="let element"> {{element.province.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="options">
+      <mat-header-cell *cdkHeaderCellDef> Opciones </mat-header-cell>
+      <mat-cell *cdkCellDef="let element">
+        <button *ngIf="hasStudentRol" type="button" mat-raised-button color="primary" (click)="goToDetail(element.id)">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <button *ngIf="!hasStudentRol" type="button" mat-raised-button color="primary">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="displayedColumnsOffers"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: displayedColumnsOffers;"></mat-row>
+  </mat-table>
+
 </div>
