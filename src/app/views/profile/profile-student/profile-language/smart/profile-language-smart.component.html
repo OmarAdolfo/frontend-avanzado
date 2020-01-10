@@ -6,7 +6,7 @@
         </div>
         <div class="card-content">
             <h4 class="card-title">Idioma</h4>
-            <app-profile-language [language]="language" [user]="user$ | async" (updateUser)="updateUser($event)">
+            <app-profile-language [language]="language$ | async" [user]="user$ | async" (updateUser)="updateUser($event)">
             </app-profile-language>
         </div>
     </div>

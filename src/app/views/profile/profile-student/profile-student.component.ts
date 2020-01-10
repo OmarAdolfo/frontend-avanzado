@@ -38,7 +38,7 @@ export class ProfileStudentComponent implements OnInit {
   }
 
   /* Navega a la pantalla de estudios del estudiante */
-  goToProfileStudy(uid: number) {
+  goToProfileStudy(uid?: number) {
     this.route.navigate(['./profile-study', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
@@ -52,7 +52,7 @@ export class ProfileStudentComponent implements OnInit {
   }
 
   /* Navega a la pantalla de idiomas del estudiante */
-  goToProfileLanguage(uid: number) {
+  goToProfileLanguage(uid?: number) {
     this.route.navigate(['./profile-language', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 
@@ -66,7 +66,7 @@ export class ProfileStudentComponent implements OnInit {
   }
 
   /* Navega a la pantalla de experiencia del estudiante */
-  goToExperience(uid: number) {
+  goToExperience(uid?: number) {
     this.route.navigate(['./profile-experience', uid ? uid : 'new'], { relativeTo: this.activatedRoute });
   }
 

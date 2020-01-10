@@ -13,8 +13,6 @@ import { HeaderComponent } from './components/header/header.component';
 // PIPES
 
 // SERVICES
-import { AppConfirmService } from './services/app-confirm/app-confirm.service';
-import { AppComfirmComponent } from './services/app-confirm/app-confirm.component';
 import { UserService } from './services/user.service';
 import { MunicipeService } from './services/municipe.service'
 import { ProvinceService } from './services/province.service';
@@ -32,14 +30,12 @@ import { SettingsService } from './services/settings.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RootComponent } from './components/root/root.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FontSizeDirective } from './directives/fontsize.directive';
 
-const classesToInclude = [AppComfirmComponent, HeaderComponent, SidebarComponent, RootComponent, NavbarComponent];
+const classesToInclude = [HeaderComponent, SidebarComponent, RootComponent, NavbarComponent, FontSizeDirective];
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule, MaterialModule],
-
-  providers: [AppConfirmService],
-  entryComponents: [AppComfirmComponent],
   declarations: classesToInclude,
   exports: [
     ...classesToInclude,
