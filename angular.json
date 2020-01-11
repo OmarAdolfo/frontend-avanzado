@@ -64,6 +64,14 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
             }
           }
         },
@@ -75,6 +83,9 @@
           "configurations": {
             "production": {
               "browserTarget": "UOCJob:build:production"
+            },
+            "qa": {
+              "browserTarget": "UOCJob:build:qa"
             }
           }
         },
@@ -124,6 +135,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "UOCJob:serve:production"
+            },
+            "qa": {
+              "devServerTarget": "UOCJob:serve:qa"
             }
           }
         },
@@ -147,6 +161,14 @@
                 "scripts": false,
                 "styles": true
               }
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
             }
           }
         },
