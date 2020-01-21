@@ -98,7 +98,7 @@
     <ng-container cdkColumnDef="options">
         <mat-header-cell *cdkHeaderCellDef> Opciones </mat-header-cell>
         <mat-cell *cdkCellDef="let element">
-            <button type="button" mat-raised-button color="primary" (click)="goToProfileStudy(element.id)">
+            <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-study', element.id)">
                 <i class="fa fa-edit" aria-hidden="true"></i>
             </button>
             <button type="button" mat-raised-button color="warn" (click)="removeStudie(element.id)">
@@ -111,7 +111,7 @@
     <mat-row *cdkRowDef="let row; columns: displayedColumnsStudies;"></mat-row>
 </mat-table>
 <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
-    <button type="button" mat-raised-button color="primary" (click)="goToProfileStudy()">
+    <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-study')">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Nueva
     </button>
@@ -140,7 +140,7 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> Opciones </th>
             <td mat-cell *matCellDef="let element">
-                <button type="button" mat-raised-button color="primary" (click)="goToExperience(element.id)">
+                <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-experience', element.id)">
                     <i class="fa fa-edit" aria-hidden="true"></i>
                 </button>
                 <button type="button" mat-raised-button color="warn" (click)="removeExperience(element.id)">
@@ -155,7 +155,7 @@
 </div>
 
 <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
-    <button type="button" mat-raised-button color="primary" (click)="goToExperience()">
+    <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-experience')">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Nueva
     </button>
@@ -184,7 +184,7 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> Opciones </th>
             <td mat-cell *matCellDef="let element">
-                <button type="button" mat-raised-button color="primary" (click)="goToProfileLanguage(element.id)">
+                <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-language', element.id)">
                     <i class="fa fa-edit" aria-hidden="true"></i>
                 </button>
                 <button type="button" mat-raised-button color="warn" (click)="removeLanguage(element.id)">
@@ -199,7 +199,7 @@
 </div>
 
 <div class="buttons" fxLayout="row" fxLayoutAlign="end center">
-    <button type="button" mat-raised-button color="primary" (click)="goToProfileLanguage()">
+    <button type="button" mat-raised-button color="primary" (click)="navigate('./profile-language')">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Nueva
     </button>
