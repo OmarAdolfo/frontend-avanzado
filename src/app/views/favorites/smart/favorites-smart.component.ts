@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppStore } from 'src/app/shared/state/store.interface';
@@ -10,7 +10,7 @@ import { selectorUser, getConfiguration } from 'src/app/shared/state/user/select
   templateUrl: './favorites-smart.component.html',
   styleUrls: ['./favorites-smart.component.scss']
 })
-export class FavoritesSmartComponent implements OnInit {
+export class FavoritesSmartComponent {
 
   user$: Observable<any>;
   configuration$: Observable<any>;
@@ -20,9 +20,6 @@ export class FavoritesSmartComponent implements OnInit {
   ) {
     this.user$ = this.store.select(selectorUser);
     this.configuration$ = this.store.select(getConfiguration);
-  }
-
-  ngOnInit() {
   }
 
   updateUser(user: any) {

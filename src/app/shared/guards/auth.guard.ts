@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     private store: Store<AppStore>
   ) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     /* Si el usuario esta logueado y accede al login, se reenvia a la pantalla de dashboard */
     return this.store
       .pipe(
