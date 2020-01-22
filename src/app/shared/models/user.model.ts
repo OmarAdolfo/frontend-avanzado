@@ -31,7 +31,23 @@ export interface Province {
   uid: number;
   name: string;
 }
-
+export interface Student extends User {
+  phone2: string;
+  documentType: DocumentType;
+  aboutMe: string;
+  otherCompetences: string;
+  license: string;
+  avatar_hash: string;
+  studies: (VocationalStudy | CollegeStudy)[];
+  experiencies: Experience[];
+  languages: Language[];
+  birthdate: string;
+}
+export interface Enterprise extends User {
+  comercialName: string;
+  businessName: string;
+  url: string
+}
 export interface User {
   password: string; // Only for mock
   id: number;
@@ -45,19 +61,6 @@ export interface User {
   roles: string[];
   offers: Offer[];
   configuration: Configuration;
-  phone2: string;
-  documentType: DocumentType;
-  aboutMe: string;
-  otherCompetences: string;
-  license: string;
-  avatar_hash: string;
-  studies: (VocationalStudy | CollegeStudy)[];
-  experiencies: Experience[];
-  languages: Language[];
-  birthdate: string;
-  comercialName: string;
-  businessName: string;
-  url: string
 }
 
 export function createNewUser(user?: Student): Student {
