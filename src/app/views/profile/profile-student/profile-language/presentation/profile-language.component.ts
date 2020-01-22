@@ -110,43 +110,45 @@ export class ProfileLanguageComponent implements OnInit {
     return val1 && val2 ? val1.uid === val2.uid : val1 === val2;
   }
 
-  /* Guardar un idioma escrito en el input de Otros */
-  saveOtherLanguage(language: Language) {
-    this.languageNameService.addLanguageName({ id: -1, name: this.languageForm.get('otherLanguage').value }).subscribe(
-      languageName => {
-        language.name = languageName;
-        this.saveLanguage(language);
-      }
-    )
-  }
-
-  /* Guardar idioma del estudiante */
-  saveLanguage(language: Language) {
-    this.languageService.saveLanguage(language).subscribe(
-      languageSave => {
-        let languages = [...this.user.languages];
-        let index = languages.findIndex(({ id }) => id === languageSave.id);
-        if (index === -1) {
-          languages.push(languageSave);
-        } else {
-          languages[index] = languageSave;
-        }
-        const user: Student = {...this.user, languages};
-        this.updateUser.emit(user);
-      }
-    )
-  }
-
   /* Comienza el proceso de guardar cuando el usuario pulsa sobre el botón Guardar */
   save() {
     const language = {...this.language}
     language.date = moment(this.languageForm.get('date').value).format('DD/MM/YYYY');;
     language.level = this.languageForm.get('level').value;
     if (this.languageForm.get('languageName').value.name === 'Otro') {
-      this.saveOtherLanguage(language);
+      this.languageNameService.addLanguageName({ id: -1, name: this.languageForm.get('otherLanguage').value }).subscribe(
+        languageName => {
+          language.name = languageName;
+          this.languageService.saveLanguage(language).subscribe(
+            languageSave => {
+              let languages = [...this.user.languages];
+              let index = languages.findIndex(({ id }) => id === languageSave.id);
+              if (index === -1) {
+                languages.push(languageSave);
+              } else {
+                languages[index] = languageSave;
+              }
+              const user: Student = {...this.user, languages};
+              this.updateUser.emit(user);
+            }
+          )
+        }
+      )
     } else {
       language.name = this.languageForm.get('languageName').value;
-      this.saveLanguage(language);
+      this.languageService.saveLanguage(language).subscribe(
+        languageSave => {
+          let languages = [...this.user.languages];
+          let index = languages.findIndex(({ id }) => id === languageSave.id);
+          if (index === -1) {
+            languages.push(languageSave);
+          } else {
+            languages[index] = languageSave;
+          }
+          const user: Student = {...this.user, languages};
+          this.updateUser.emit(user);
+        }
+      )
     }
   }
 
